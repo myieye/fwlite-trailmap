@@ -1,0 +1,240 @@
+:root {
+  --paper: #e4ece2;
+  --paper-2: #d2dfd0;
+  --card: #f7faf3;
+  --ink: #1d2a3f;
+  --ink-soft: #4d5b6c;
+  --line: #1d2a3f22;
+  --c-rust: #e8572a;
+  --c-sun: #f0a31a;
+  --c-sage: #4a9466;
+  --c-forest: #1f5a4a;
+  --c-river: #2b8bb5;
+  --c-plum: #7b4f9a;
+  --sky-top: #8fc4df;
+  --sky-bottom: #fbdcaa;
+  --mtn-far: #b4c5d4;
+  --mtn-mid: #7d8db3;
+  --mtn-near: #56628f;
+  --hill: #6f9e6c;
+  --hill-2: #4c7f5a;
+  --snow: #fffdf6;
+  --orb: #fff0bd;
+  --trail: #f7faf3;
+  --stars: 0;
+  --halo: 0.3;
+  --a-feature: #d98a16;
+  --a-fix: #c4472f;
+  --a-data: #2a86b0;
+  --a-devices: #5e9a2e;
+  --a-backstage: #8e55a8;
+  --shadow: 0 1px 0 #2a273314, 0 8px 24px -12px #2a273340;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Figtree', system-ui, sans-serif, 'Noto Color Emoji';
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #171a2c;
+    --paper-2: #20243b;
+    --card: #222741;
+    --ink: #f1e8d6;
+    --ink-soft: #b6aec2;
+    --line: #f1e8d61f;
+    --c-rust: #e57558;
+    --c-sun: #f2b84f;
+    --c-sage: #8dbb8f;
+    --c-forest: #9fd1bf;
+    --c-river: #6cc0d4;
+    --c-plum: #b993c6;
+    --sky-top: #0e1124;
+    --sky-bottom: #2b2d55;
+    --mtn-far: #3a3c66;
+    --mtn-mid: #2d2f55;
+    --mtn-near: #222445;
+    --hill: #1f3a3a;
+    --hill-2: #172d2e;
+    --snow: #d9dcf2;
+    --orb: #f3ecd2;
+    --trail: #f1e8d6;
+    --stars: 1;
+    --halo: 0.08;
+    --a-feature: #bb8519;
+    --a-fix: #e2546e;
+    --a-data: #3a92c4;
+    --a-devices: #5c9c33;
+    --a-backstage: #a46fd0;
+    --shadow: 0 1px 0 #0003, 0 10px 30px -14px #000a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #171a2c;
+  --paper-2: #20243b;
+  --card: #222741;
+  --ink: #f1e8d6;
+  --ink-soft: #b6aec2;
+  --line: #f1e8d61f;
+  --c-rust: #e57558;
+  --c-sun: #f2b84f;
+  --c-sage: #8dbb8f;
+  --c-forest: #9fd1bf;
+  --c-river: #6cc0d4;
+  --c-plum: #b993c6;
+  --sky-top: #0e1124;
+  --sky-bottom: #2b2d55;
+  --mtn-far: #3a3c66;
+  --mtn-mid: #2d2f55;
+  --mtn-near: #222445;
+  --hill: #1f3a3a;
+  --hill-2: #172d2e;
+  --snow: #d9dcf2;
+  --orb: #f3ecd2;
+  --trail: #f1e8d6;
+  --stars: 1;
+  --halo: 0.08;
+  --a-feature: #bb8519;
+  --a-fix: #e2546e;
+  --a-data: #3a92c4;
+  --a-devices: #5c9c33;
+  --a-backstage: #a46fd0;
+  --shadow: 0 1px 0 #0003, 0 10px 30px -14px #000a;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  /* Faint contour lines, like the paper of a topo map. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.05' stroke-width='1.2'%3E%3Cpath d='M0 60c80-40 160 30 260 0s200-50 340 10'/%3E%3Cpath d='M0 110c90-40 170 40 270 5s210-45 330 15'/%3E%3Cpath d='M0 170c70-30 180 45 280 10s200-40 320 20'/%3E%3Cpath d='M0 235c100-35 170 35 290 5s190-40 310 15'/%3E%3C/g%3E%3C/svg%3E");
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Paper grain over everything; pointer-events off so it never blocks clicks. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  z-index: 100;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section {
+  padding-top: 56px;
+  padding-bottom: 8px;
+}
+
+.eyebrow {
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: var(--c-rust);
+  line-height: 1;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+}
+.section-head p {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+.card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--chip, var(--ink-soft)) 16%, transparent);
+  color: color-mix(in srgb, var(--chip, var(--ink-soft)) 85%, var(--ink));
+  white-space: nowrap;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

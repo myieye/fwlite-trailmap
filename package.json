@@ -1,0 +1,29 @@
+{
+  "name": "trailmap",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "sync": "node scripts/sync.mjs",
+    "plain:todo": "node scripts/plain-todo.mjs",
+    "build": "vite build",
+    "build:single": "SINGLE_FILE=1 vite build --outDir dist-single",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "shot": "node scripts/shot.mjs"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^24.19.2",
+    "playwright-core": "^1.64.1",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.7",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.4",
+    "yaml": "^2.9.1"
+  },
+  "description": "A fun progress map for the FW Lite team: roadmap, current work, long bugs and forum requests, from GitHub."
+}

@@ -1,0 +1,1742 @@
+{
+ "lexbox#2747": {
+  "title": "Mark all comments as read at once",
+  "for": "Bulk mark as read",
+  "area": "feature"
+ },
+ "lexbox#2746": {
+  "title": "A comment-only role for reviewers",
+  "for": "Comment only permission",
+  "area": "feature"
+ },
+ "lexbox#2745": {
+  "title": "Add a sense or example through a dialog",
+  "for": "Use dialogs for adding Senses and Examples in entry editor",
+  "area": "feature"
+ },
+ "lexbox#2743": {
+  "title": "App errors are reported to the team automatically",
+  "for": "Report errors to mixpanel",
+  "area": "backstage"
+ },
+ "lexbox#2742": {
+  "title": "Complex form components shown under the sense they belong to",
+  "for": "Show complex form components under senses",
+  "area": "feature"
+ },
+ "lexbox#2700": {
+  "title": "Two different files with the same name are kept separate",
+  "for": "FW Lite treats different media files with the same filename as one file",
+  "area": "data"
+ },
+ "lexbox#2693": {
+  "title": "Audio and pictures stay linked after an iOS reinstall or update",
+  "for": "FW Lite media files not found after iOS app reinstall/update (absolute LocalPath stored)",
+  "area": "data"
+ },
+ "lexbox#2678": {
+  "title": "Two Safari-only UI differences to investigate",
+  "for": "FW Lite viewer: two WebKit-specific UI behavior differences (skipped on WebKit in #2677)",
+  "area": "backstage"
+ },
+ "lexbox#2662": {
+  "title": "Cancelled downloads stop instead of running on in the background",
+  "for": "[claude] FwLite download route ignores cancellation, so an abandoned download keeps running",
+  "area": "backstage"
+ },
+ "lexbox#2659": {
+  "title": "Search finds the right entry after a sense is moved",
+  "for": "Moved senses only update the new entry search record, not the old entry search record",
+  "area": "fix"
+ },
+ "lexbox#2647": {
+  "title": "Paratext can tell apart same-named local and online lexicons",
+  "for": "[claude] Lexicon selector: same-code FwData and CRDT projects need format-aware identity",
+  "area": "feature"
+ },
+ "lexbox#2515": {
+  "title": "Server reports when a blocked project did not sync",
+  "for": "[claude] sync-harmony endpoint returns 200 when a project is blocked from syncing",
+  "area": "backstage"
+ },
+ "lexbox#2498": {
+  "title": "'Synced' only shows once every edit really reached the server",
+  "for": "[claude] FW Lite: client stamps un-pushed commits as synced, hiding sync gaps",
+  "area": "data"
+ },
+ "lexbox#2480": {
+  "title": "Switching between dialogs no longer hits a rare timeout error",
+  "for": "Intermittent \"Timed out waiting for popstate event\"",
+  "area": "fix"
+ },
+ "lexbox#2431": {
+  "title": "Copying a project folder can't corrupt syncing",
+  "for": "[claude] FW Lite: don't store the ClientId in the project database",
+  "area": "data"
+ },
+ "lexbox#2316": {
+  "title": "Android shortcut to recover from a broken page",
+  "for": "Create and Android shortcut to let users recover when stuck on a broken page",
+  "area": "devices"
+ },
+ "lexbox#2292": {
+  "title": "A download that fails midway can be retried, not stuck forever",
+  "for": "Fix orphaned CRDT project files from failed downloads (stuck at 'Sequence contains no elements')",
+  "area": "data"
+ },
+ "lexbox#2231": {
+  "title": "Data in disabled writing systems is shown when present",
+  "for": "Show data in disabled WS's",
+  "area": "feature"
+ },
+ "lexbox#2229": {
+  "title": "Data in disabled writing systems comes across from FieldWorks",
+  "for": "Sync disabled WS's to FW-Lite",
+  "area": "data"
+ },
+ "lexbox#2211": {
+  "title": "Website updated: entries can have any morph type",
+  "for": "Update \"Important Info\" section on software.sil.org FW Lite page with mention of morph type support",
+  "area": "feature"
+ },
+ "lexbox#2169": {
+  "title": "Your last edit is saved even if you close the app right away",
+  "for": "Race condition when closing app with a commit pending",
+  "area": "data"
+ },
+ "lexbox#2148": {
+  "title": "Android no longer nags about an update you already have",
+  "for": "Android: \"A new version is available\" but I appear to be on the latest version",
+  "area": "fix"
+ },
+ "lexbox#1963": {
+  "title": "Part of speech can be cleared after it's set",
+  "for": "Once a part of speech has been set it's not possible to clear it",
+  "area": "fix"
+ },
+ "lexbox#1941": {
+  "title": "Password login from the web app no longer shows an error",
+  "for": "Logging into Lexbox from FwLite Web using credentials shows error",
+  "area": "fix"
+ },
+ "lexbox#1889": {
+  "title": "Logging in from the sync dialog returns you to your project",
+  "for": "Minor annoyance: logging in from sync dialog doesn't take you back to where you were",
+  "area": "fix"
+ },
+ "lexbox#1878": {
+  "title": "Download or export audio recordings",
+  "for": "Allow downloading/exporting audio",
+  "area": "feature"
+ },
+ "lexbox#1875": {
+  "title": "Sync dialog no longer shows '-1 changes'",
+  "for": "Sync dialog showing -1 changes from FieldWorks to FW Lite",
+  "area": "fix"
+ },
+ "lexbox#1869": {
+  "title": "'Missing X' filters update as you fill things in",
+  "for": "\"Missing X\" filters only update in one direction",
+  "area": "fix"
+ },
+ "lexbox#1835": {
+  "title": "Backend API for managing audio files",
+  "for": "Backend: API Support for Audio File Management in Fw Lite",
+  "area": "backstage"
+ },
+ "lexbox#1834": {
+  "title": "A view of all audio files in the project",
+  "for": "Feature Request: Dedicated Audio Files View for Fw Lite",
+  "area": "feature"
+ },
+ "lexbox#1806": {
+  "title": "Sending feedback explains what will be shared first",
+  "for": "Show intermediate dialog when sending feedback",
+  "area": "feature"
+ },
+ "lexbox#1801": {
+  "title": "Sync dialog links to the project on Lexbox",
+  "for": "Show a link to the lexbox project in the sync dialog",
+  "area": "feature"
+ },
+ "lexbox#1799": {
+  "title": "Projects with unnamed complex form types import correctly",
+  "for": "Complex form types with no name break project imports",
+  "area": "data"
+ },
+ "lexbox#1767": {
+  "title": "Redesigned home page",
+  "for": "Rethink home page",
+  "area": "feature"
+ },
+ "lexbox#1765": {
+  "title": "Comments on entries, with threads and read tracking",
+  "for": "Commenting support",
+  "area": "feature"
+ },
+ "lexbox#1764": {
+  "title": "Pictures on senses: add, replace, delete",
+  "for": "Image support",
+  "area": "feature"
+ },
+ "lexbox#1763": {
+  "title": "Guided tasks (e.g. add an example sentence) explored",
+  "for": "Tasks",
+  "area": "feature"
+ },
+ "lexbox#1743": {
+  "title": "Catch Android startup crashes before release",
+  "for": "Smoke test Android builds in CI",
+  "area": "backstage"
+ },
+ "lexbox#1735": {
+  "title": "A failed import can be retried without crashing sync",
+  "for": "Sync FW <-> Fw lite crash when an import fails part way through",
+  "area": "data"
+ },
+ "lexbox#1718": {
+  "title": "Searching 'a' also finds 'ã' and other accented letters",
+  "for": "Searching for A should show results with Ã",
+  "area": "fix"
+ },
+ "lexbox#1717": {
+  "title": "Old app versions are told to update instead of mis-syncing newer data",
+  "for": "reject commits from newer versions of FW Lite",
+  "area": "data"
+ },
+ "lexbox#1707": {
+  "title": "Admins can download any FW Lite project by its code",
+  "for": "Design a way for admins to download any FW Lite project",
+  "area": "feature"
+ },
+ "lexbox#1705": {
+  "title": "Shared input validation layer for the data API",
+  "for": "Make MiniLcm validation wrapper",
+  "area": "backstage"
+ },
+ "lexbox#1700": {
+  "title": "FW Lite respects FieldWorks' lock on an open project",
+  "for": "We don't respect FieldWork's lock file",
+  "area": "data"
+ },
+ "lexbox#1699": {
+  "title": "Fixes for fields with mixed formatting",
+  "for": "Rich-string field bugs/quircks",
+  "area": "fix"
+ },
+ "lexbox#1689": {
+  "title": "Fields save automatically when you pause typing",
+  "for": "Save current field on idle (with runed)",
+  "area": "feature"
+ },
+ "lexbox#1688": {
+  "title": "Small UI polish items after the redesign",
+  "for": "Shadcn low-hanging fruit follow up",
+  "area": "feature"
+ },
+ "lexbox#1687": {
+  "title": "Typing quickly between fields no longer loses your text",
+  "for": "Unsubmitted changes get stomped on",
+  "area": "data"
+ },
+ "lexbox#1686": {
+  "title": "Press Enter to create a new entry on desktop",
+  "for": "Enter should submit New entry dialog on desktop",
+  "area": "feature"
+ },
+ "lexbox#1685": {
+  "title": "Sort entries by how well they match your search",
+  "for": "Sort entries by rank",
+  "area": "feature"
+ },
+ "lexbox#1684": {
+  "title": "Filter entries by semantic domain",
+  "for": "Semantic domain filter",
+  "area": "feature"
+ },
+ "lexbox#1682": {
+  "title": "The list scrolls to the entry you selected",
+  "for": "Navigate to selected entry in list",
+  "area": "feature"
+ },
+ "lexbox#1681": {
+  "title": "Headwords and complex forms shown the way FLEx shows them",
+  "for": "Headword, component & complex-form formatting",
+  "area": "feature"
+ },
+ "lexbox#1678": {
+  "title": "Translations load reliably in the released app",
+  "for": "Translations not reliable in prod",
+  "area": "fix"
+ },
+ "lexbox#1677": {
+  "title": "Going back to the entry list keeps your scroll position",
+  "for": "Opening an entry and going back reloads the entry list and loses scroll location",
+  "area": "fix"
+ },
+ "lexbox#1675": {
+  "title": "Long entry lists scroll smoothly",
+  "for": "find or implement scrolling virtulization",
+  "area": "feature"
+ },
+ "lexbox#1642": {
+  "title": "Delete prompt API supports async callbacks",
+  "for": "change API for delete prompt to includen async callback",
+  "area": "backstage"
+ },
+ "lexbox#1636": {
+  "title": "New entry editor layout",
+  "for": "Editor layout",
+  "area": "feature"
+ },
+ "lexbox#1633": {
+  "title": "Tidy up dialog scrolling and footer layout",
+  "for": "Tidy up shadcn dialog",
+  "area": "backstage"
+ },
+ "lexbox#1628": {
+  "title": "'Where's my project?' help on the home page",
+  "for": "Add \"Where's my project?\" to project list in FW Lite home",
+  "area": "feature"
+ },
+ "lexbox#1621": {
+  "title": "Example sentence translations save when the first one is added",
+  "for": "If ILexExampleSentence.TranslationsOC is empty, translations are not saved",
+  "area": "data"
+ },
+ "lexbox#1615": {
+  "title": "Sync no longer fails on duplicate complex form links",
+  "for": "UNIQUE constraint failed: ComplexFormComponent",
+  "area": "data"
+ },
+ "lexbox#1607": {
+  "title": "FW Lite available in Indonesian",
+  "for": "Localize to Indonesian",
+  "area": "feature"
+ },
+ "lexbox#1603": {
+  "title": "Fix the Mac build error",
+  "for": "MacOS dotnet publish results in NativeAOT error",
+  "area": "devices"
+ },
+ "lexbox#1587": {
+  "title": "New look and feel for FW Lite",
+  "for": "Deliver shadCN UI",
+  "area": "feature"
+ },
+ "lexbox#1584": {
+  "title": "Dropdown follow-ups after the UI library move",
+  "for": "Shadcn select follow-up",
+  "area": "backstage"
+ },
+ "lexbox#1571": {
+  "title": "Entry editor rebuilt on the new UI components",
+  "for": "Migrate editor to shadcn",
+  "area": "feature"
+ },
+ "lexbox#1540": {
+  "title": "Refine the shared UI component library",
+  "for": "Refine Shadcn",
+  "area": "backstage"
+ },
+ "lexbox#1532": {
+  "title": "Backend model for user preferences",
+  "for": "Design a preferences backend model",
+  "area": "backstage"
+ },
+ "lexbox#1513": {
+  "title": "A clear message when your project list can't be loaded",
+  "for": "If getting lexbox projects fails, the user should be appropriately informed",
+  "area": "fix"
+ },
+ "lexbox#1511": {
+  "title": "End-to-end tests of FW Lite syncing with Lexbox",
+  "for": "e2e test Fw Lite with lexbox",
+  "area": "backstage"
+ },
+ "lexbox#1491": {
+  "title": "Publications: choose which entries go in which dictionary",
+  "for": "Complete publication support",
+  "area": "feature"
+ },
+ "lexbox#1480": {
+  "title": "A plain explanation of how FW Lite projects differ from FieldWorks",
+  "for": "Create a page to explain Harmony projects ",
+  "area": "feature"
+ },
+ "lexbox#1475": {
+  "title": "Deleting a sense shows up in other open windows",
+  "for": "deleting a sense does not get pushed properly to another open window",
+  "area": "fix"
+ },
+ "lexbox#1470": {
+  "title": "The app's interface can be translated into other languages",
+  "for": "i18n UI",
+  "area": "feature"
+ },
+ "lexbox#1469": {
+  "title": "Anonymous usage telemetry for FW Lite",
+  "for": "FW Lite telemetry",
+  "area": "backstage"
+ },
+ "lexbox#1431": {
+  "title": "Error and performance tracing for FW Lite",
+  "for": "OTEL for FW Lite",
+  "area": "backstage"
+ },
+ "lexbox#1414": {
+  "title": "Sync status is back in the project settings dialog",
+  "for": "Sync status was removed from the configure dialog",
+  "area": "fix"
+ },
+ "lexbox#1413": {
+  "title": "The app reopens where you left off",
+  "for": "Idea: the app should resume where the user left off at",
+  "area": "feature"
+ },
+ "lexbox#1411": {
+  "title": "A sync dialog shows whether your changes reached FieldWorks",
+  "for": "Show sync state in dedicated dialog/ui",
+  "area": "feature"
+ },
+ "lexbox#1396": {
+  "title": "Semantic domain search also matches example words, like FLEx",
+  "for": "Consider including example words in semantic domain filters",
+  "area": "feature"
+ },
+ "lexbox#1391": {
+  "title": "Your project data survives uninstalling the app",
+  "for": "Project data is lost when app is uninstalled",
+  "area": "data"
+ },
+ "lexbox#1372": {
+  "title": "Open any entry even when it's not in the current filtered list",
+  "for": "Decouple entry-list and editor",
+  "area": "feature"
+ },
+ "lexbox#1369": {
+  "title": "History view shows an entry's complex forms",
+  "for": "complex forms are always empty in history view",
+  "area": "fix"
+ },
+ "lexbox#1341": {
+  "title": "Update build tooling to pnpm 10",
+  "for": "Update to PNPM 10",
+  "area": "backstage"
+ },
+ "lexbox#1334": {
+  "title": "Fields no longer vanish while 'hide empty fields' is on",
+  "for": "Fields can disappear unexpectedly when hiding empty fields is enabled",
+  "area": "fix"
+ },
+ "lexbox#1325": {
+  "title": "Follow-up cleanup after the desktop app rewrite",
+  "for": "Blazor Hybrid follow-up PR",
+  "area": "backstage"
+ },
+ "lexbox#1319": {
+  "title": "Live user testing sessions with early users",
+  "for": "User testing cleanup",
+  "area": "backstage"
+ },
+ "lexbox#1318": {
+  "title": "Layout and design mockups for the project view",
+  "for": "Generate layout / design ideas",
+  "area": "backstage"
+ },
+ "lexbox#1307": {
+  "title": "Text with FieldWorks styling is protected instead of overwritten",
+  "for": "fwdata text with runs (styles/ws spans) in it will be overwritten if changed",
+  "area": "data"
+ },
+ "lexbox#1299": {
+  "title": "A proper Mac installer with automatic updates",
+  "for": "Setup installer for mac with Velopack",
+  "area": "devices"
+ },
+ "lexbox#1241": {
+  "title": "FW Lite beta released to users",
+  "for": "FW Lite beta",
+  "area": "feature"
+ },
+ "lexbox#1017": {
+  "title": "Filter entries by what's missing (no sense, no example, empty field)",
+  "for": "enable rich filtering of fw lite entries",
+  "area": "feature"
+ },
+ "lexbox#2765": {
+  "title": "App errors are reported to the team automatically",
+  "for": "Report FW Lite errors to Mixpanel",
+  "area": "backstage"
+ },
+ "lexbox#2762": {
+  "title": "Tests for writing systems used as both vernacular and analysis",
+  "for": "Add failing sync tests for writing systems shared between vernacular and analysis",
+  "area": "backstage"
+ },
+ "lexbox#2768": {
+  "title": "Server says 'blocked' instead of 'ok' when a project can't sync",
+  "for": "Return 423 from sync-harmony when the project is blocked",
+  "area": "backstage"
+ },
+ "lexbox#2763": {
+  "title": "Work around Mac signing network failures in CI",
+  "for": "Work around stapler network failures on the Intel Mac runner",
+  "area": "backstage"
+ },
+ "lexbox#2692": {
+  "title": "Update login token handling to supported APIs",
+  "for": "Migrate JWT auth off deprecated SecurityTokenValidators",
+  "area": "backstage"
+ },
+ "lexbox#2756": {
+  "title": "Uploaded project zips can't smuggle server config",
+  "for": "Drop .hg/hgrc from uploaded project zips",
+  "area": "backstage"
+ },
+ "lexbox#2432": {
+  "title": "Plugins: add small custom tools to FW Lite",
+  "for": "FW Lite plugins MVP: resource-backed storage, hardened API v1, research-backed trust UX",
+  "area": "feature"
+ },
+ "lexbox#2764": {
+  "title": "Deleting a media file on the server works and is recorded",
+  "for": "Fix media file deletes and scope media commits in FwHeadless",
+  "area": "fix"
+ },
+ "lexbox#2755": {
+  "title": "Skill to collect quarterly analytics",
+  "for": "Add a quarterly-analytics skill for the FW Lite and Lexbox analytics sheet",
+  "area": "backstage"
+ },
+ "lexbox#2766": {
+  "title": "Regression test: 'Missing X' filters update live",
+  "for": "Add regression test for Missing filters updating live",
+  "area": "backstage"
+ },
+ "lexbox#2767": {
+  "title": "Search finds the right entry after a sense is moved",
+  "for": "Re-index the old entry's search record when a sense moves",
+  "area": "fix"
+ },
+ "lexbox#2757": {
+  "title": "Conformance tests for sense pictures",
+  "for": "Add picture conformance tests and enforce picture parent checks",
+  "area": "backstage"
+ },
+ "lexbox#2718": {
+  "title": "Update the Send/Receive server image",
+  "for": "Update hgresume image to v2026-09-30",
+  "area": "backstage"
+ },
+ "lexbox#1554": {
+  "title": "Linux users are told when a new version is out",
+  "for": "Notify Linux users of new versions",
+  "area": "devices"
+ },
+ "lexbox#2761": {
+  "title": "Re-uploading an identical media file no longer fails",
+  "for": "Don't fail media uploads when hg commit has nothing to commit",
+  "area": "fix"
+ },
+ "lexbox#2736": {
+  "title": "Settings file and troubleshooting toggles, e.g. debug logs",
+  "for": "Add a settings file and troubleshoot toggles for FW Lite configuration",
+  "area": "feature"
+ },
+ "lexbox#2758": {
+  "title": "Route server traffic through the Gateway API",
+  "for": "Route k8s traffic through Gateway API (Traefik)",
+  "area": "backstage"
+ },
+ "lexbox#2759": {
+  "title": "Dependabot covers composite actions",
+  "for": "Let Dependabot bump composite actions under .github/actions",
+  "area": "backstage"
+ },
+ "lexbox#2752": {
+  "title": "Part of speech can be cleared",
+  "for": "allow clearing part of speech",
+  "area": "fix"
+ },
+ "lexbox#2753": {
+  "title": "Drop skaffold",
+  "for": "drop skaffold",
+  "area": "backstage"
+ },
+ "lexbox#2717": {
+  "title": "Record and play audio on iOS and Mac",
+  "for": "Get audio recording and playback working on iOS and Mac Catalyst",
+  "area": "devices"
+ },
+ "lexbox#2730": {
+  "title": "Sign-in problems are logged so they can be diagnosed",
+  "for": "Log FW Lite sign-in lifecycle and make log levels configurable",
+  "area": "backstage"
+ },
+ "lexbox#2751": {
+  "title": "End-to-end tests for Send/Receive repository operations",
+  "for": "Add end-to-end tests for hg repo operations",
+  "area": "backstage"
+ },
+ "lexbox#2706": {
+  "title": "Paratext extension ships with each FW Lite release",
+  "for": "Ship the Platform.Bible extension on the FW Lite release",
+  "area": "feature"
+ },
+ "lexbox#2689": {
+  "title": "Paratext extension published from CI",
+  "for": "Publish the Lexicon extension from CI",
+  "area": "backstage"
+ },
+ "lexbox#2748": {
+  "title": "Loading placeholders match real entry rows",
+  "for": "Make entry skeleton rows more realistic",
+  "area": "backstage"
+ },
+ "lexbox#2729": {
+  "title": "Update check retries after a network hiccup",
+  "for": "Retry FW Lite update check after a failed fetch",
+  "area": "fix"
+ },
+ "lexbox#2719": {
+  "title": "Dictionary preview respects your chosen writing systems",
+  "for": "Respect custom view writing systems in the FW Lite dictionary preview",
+  "area": "feature"
+ },
+ "lexbox#2406": {
+  "title": "Entries sort the same way as in FLEx, per writing system",
+  "for": "Add FLEx-compatible per-writing-system collation to FwLite",
+  "area": "feature"
+ },
+ "lexbox#2377": {
+  "title": "Package overrides moved out of package.json",
+  "for": "pnpm overrides no longer live in package.json",
+  "area": "backstage"
+ },
+ "lexbox#2739": {
+  "title": "Agent environment fixups",
+  "for": "Agent environment fixups: verify tasks, CI log script, steering refresh",
+  "area": "backstage"
+ },
+ "lexbox#2741": {
+  "title": "FwData tests run without FieldWorks installed",
+  "for": "Make FwData tests independent of an installed FieldWorks",
+  "area": "backstage"
+ },
+ "lexbox#2740": {
+  "title": "Remove dead code from bulk entry creation",
+  "for": "Remove dead search-table regenerate from BulkCreateEntries",
+  "area": "backstage"
+ },
+ "lexbox#1931": {
+  "title": "Creating the same example twice no longer breaks a project",
+  "for": "A project can become un-openable if you create the same example twice",
+  "area": "data"
+ },
+ "lexbox#2331": {
+  "title": "Live updates reconnect after network loss or sleep",
+  "for": "FwLite push listener doesn't recover after network loss / OS suspend; project-open can crash ('SendCoreAsync … not active')",
+  "area": "fix"
+ },
+ "lexbox#2359": {
+  "title": "New entries are validated like everything else",
+  "for": "MiniLcmApiValidationWrapper.CreateEntry skips entry validation",
+  "area": "backstage"
+ },
+ "lexbox#2738": {
+  "title": "Split entry API out of the CRDT API class",
+  "for": "Split entry API out of CrdtMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2734": {
+  "title": "Split example sentence API out of the CRDT API class",
+  "for": "Split example sentence API out of CrdtMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2733": {
+  "title": "Split sense API out of the CRDT API class",
+  "for": "Split sense API out of CrdtMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2732": {
+  "title": "Split picture API out of the CRDT API class",
+  "for": "Split picture API out of CrdtMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2731": {
+  "title": "Split custom view, media and comment APIs out",
+  "for": "Split custom view, media and comment APIs out of CrdtMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2728": {
+  "title": "Fix analyzer tests loading in C# Dev Kit",
+  "for": "Fix C# Dev Kit failing to load LexboxAnalyzers.Tests",
+  "area": "backstage"
+ },
+ "lexbox#2108": {
+  "title": "Fix a sync test failing on the 'Affixes' field",
+  "for": "CanSyncRandomEntries failure: Fieldname 'Affixes' does not exist",
+  "area": "backstage"
+ },
+ "lexbox#2727": {
+  "title": "Smaller regression data on schema changes",
+  "for": "Reduce added regression data on schema changes",
+  "area": "backstage"
+ },
+ "lexbox#2713": {
+  "title": "Recordings and camera photos get meaningful file names",
+  "for": "[claude] Give recordings and camera captures meaningful file names",
+  "area": "feature"
+ },
+ "lexbox#2726": {
+  "title": "Hardware keyboard detection moved to platform service",
+  "for": "Move HasHardwareKeyboard from FwLiteConfig to IPlatformFeaturesService",
+  "area": "backstage"
+ },
+ "lexbox#2721": {
+  "title": "Fix release workflow checkout order",
+  "for": "Check out before downloading artifacts in create-release",
+  "area": "backstage"
+ },
+ "lexbox#2723": {
+  "title": "Linux build shows its release version",
+  "for": "Stamp the release tag into the Linux FW Lite build",
+  "area": "devices"
+ },
+ "lexbox#2305": {
+  "title": "Small improvement to bulk entry creation",
+  "for": "Minor improvement to BulkCreateEntries",
+  "area": "backstage"
+ },
+ "lexbox#2711": {
+  "title": "Release Lexbox and FW Lite from one button",
+  "for": "Release LexBox and FW Lite from one manual dispatch",
+  "area": "backstage"
+ },
+ "lexbox#2661": {
+  "title": "Comments update live while you work",
+  "for": "Add live comment updates to FW Lite",
+  "area": "feature"
+ },
+ "lexbox#2720": {
+  "title": "Shortcut hints only shown when a real keyboard is attached",
+  "for": "[claude] Gate shortcut hints and autofocus on a real hardware-keyboard signal",
+  "area": "fix"
+ },
+ "lexbox#2673": {
+  "title": "iOS stays awake while a project downloads",
+  "for": "Keep iOS awake during project downloads",
+  "area": "devices"
+ },
+ "lexbox#2685": {
+  "title": "Fields don't pop up the on-screen keyboard uninvited",
+  "for": "Only autofocus entry fields when it won't pop up a virtual keyboard",
+  "area": "fix"
+ },
+ "lexbox#2705": {
+  "title": "Separate GitHub releases for Lexbox and FW Lite",
+  "for": "Split the Lexbox and FW Lite GitHub releases",
+  "area": "backstage"
+ },
+ "lexbox#2703": {
+  "title": "Separate GitHub releases for Lexbox and FW Lite",
+  "for": "Split Lexbox and FieldWorks Lite GitHub releases",
+  "area": "backstage"
+ },
+ "lexbox#2716": {
+  "title": "Limit how many syncs one user can run at once on the server",
+  "for": "Rate-limit concurrent resumable sync requests per user and project",
+  "area": "backstage"
+ },
+ "lexbox#2702": {
+  "title": "Camera, picture editing and picture download work on iOS",
+  "for": "Fix iOS camera, picture editing, and picture download",
+  "area": "devices"
+ },
+ "lexbox#2710": {
+  "title": "Release notes headings link to where they get posted",
+  "for": "Link release-notes headings to where the notes get posted",
+  "area": "backstage"
+ },
+ "lexbox#2712": {
+  "title": "Retry Mac disk-image build when the runner is busy",
+  "for": "Retry hdiutil when the macOS runner reports \"Resource busy\"",
+  "area": "backstage"
+ },
+ "lexbox#2704": {
+  "title": "Label shared FW Lite libraries as FW Lite Core",
+  "for": "Label shared FW Lite libraries as FW Lite Core and fix paths",
+  "area": "backstage"
+ },
+ "lexbox#2698": {
+  "title": "Server loads each FieldWorks project once under load",
+  "for": "Load each FwData project once under concurrent requests",
+  "area": "backstage"
+ },
+ "lexbox#2708": {
+  "title": "Project id in sync analytics; track project opens",
+  "for": "Add project id to sync analytics and track FW Lite project opens",
+  "area": "backstage"
+ },
+ "lexbox#2679": {
+  "title": "Android update prompts come through Google Play",
+  "for": "Notify Android users of updates via Google Play in-app updates",
+  "area": "devices"
+ },
+ "lexbox#2709": {
+  "title": "Pin MAUI workload to fix the Mac build",
+  "for": "Pin the MAUI workload set to fix the Mac Catalyst build",
+  "area": "backstage"
+ },
+ "lexbox#2439": {
+  "title": "Create a new empty FLEx project on Lexbox",
+  "for": "Lexbox API to create empty FLEx project",
+  "area": "feature"
+ },
+ "lexbox#2652": {
+  "title": "Bulk entry creation checks input more carefully",
+  "for": "Improve Bulk Create Entries Validation",
+  "area": "fix"
+ },
+ "lexbox#2676": {
+  "title": "Windows updates show real download progress",
+  "for": "Show real download progress for Windows updates via a loopback proxy",
+  "area": "devices"
+ },
+ "lexbox#2695": {
+  "title": "CI launches the packaged Mac and Windows apps",
+  "for": "[claude] Launch the packaged Mac and Windows apps in CI",
+  "area": "backstage"
+ },
+ "lexbox#2694": {
+  "title": "Fix Mac build shipping without its web UI",
+  "for": "[claude] Fix Mac Catalyst DMG shipping without its web UI",
+  "area": "devices"
+ },
+ "lexbox#2688": {
+  "title": "Paratext: lexicon picker can replace a deleted lexicon",
+  "for": "[PB Extension] Let openSelector replace a deleted lexicon",
+  "area": "fix"
+ },
+ "lexbox#2697": {
+  "title": "UI tests wait for entries to load",
+  "for": "[claude] Make viewer UI tests wait until entry rows have loaded",
+  "area": "backstage"
+ },
+ "lexbox#2686": {
+  "title": "Paratext: deleted projects are ignored",
+  "for": "[PB Extension] Ignore deleted projects when getting a project manager",
+  "area": "fix"
+ },
+ "lexbox#2691": {
+  "title": "Paratext: remove dev-only command",
+  "for": "[PB Extension] Remove dev-only changeLexicon command and its menu item",
+  "area": "backstage"
+ },
+ "lexbox#2675": {
+  "title": "Mac app is signed and notarized as a DMG",
+  "for": "Sign and notarize the Mac Catalyst app into a DMG in CI",
+  "area": "devices"
+ },
+ "lexbox#2677": {
+  "title": "UI tests also run on Safari's engine",
+  "for": "Run FwLite viewer UI tests against WebKit as well as Chromium",
+  "area": "backstage"
+ },
+ "lexbox#2684": {
+  "title": "Paratext: command to open the lexicon picker",
+  "for": "[PB Extension] Add command to open lexicon selector",
+  "area": "feature"
+ },
+ "lexbox#2683": {
+  "title": "Paratext: command to open the lexicon picker",
+  "for": "[PB Extension] Add a command to open the lexicon selector for a project",
+  "area": "feature"
+ },
+ "lexbox#2687": {
+  "title": "Fix flaky test tripped by status-code-like folder names",
+  "for": "Use letters-only ids for S&R test folders to avoid fake HTTP-status matches",
+  "area": "backstage"
+ },
+ "lexbox#2636": {
+  "title": "Big imports are twice as fast",
+  "for": "Sync FTS and collations via Harmony projected-entity interceptor",
+  "area": "feature"
+ },
+ "lexbox#2656": {
+  "title": "Lexbox analytics MVP",
+  "for": "Add LexBox analytics MVP with shared Mixpanel core",
+  "area": "backstage"
+ },
+ "lexbox#2630": {
+  "title": "Admins can request a snapshot rebuild on every device",
+  "for": "Add an endpoint to request a CRDT snapshot rebuild",
+  "area": "backstage"
+ },
+ "lexbox#2585": {
+  "title": "Paratext: choose a local or online lexicon",
+  "for": "Enable selecting a local or remote lexicon (Platform.Bible)",
+  "area": "feature"
+ },
+ "lexbox#2461": {
+  "title": "Paratext: pick an online lexicon, not just a local one",
+  "for": "[P.B ext] Enable selecting a remote project",
+  "area": "feature"
+ },
+ "lexbox#2681": {
+  "title": "App icon sized right on iOS and Mac",
+  "for": "Scale down the FwLite app icon on iOS and Mac Catalyst",
+  "area": "devices"
+ },
+ "lexbox#2680": {
+  "title": "Native HTTP handler on iOS/Mac",
+  "for": "Use Apple's native HTTP handler on iOS/Mac Catalyst",
+  "area": "backstage"
+ },
+ "lexbox#2672": {
+  "title": "iPad: external links open in Safari; share sheet fixed",
+  "for": "iPad UX: open external links in Safari, fix the iPad share sheet",
+  "area": "devices"
+ },
+ "lexbox#2664": {
+  "title": "Web app no longer shuts down when its input closes",
+  "for": "Don't shut down FwLiteWeb on stdin EOF",
+  "area": "backstage"
+ },
+ "lexbox#2669": {
+  "title": "FW Lite builds and runs on iOS and Mac",
+  "for": "Build and run FieldWorks Lite on iOS and Mac Catalyst",
+  "area": "devices"
+ },
+ "lexbox#2667": {
+  "title": "Copy to clipboard works on iOS and Mac",
+  "for": "Make clipboard copy work in the Apple WebViews via a .NET bridge",
+  "area": "devices"
+ },
+ "lexbox#2666": {
+  "title": "Update check no longer errors for editions without a release feed",
+  "for": "Stop the FwLite update check from 500ing for editions with no release feed",
+  "area": "fix"
+ },
+ "lexbox#2668": {
+  "title": "Windows-only notifications package kept out of other builds",
+  "for": "Keep the Windows-only toast package out of the iOS/Mac/Android bundles",
+  "area": "backstage"
+ },
+ "lexbox#2627": {
+  "title": "Paratext: entry service addressed by lexicon",
+  "for": "[PB Extension] Address the entry service by lexicon, not by project",
+  "area": "backstage"
+ },
+ "lexbox#2626": {
+  "title": "Paratext: a caller can name a lexicon without owning the setting",
+  "for": "[PB Extension] Let a caller name a lexicon without owning the project setting",
+  "area": "backstage"
+ },
+ "lexbox#2658": {
+  "title": "Smaller snapshot data (duplicate fields removed)",
+  "for": "Exclude redundant fields from MiniLcmCrdtAdapter serialization",
+  "area": "backstage"
+ },
+ "lexbox#2649": {
+  "title": "Senses and examples moved in FLEx stay in place after sync",
+  "for": "Handling example-sentence reparenting",
+  "area": "data"
+ },
+ "lexbox#2577": {
+  "title": "Examples moved between senses in FLEx stay in place after sync",
+  "for": "Sync example sentences moved between senses",
+  "area": "data"
+ },
+ "lexbox#2654": {
+  "title": "Fix Send/Receive web server startup as non-root",
+  "for": "Fix hgweb non-root startup: back Apache runtime dir with an emptyDir",
+  "area": "backstage"
+ },
+ "lexbox#2643": {
+  "title": "Fix the help link for complex forms",
+  "for": "fix help link for complex forms",
+  "area": "fix"
+ },
+ "lexbox#2651": {
+  "title": "Paratext extension synced with its template",
+  "for": "Sync with template; Remake package-lock",
+  "area": "backstage"
+ },
+ "lexbox#2648": {
+  "title": "Download failures show the real reason instead of a generic error",
+  "for": "[claude] Return the download error message from the REST endpoint",
+  "area": "fix"
+ },
+ "lexbox#2639": {
+  "title": "Split more APIs out of the CRDT API class",
+  "for": "split out more apis from crdt mini lcm api",
+  "area": "backstage"
+ },
+ "lexbox#2635": {
+  "title": "Emails link to lexbox.org instead of the old domain",
+  "for": "Update languagedepot to lexbox in email URLs",
+  "area": "fix"
+ },
+ "lexbox#2451": {
+  "title": "Emails link to lexbox.org instead of the old domain",
+  "for": "[claude] Production email links point to languagedepot.org, not lexbox.org",
+  "area": "fix"
+ },
+ "lexbox#2645": {
+  "title": "Clean up test warnings in the viewer",
+  "for": "Clean up vitest warnings in the viewer",
+  "area": "backstage"
+ },
+ "lexbox#2638": {
+  "title": "Tests use the real project creation path",
+  "for": "Use the real CreateProject path in LcmCrdt.Tests fixtures",
+  "area": "backstage"
+ },
+ "lexbox#2495": {
+  "title": "Test fixtures use the normal project create and open paths",
+  "for": "[claude] Let test fixtures use the normal CreateProject/OpenProject paths with in-memory sqlite",
+  "area": "backstage"
+ },
+ "lexbox#2637": {
+  "title": "Long member names trimmed in the project members list",
+  "for": "Trim long member names in project members list",
+  "area": "fix"
+ },
+ "lexbox#2467": {
+  "title": "Long user names no longer overflow the member list",
+  "for": "Long user names overflow user list",
+  "area": "fix"
+ },
+ "lexbox#2642": {
+  "title": "Redesigned tasks view: one row per field, a chip per writing system",
+  "for": "[claude] Redesign the tasks view",
+  "area": "feature"
+ },
+ "lexbox#2226": {
+  "title": "Update to .NET 10",
+  "for": "Update to dotnet 10",
+  "area": "backstage"
+ },
+ "lexbox#2263": {
+  "title": "Clean up packages after the .NET 10 upgrade",
+  "for": "Bump and clean up Nuget packages after .NET 10 upgrade",
+  "area": "backstage"
+ },
+ "lexbox#2641": {
+  "title": "Merge pipeline",
+  "for": "merge pipeline",
+  "area": "backstage"
+ },
+ "lexbox#2640": {
+  "title": "Comments turned on for everyone",
+  "for": "Enable comments in production",
+  "area": "feature"
+ },
+ "lexbox#2549": {
+  "title": "Upgrade to .NET 11 RC1",
+  "for": "Upgrade to .NET 11 RC1",
+  "area": "backstage"
+ },
+ "lexbox#2633": {
+  "title": "Update to pnpm 12 with a global store",
+  "for": "use pnpm global virtual store update to pnpm 12",
+  "area": "backstage"
+ },
+ "lexbox#2487": {
+  "title": "Web API returns proper 'not found' errors instead of crashing",
+  "for": "FwLiteWeb mini-lcm routes return 500 instead of 404/400 for not-found and bad-request cases",
+  "area": "backstage"
+ },
+ "lexbox#2631": {
+  "title": "Stop generating metrics in .NET",
+  "for": "[claude] Stop generating metrics in .NET",
+  "area": "backstage"
+ },
+ "lexbox#2618": {
+  "title": "Sort the entry list by a chosen vernacular writing system",
+  "for": "Sort entry list by vernacular writing systems",
+  "area": "feature"
+ },
+ "lexbox#2628": {
+  "title": "Stop exporting metrics from the collector",
+  "for": "Stop exporting metrics from the collector",
+  "area": "backstage"
+ },
+ "lexbox#2621": {
+  "title": "CI and Play test runs excluded from analytics",
+  "for": "Exclude CI and Play pre-launch from Mixpanel analytics",
+  "area": "backstage"
+ },
+ "lexbox#2629": {
+  "title": "Stabilize project download extraction in CI",
+  "for": "Stabilize tar extraction in download-fw-headless-project",
+  "area": "backstage"
+ },
+ "lexbox#2616": {
+  "title": "New tasks: fill in semantic domains, citation forms and lexeme forms",
+  "for": "Add semantic domain, citation form, and lexeme form tasks",
+  "area": "feature"
+ },
+ "lexbox#2567": {
+  "title": "Writing system code split into smaller classes",
+  "for": "Refactor writing system methods",
+  "area": "backstage"
+ },
+ "lexbox#2611": {
+  "title": "Smaller server image; merges run on .NET 10",
+  "for": "Shrink the FwHeadless image and run ChorusMerge on .NET 10",
+  "area": "backstage"
+ },
+ "lexbox#2619": {
+  "title": "Deployment waits for certificate manager to be ready",
+  "for": "Wait for cert-manager webhook TLS before GHA kustomize apply",
+  "area": "backstage"
+ },
+ "lexbox#2622": {
+  "title": "Client-only packages moved out of the server image",
+  "for": "[claude] Move client-only packages to devDependencies and check runtime imports in the image build",
+  "area": "backstage"
+ },
+ "lexbox#2613": {
+  "title": "Smaller web UI Docker image",
+  "for": "Trim lexbox-ui Docker image by prod-pruning node_modules",
+  "area": "backstage"
+ },
+ "lexbox#2624": {
+  "title": "Release notes drafted automatically in CI",
+  "for": "[claude] Draft FW Lite release notes with Claude in CI",
+  "area": "backstage"
+ },
+ "lexbox#2620": {
+  "title": "Fix Lexbox login on Android",
+  "for": "Fix Android Lexbox login: MSAL parent Activity was null",
+  "area": "fix"
+ },
+ "lexbox#2614": {
+  "title": "Android releases go to the Play Store beta automatically",
+  "for": "Publish FW Lite Android to Play Store beta on release",
+  "area": "devices"
+ },
+ "lexbox#2617": {
+  "title": "Filter for entries whose examples lack a translation",
+  "for": "Add filter for entries missing example-sentence translations",
+  "area": "feature"
+ },
+ "lexbox#2610": {
+  "title": "Skill for writing release notes",
+  "for": "[claude] Add release-notes skill",
+  "area": "backstage"
+ },
+ "lexbox#2609": {
+  "title": "Copy a ready-to-paste Send/Receive URL",
+  "for": "Generate a paste-ready Send/Receive URL",
+  "area": "feature"
+ },
+ "lexbox#2599": {
+  "title": "Remove redundant tracing retry wrapper",
+  "for": "Remove redundant OTLP XHR-retry trace exporter wrapper",
+  "area": "backstage"
+ },
+ "lexbox#2606": {
+  "title": "Anonymous launch analytics for FW Lite",
+  "for": "Add FwLite Mixpanel launch analytics MVP",
+  "area": "backstage"
+ },
+ "lexbox#2605": {
+  "title": "Tests for media not found during sync before upload",
+  "for": "Fix media not found on sync when not yet uploaded",
+  "area": "backstage"
+ },
+ "lexbox#2603": {
+  "title": "FLEx media files keep their identity across Windows and Linux paths",
+  "for": "Keep FLEx media file IDs stable across path separator differences",
+  "area": "data"
+ },
+ "lexbox#2587": {
+  "title": "Android downloads keep running while the screen sleeps",
+  "for": "Keep Android downloads running and prevents sleep",
+  "area": "devices"
+ },
+ "lexbox#2604": {
+  "title": "Buttons and list items respond visibly when tapped",
+  "for": "Scale buttons and list items on click",
+  "area": "feature"
+ },
+ "lexbox#2608": {
+  "title": "Replace old API hook with the new one",
+  "for": "remove old useLexboxApi and replace with useMiniLcmApi",
+  "area": "backstage"
+ },
+ "lexbox#2601": {
+  "title": "Release channel picker to try beta features",
+  "for": "Add FieldWorks Lite release-channel feature flags",
+  "area": "feature"
+ },
+ "lexbox#2494": {
+  "title": "Release channels: try beta features before everyone else",
+  "for": "Release channels/feature flags",
+  "area": "feature"
+ },
+ "lexbox#2602": {
+  "title": "Lexbox pages show an error box instead of a blank page",
+  "for": "Add Svelte error-boundary guards for LexBox page throws",
+  "area": "fix"
+ },
+ "lexbox#2600": {
+  "title": "Picture dialog opens right after choosing a picture",
+  "for": "Show picture dialog after selecting picture",
+  "area": "feature"
+ },
+ "lexbox#2536": {
+  "title": "Semantic domains carry FLEx's extra fields (abbreviation, codes)",
+  "for": "Add FLEx semantic-domain fields to MiniLcm",
+  "area": "feature"
+ },
+ "lexbox#2592": {
+  "title": "Smoke test mixing both Send/Receive protocols",
+  "for": "Add cross-protocol send/receive interop smoke test",
+  "area": "backstage"
+ },
+ "lexbox#2597": {
+  "title": "Filter to entries with unread comments",
+  "for": "Add unread-comment filtering and a dev-only mark-unread control",
+  "area": "feature"
+ },
+ "lexbox#2598": {
+  "title": "Browser no longer traces its own tracing requests",
+  "for": "Stop the browser tracing its own trace-export requests",
+  "area": "backstage"
+ },
+ "lexbox#2593": {
+  "title": "Send/Receive web server runs as non-root",
+  "for": "Run hgweb container as non-root",
+  "area": "backstage"
+ },
+ "lexbox#2596": {
+  "title": "Fix the Windows installer manifest check",
+  "for": "Fix 404 on HEAD for the FW Lite App Installer manifest",
+  "area": "devices"
+ },
+ "lexbox#2594": {
+  "title": "More memory for the Send/Receive server on large pushes",
+  "for": "Raise hgweb memory to 600Mi to stop OOM kills on large pushes",
+  "area": "backstage"
+ },
+ "lexbox#2590": {
+  "title": "Resumable Send/Receive containers run as www-data",
+  "for": "set hgresume containers to run as www-data",
+  "area": "backstage"
+ },
+ "lexbox#2561": {
+  "title": "Cache Docker builds in CI",
+  "for": "Cache Docker builds for api, fw-headless, hgweb, and ui images",
+  "area": "backstage"
+ },
+ "lexbox#2591": {
+  "title": "Windows installer manifest served from the expected path",
+  "for": "Serve the .appinstaller manifest from a .appinstaller path",
+  "area": "devices"
+ },
+ "lexbox#2576": {
+  "title": "Log Windows updating the app package",
+  "for": "Log Windows updating the FW Lite MSIX package",
+  "area": "backstage"
+ },
+ "lexbox#2586": {
+  "title": "Faster linting",
+  "for": "Speed up viewer and frontend eslint: local cache + drop slow rule",
+  "area": "backstage"
+ },
+ "lexbox#2582": {
+  "title": "Drop query workaround properties",
+  "for": "[claude] Drop the shadow *Rows query-rewrite properties",
+  "area": "backstage"
+ },
+ "lexbox#2291": {
+  "title": "Remove linq2db workarounds once upstream fixes land",
+  "for": "Clean up linq2db v6 workarounds when upstream fixes land",
+  "area": "backstage"
+ },
+ "lexbox#2581": {
+  "title": "Remove the Android linq2db patcher",
+  "for": "[claude] Remove the Android linq2db cctor IL patcher",
+  "area": "backstage"
+ },
+ "lexbox#2574": {
+  "title": "Frontend on Node 26",
+  "for": "Bump the frontend to node 26 and install pnpm directly",
+  "area": "backstage"
+ },
+ "lexbox#2579": {
+  "title": "Comment dates say 'just now' and keep ticking",
+  "for": "Use 'just now' for zero relative dates and make comment dates live",
+  "area": "fix"
+ },
+ "lexbox#2519": {
+  "title": "Every write goes through validation",
+  "for": "Add and enforce missing validation calls in wrapper",
+  "area": "backstage"
+ },
+ "lexbox#2545": {
+  "title": "Move to the ASP.NET OpenAPI package",
+  "for": "Migrate to Aspnet.OpenApi package from swashbuckle",
+  "area": "backstage"
+ },
+ "lexbox#2568": {
+  "title": "Lexbox pages load lighter (password checker loaded on demand)",
+  "for": "Don't load zxcvbn on page in lexbox",
+  "area": "backstage"
+ },
+ "lexbox#2546": {
+  "title": "Project page loads history on demand and shows FW Lite history",
+  "for": "[project page] on demand history loading, show fw lite history",
+  "area": "feature"
+ },
+ "lexbox#2470": {
+  "title": "Redesigned comments panel: sidebar on desktop, drawer on mobile",
+  "for": "Redesign FwLite comments panel with responsive layout",
+  "area": "feature"
+ },
+ "lexbox#2584": {
+  "title": "Install only the browsers CI runs",
+  "for": "[claude] Install only the Playwright browsers CI actually runs",
+  "area": "backstage"
+ },
+ "lexbox#2578": {
+  "title": "CI check for GraphQL schema drift",
+  "for": "[claude] Add CI check for GraphQL schema drift",
+  "area": "backstage"
+ },
+ "lexbox#2062": {
+  "title": "Interrupted syncs no longer create duplicate changes",
+  "for": "Partial syncs cause duplicate changes/noise",
+  "area": "data"
+ },
+ "lexbox#2508": {
+  "title": "FieldWorks edits no longer lost when the server merge can't load",
+  "for": "FwHeadless silently loses FieldWorks edits: ChorusMerge can't find its merge handlers",
+  "area": "data"
+ },
+ "lexbox#2575": {
+  "title": "Activity view no longer freezes FW Lite on large projects",
+  "for": "Stop the activity view freezing FW Lite on large projects",
+  "area": "fix"
+ },
+ "lexbox#2572": {
+  "title": "Better CI job path coverage",
+  "for": "Improve CI job path coverage",
+  "area": "backstage"
+ },
+ "lexbox#2569": {
+  "title": "Server merge finds its plugins again (FieldWorks edits kept)",
+  "for": "Bump Chorus for FwHeadless plugin discovery and require plugins",
+  "area": "data"
+ },
+ "lexbox#2511": {
+  "title": "Pick up the upstream merge plugin fix when it lands",
+  "for": "[claude] Long-term: consume the upstream ChorusMerge plugin-discovery fix",
+  "area": "backstage"
+ },
+ "lexbox#2571": {
+  "title": "Pin GitHub Action tags to SHAs",
+  "for": "[claude] Pin the remaining floating GitHub Action tags to SHAs",
+  "area": "backstage"
+ },
+ "lexbox#2514": {
+  "title": "Dry-run sync records identify what changed",
+  "for": "Standardize dry-run sync records and remove the Submit* defaults",
+  "area": "backstage"
+ },
+ "lexbox#2471": {
+  "title": "PR self-merge rubric",
+  "for": "Add PR self-merge rubric",
+  "area": "backstage"
+ },
+ "lexbox#2416": {
+  "title": "Variants: model and sync with FieldWorks (editor UI to follow)",
+  "for": "Add variant model, CRDT changes, FwData bridge and sync (1/3)",
+  "area": "feature"
+ },
+ "lexbox#2355": {
+  "title": "New translations from Crowdin",
+  "for": "New Crowdin updates",
+  "area": "feature"
+ },
+ "lexbox#2548": {
+  "title": "Pre-commit hooks run with pnpm",
+  "for": "Run Husky pre-commit hooks with PNPM rather than NPM",
+  "area": "backstage"
+ },
+ "lexbox#2563": {
+  "title": "Use the published test repos image for seeding",
+  "for": "Consume published lexbox-test-repos image for hg seeding",
+  "area": "backstage"
+ },
+ "lexbox#2050": {
+  "title": "Long server syncs no longer drop the project from memory midway",
+  "for": "Long fw-headless syncs result in premature LcmCache eviction",
+  "area": "data"
+ },
+ "lexbox#2557": {
+  "title": "Fix a performance test rounding up to its budget",
+  "for": "Stop query perf test rounding a passing measurement up to its budget",
+  "area": "backstage"
+ },
+ "lexbox#2553": {
+  "title": "Grant CI workflows the scopes Dependabot needs",
+  "for": "Grant CI workflows the write scopes Dependabot PRs need",
+  "area": "backstage"
+ },
+ "lexbox#2550": {
+  "title": "Last old Svelte 4 files migrated",
+  "for": "migrate last old svelte 4 files fw lite",
+  "area": "backstage"
+ },
+ "lexbox#2551": {
+  "title": "Svelte contexts migrated to createContext",
+  "for": "Migrate Svelte contexts to createContext",
+  "area": "backstage"
+ },
+ "lexbox#2562": {
+  "title": "Manual workflow to publish the test repos image",
+  "for": "Add manual workflow to publish the lexbox-test-repos seed image",
+  "area": "backstage"
+ },
+ "lexbox#2535": {
+  "title": "Analyzer enforces entity id on CRDT changes",
+  "for": "Add in-repo Roslyn analyzer enforcing Guid entityId constructor on CRDT changes",
+  "area": "backstage"
+ },
+ "lexbox#2556": {
+  "title": "Regenerate a stale TypeScript type",
+  "for": "Regenerate stale captureImage TypeScript type",
+  "area": "backstage"
+ },
+ "lexbox#2547": {
+  "title": "Paratext: a missing lexicon is handled without exposing full FW Lite",
+  "for": "[PB Extension] Handle a missing lexicon without exposing full FW Lite",
+  "area": "fix"
+ },
+ "lexbox#2440": {
+  "title": "Paratext: a wrong lexicon code gives a clear message",
+  "for": "[P.B ext] \"Browse lexicon\" mishandles invalid lexicon code",
+  "area": "fix"
+ },
+ "lexbox#2530": {
+  "title": "Type generation handles nullable return types",
+  "for": "teach ts type gen how to handle nullable return types",
+  "area": "backstage"
+ },
+ "lexbox#2554": {
+  "title": "Document why the server runtime stage is pinned",
+  "for": "Document why FwHeadless's dotnet8 runtime stage is pinned",
+  "area": "backstage"
+ },
+ "lexbox#2552": {
+  "title": "Bigger server volume",
+  "for": "bump fw-headless volume size",
+  "area": "backstage"
+ },
+ "lexbox#2529": {
+  "title": "Take a picture with the camera for a sense",
+  "for": "Setup taking pictures for sense pictures",
+  "area": "feature"
+ },
+ "harmony#144": {
+  "title": "Interceptors see the entity's previous state",
+  "for": "Pass interceptors the pre-batch projected entity",
+  "area": "backstage"
+ },
+ "harmony#140": {
+  "title": "Media copied over USB is recognised without a new edit",
+  "for": "Add ResourceService.AddLocalCopy to record a local file without a commit",
+  "area": "feature"
+ },
+ "harmony#135": {
+  "title": "Older and newer app versions can share a project safely",
+  "for": "Model Version support",
+  "area": "data"
+ },
+ "harmony#145": {
+  "title": "Register change types through model versions only",
+  "for": "[claude] Register change types through model versions only",
+  "area": "backstage"
+ },
+ "harmony#142": {
+  "title": "Tests added from mutation testing",
+  "for": "Improve tests found by Stryker.NET mutation testing",
+  "area": "backstage"
+ },
+ "harmony#143": {
+  "title": "Project files shrink after a rebuild",
+  "for": "Compact the SQLite file after regenerating snapshots",
+  "area": "feature"
+ },
+ "harmony#136": {
+  "title": "Media files stay found after the app moves folders (iOS)",
+  "for": "Store local resource paths relative to the cache directory",
+  "area": "data"
+ },
+ "harmony#139": {
+  "title": "Agent steering, SDK pin, warnings as errors",
+  "for": "Agent steering, SDK pin, warnings-as-errors, per-test temp db",
+  "area": "backstage"
+ },
+ "harmony#132": {
+  "title": "Test helper cleanup",
+  "for": "Drop the add flag from the Write* test helpers",
+  "area": "backstage"
+ },
+ "harmony#130": {
+  "title": "Test helper cleanup",
+  "for": "Move in-memory commit building out of DataModelTestBase",
+  "area": "backstage"
+ },
+ "harmony#129": {
+  "title": "Test SnapshotWorker directly",
+  "for": "Test SnapshotWorker directly over a fake ISnapshotView",
+  "area": "backstage"
+ },
+ "harmony#119": {
+  "title": "A device that missed an edit gets it on the next sync",
+  "for": "Recover from missing commits",
+  "area": "data"
+ },
+ "harmony#133": {
+  "title": "Missed-commit recovery refactor",
+  "for": "Recover from missing commits - Refactor",
+  "area": "backstage"
+ },
+ "harmony#39": {
+  "title": "Support EF compiled models",
+  "for": "enable using a compiled model",
+  "area": "backstage"
+ },
+ "harmony#128": {
+  "title": "Commit validation off by default",
+  "for": "Turn AlwaysValidateCommits off by default",
+  "area": "backstage"
+ },
+ "harmony#127": {
+  "title": "Validate commits everywhere when enabled",
+  "for": "Respect AlwaysValidateCommits everywhere",
+  "area": "backstage"
+ },
+ "harmony#125": {
+  "title": "Create indexes on EnsureCreated",
+  "for": "Create complex indexes when EnsureCreated is called",
+  "area": "backstage"
+ },
+ "harmony#107": {
+  "title": "Late-arriving edits replay from a safe checkpoint",
+  "for": "Resume snapshot replays from checkpoints",
+  "area": "data"
+ },
+ "harmony#105": {
+  "title": "Rolling back snapshots no longer loses in-between edits",
+  "for": "[claude] Snapshot rollback resumes from a stale snapshot and loses intermediate state",
+  "area": "data"
+ },
+ "harmony#126": {
+  "title": "Checkpoint policy keyed by commit",
+  "for": "Key the snapshot checkpoint policy by commit, not batch position",
+  "area": "backstage"
+ },
+ "harmony#123": {
+  "title": "Enforce LF line endings",
+  "for": "Enforce LF line endings",
+  "area": "backstage"
+ },
+ "harmony#121": {
+  "title": "Fix snapshot sort key for trimmed timestamps",
+  "for": "Fix current-snapshot sort key for trimmed datetime fractions",
+  "area": "data"
+ },
+ "harmony#86": {
+  "title": "Syncing is about twice as fast and uses half the memory",
+  "for": "Reduce sync work: faster snapshot projection + benchmarks",
+  "area": "feature"
+ },
+ "harmony#118": {
+  "title": "Faster lookup of current snapshots",
+  "for": "Optimize MakeCurrentSnapshotsQuery: single grouped max() pass (SQLite)",
+  "area": "feature"
+ },
+ "harmony#108": {
+  "title": "Rebuild snapshots inside a transaction",
+  "for": "[claude] Run snapshot regeneration in a transaction",
+  "area": "data"
+ },
+ "harmony#117": {
+  "title": "Fix a JSON sync warning",
+  "for": "fix json syncable max async warning",
+  "area": "backstage"
+ },
+ "harmony#116": {
+  "title": "Random-order sync tests prove every order gives the same result",
+  "for": "Property based tests",
+  "area": "backstage"
+ },
+ "harmony#112": {
+  "title": "Design: what the hole position records",
+  "for": "What does the hole watermark record, and how does the lookup consult it?",
+  "area": "backstage"
+ },
+ "harmony#111": {
+  "title": "Design: what a hole record contains",
+  "for": "What exactly does a hole record contain, and does it live in its own table?",
+  "area": "backstage"
+ },
+ "harmony#110": {
+  "title": "Design: derive the safe resume position from hole records",
+  "for": "Can the newest safe resume position be derived from hole records, readably?",
+  "area": "backstage"
+ },
+ "harmony#103": {
+  "title": "Trusted publishing to NuGet",
+  "for": "Migrate NuGet publishing to trusted publishing (OIDC)",
+  "area": "backstage"
+ },
+ "harmony#82": {
+  "title": "Branches and tags for project history (experimental)",
+  "for": "Add branches and tags refs package",
+  "area": "feature"
+ },
+ "harmony#77": {
+  "title": "Show detailed progress while a sync runs",
+  "for": "Implement and refine progress tracking with HarmonyProgressReporter",
+  "area": "feature"
+ },
+ "lexbox#2481": {
+  "title": "Keyboard shortcuts for a new entry and for search",
+  "for": "Add browse-view hotkeys for new entry and search focus",
+  "area": "feature"
+ },
+ "lexbox#2041": {
+  "title": "Filter entries by semantic domain",
+  "for": "Add semantic domain filter",
+  "area": "feature"
+ },
+ "lexbox#2078": {
+  "title": "Filter entries by part of speech",
+  "for": "Part of speech filter",
+  "area": "feature"
+ },
+ "lexbox#2103": {
+  "title": "Collect words by semantic domain",
+  "for": "Rudimentary collect words by semantic domain feature",
+  "area": "feature"
+ },
+ "lexbox#1049": {
+  "title": "Choose which fields you see with custom views",
+  "for": "Allow creating custom views/layouts",
+  "area": "feature"
+ },
+ "lexbox#2215": {
+  "title": "Custom views: pick the fields and writing systems you see",
+  "for": "Add custom views",
+  "area": "feature"
+ },
+ "lexbox#1549": {
+  "title": "Edit reversal entries on a sense",
+  "for": "Add Reversal Entires field from Sense",
+  "area": "feature"
+ },
+ "lexbox#1752": {
+  "title": "See matching entries while creating one, to avoid duplicates",
+  "for": "Show Existing Entries in Create Entry Dialog to Prevent Duplicate",
+  "area": "feature"
+ },
+ "lexbox#2433": {
+  "title": "The new-entry dialog warns you about likely duplicates",
+  "for": "Add live duplicate check to the new-entry dialog",
+  "area": "feature"
+ },
+ "lexbox#1336": {
+  "title": "Type with Keyman keyboards",
+  "for": "Support keyman",
+  "area": "feature"
+ },
+ "lexbox#2233": {
+  "title": "Pictures on senses, like in FieldWorks",
+  "for": "Model images in FW-Lite",
+  "area": "feature"
+ },
+ "lexbox#1302": {
+  "title": "Show and edit custom fields",
+  "for": "Support custom fields",
+  "area": "feature"
+ },
+ "harmony#79": {
+  "title": "Two devices posing as one client get detected and repaired",
+  "for": "[claude] Sync: duplicated ClientId causes silent, permanent divergence — add detection and reconciliation",
+  "area": "data"
+ },
+ "harmony#89": {
+  "title": "Edits made within the same millisecond can't get stranded",
+  "for": "[claude] Sync head truncates HybridDateTime to milliseconds, permanently stranding commits",
+  "area": "data"
+ },
+ "harmony#90": {
+  "title": "Changes from newer app versions apply once your app catches up",
+  "for": "[claude] Detect and recover when OpaqueChanges become applicable",
+  "area": "data"
+ },
+ "harmony#104": {
+  "title": "The server rejects incomplete commits again",
+  "for": "ServerCommit no longer enforces required properties on JSON deserialization (regression rc.241 → rc.266)",
+  "area": "data"
+ },
+ "harmony#7": {
+  "title": "A device with a wrong clock can't throw off everyone's history",
+  "for": "One commit authored in the future could throw off everything",
+  "area": "data"
+ },
+ "harmony#80": {
+  "title": "Changes from a newer app version no longer crash older apps",
+  "for": "Tolerate unknown IChange $type via PeekThenConcreteChangeConverter",
+  "area": "data"
+ },
+ "harmony#70": {
+  "title": "Clients can't forge commit ids",
+  "for": "Prevent clients from setting CommitId",
+  "area": "data"
+ },
+ "harmony#141": {
+  "title": "Design: version Harmony's own change types",
+  "for": "[claude] Version Harmony's own change types (HarmonyVersion design)",
+  "area": "backstage"
+ },
+ "harmony#91": {
+  "title": "Older apps safely skip changes they don't understand yet",
+  "for": "Make OpaqueChange fallback opt-in and EntityType nullable",
+  "area": "data"
+ },
+ "harmony#47": {
+  "title": "Media files can carry details like author and copyright",
+  "for": "Add metadata to resources",
+  "area": "feature"
+ },
+ "harmony#75": {
+  "title": "Media details sync, so you can list files before downloading",
+  "for": "Add synced app-defined metadata for remote resources",
+  "area": "data"
+ },
+ "harmony#64": {
+  "title": "Faster commit lookups with an ordering index",
+  "for": "Add commits order index",
+  "area": "backstage"
+ },
+ "harmony#72": {
+  "title": "Large syncs no longer hit a database size limit",
+  "for": "Chunk queries to avoid going over the sql parameter limit",
+  "area": "data"
+ },
+ "harmony#66": {
+  "title": "Fixed a race when two edits arrive at the same moment",
+  "for": "Move HasCommit check inside lock in DataModel.Add",
+  "area": "data"
+ }
+}
