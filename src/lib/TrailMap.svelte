@@ -35,7 +35,7 @@
 </script>
 
 <figure class="map card">
-  <svg viewBox="0 0 1200 640" role="img" aria-labelledby="map-title">
+  <svg viewBox="0 0 1200 700" role="img" aria-labelledby="map-title">
     <title id="map-title">
       Trail map to 1.0. Camps: {camps
         .map((c) => `${c.name} ${c.done} of ${c.total}`)
@@ -55,7 +55,7 @@
       </filter>
     </defs>
 
-    <rect width="1200" height="640" fill="url(#sky)" />
+    <rect width="1200" height="700" fill="url(#sky)" />
     <g class="stars">
       {#each stars as [x, y, r]}<circle cx={x} cy={y} {r} fill="var(--snow)" />{/each}
     </g>
@@ -66,45 +66,48 @@
     </g>
 
     <path
-      d="M0 330 L120 250 L210 300 L330 190 L430 270 L520 220 L640 300 L760 180 L860 240 L1200 210 L1200 640 L0 640Z"
+      d="M0 330 L120 250 L210 300 L330 190 L430 270 L520 220 L640 300 L760 180 L860 240 L1200 210 L1200 700 L0 700Z"
       fill="var(--mtn-far)"
       filter="url(#rough)"
     />
-    <path d="M700 420 L984 92 L1200 330 L1200 640 L700 640Z" fill="var(--mtn-mid)" filter="url(#rough)" />
+    <path d="M700 420 L984 92 L1200 330 L1200 700 L700 700Z" fill="var(--mtn-mid)" filter="url(#rough)" />
     <path d="M984 92 L1040 160 L1012 150 L995 172 L972 146 L948 160Z" fill="var(--snow)" />
-    <path d="M984 92 L1200 330 L1200 640 L984 640Z" fill="url(#hatch)" />
+    <path d="M984 92 L1200 330 L1200 700 L984 700Z" fill="url(#hatch)" />
     <path
-      d="M0 440 L90 380 L180 420 L300 330 L420 400 L540 350 L650 420 L760 380 L860 450 L1200 430 L1200 640 L0 640Z"
+      d="M0 440 L90 380 L180 420 L300 330 L420 400 L540 350 L650 420 L760 380 L860 450 L1200 430 L1200 700 L0 700Z"
       fill="var(--mtn-near)"
       opacity=".85"
       filter="url(#rough)"
     />
-    <path d="M0 500 C 200 440 380 470 560 480 S 900 430 1200 470 L1200 640 L0 640Z" fill="var(--hill)" />
-    <path d="M0 560 C 240 520 420 580 700 560 S 1000 520 1200 560 L1200 640 L0 640Z" fill="var(--hill-2)" />
+    <path d="M0 500 C 200 440 380 470 560 480 S 900 430 1200 470 L1200 700 L0 700Z" fill="var(--hill)" />
+    <path d="M0 560 C 240 520 420 580 700 560 S 1000 520 1200 560 L1200 700 L0 700Z" fill="var(--hill-2)" />
     <g fill="none" stroke="var(--ink)" stroke-opacity=".09" stroke-width="1.5">
       <path d="M0 520 C 200 470 380 500 560 505 S 900 460 1200 495" />
       <path d="M0 540 C 200 492 380 522 560 528 S 900 482 1200 518" />
       <path d="M0 590 C 240 552 420 606 700 588 S 1000 552 1200 590" />
     </g>
 
-    <path
-      id="river"
-      d="M-10 612 C 160 650 320 590 470 618 S 760 650 900 610 S 1110 600 1210 628"
-      fill="none"
-      stroke="var(--c-river)"
-      stroke-width="26"
-      stroke-linecap="round"
-    />
-    <path
-      class="flow"
-      d="M-10 612 C 160 650 320 590 470 618 S 760 650 900 610 S 1110 600 1210 628"
-      fill="none"
-      stroke="var(--snow)"
-      stroke-opacity=".55"
-      stroke-width="2.5"
-      stroke-dasharray="14 26"
-    />
-    <text class="hand river-label"><textPath href="#river" startOffset="58%">Harmony River · carries every edit home</textPath></text>
+    <a href="#harmony" class="river-link">
+      <title>Harmony, the sync engine underneath it all</title>
+      <path
+        id="river"
+        d="M-10 612 C 160 650 320 590 470 618 S 760 650 900 610 S 1110 600 1210 628"
+        fill="none"
+        stroke="var(--c-river)"
+        stroke-width="26"
+        stroke-linecap="round"
+      />
+      <path
+        class="flow"
+        d="M-10 612 C 160 650 320 590 470 618 S 760 650 900 610 S 1110 600 1210 628"
+        fill="none"
+        stroke="var(--snow)"
+        stroke-opacity=".55"
+        stroke-width="2.5"
+        stroke-dasharray="14 26"
+      />
+      <text class="hand river-label"><textPath href="#river" startOffset="58%">Harmony River · carries every edit home</textPath></text>
+    </a>
 
     {#each pines as [x, y, s]}
       <g transform="translate({x} {y}) scale({s})">
@@ -214,6 +217,13 @@
   }
   .hand {
     font-family: var(--font-hand);
+  }
+  .river-link {
+    cursor: pointer;
+  }
+  .river-link:hover #river,
+  .river-link:focus-visible #river {
+    stroke-width: 32px;
   }
   .river-label {
     font-size: 22px;
