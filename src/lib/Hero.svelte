@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { camps, fmtDate, generatedAt, otherWork, site, summit } from './model'
+  import { camps, otherWork, site, summit } from './model'
 
   const next = camps.find((c) => c.pct < 1)
   const left = summit.total - summit.done - summit.working
@@ -15,12 +15,9 @@
 
 <header class="wrap hero">
   <div class="top">
-    <span class="brand"><span aria-hidden="true">⛰️</span> Trailmap <span class="muted">· {site.team}</span></span>
+    <h1>{site.title}</h1>
     <button class="theme" onclick={toggleTheme} aria-label="Switch between day and night">☀️ / 🌙</button>
   </div>
-
-  <span class="eyebrow">Field report · {fmtDate(generatedAt.toISOString())}</span>
-  <h1>{site.title}</h1>
   <p class="lede">{site.summitBlurb}</p>
 
   <section class="strip card" aria-label="Progress to 1.0">
@@ -39,7 +36,7 @@
       </div>
       <p class="legend">
         <span><i class="done"></i>Done</span>
-        <span><i class="working"></i>In progress</span>
+        <span><i class="working"></i>In review</span>
         <span><i></i>To do</span>
         {#if next}<span class="next">Next camp: <a href="#camp-{next.id}">{next.icon} {next.name}</a> ({next.done} of {next.total})</span>{/if}
       </p>
@@ -55,24 +52,17 @@
 
 <style>
   .hero {
-    padding-top: 18px;
+    padding-top: 16px;
   }
   .top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  .brand {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.15rem;
-  }
-  .brand .muted {
-    font-weight: 400;
-    font-size: 0.95rem;
+    align-items: flex-start;
+    gap: 12px;
   }
   .theme {
+    flex: none;
+    margin-top: 4px;
     border: 1.5px solid var(--line);
     background: var(--card);
     border-radius: 99px;
@@ -81,14 +71,15 @@
     font-family: var(--font-body);
   }
   h1 {
-    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    flex: 1;
+    margin: 0;
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
     font-weight: 900;
-    max-width: 14ch;
   }
   .lede {
-    font-size: 1.15rem;
-    max-width: 58ch;
-    margin: 18px 0 28px;
+    font-size: 1rem;
+    max-width: 60ch;
+    margin: 6px 0 16px;
     color: var(--ink-soft);
   }
   .strip {

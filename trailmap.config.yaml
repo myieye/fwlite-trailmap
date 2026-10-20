@@ -4,11 +4,10 @@
 
 site:
   title: The Road to FieldWorks Lite 1.0
-  team: the FW Lite team
   # Shown in the header so stakeholders know what "1.0" means.
   summitBlurb: >-
-    Version 1.0 is the point where we'd tell any FieldWorks team "yes, use FW Lite
-    for your everyday dictionary work". No data surprises, works on every device you own.
+    1.0 is the point where we'd tell any FieldWorks team "yes, use FW Lite for your
+    everyday dictionary work."
 
 repos:
   - key: lexbox

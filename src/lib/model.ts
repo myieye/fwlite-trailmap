@@ -35,7 +35,7 @@ export const areas: Record<AreaId, { name: string; blurb: string; color: string 
   backstage: { name: 'Behind the scenes', blurb: 'Tests, tooling, and cleanup that keep us fast', color: 'var(--a-backstage)' },
 }
 
-export const site = config.site as { title: string; team: string; summitBlurb: string }
+export const site = config.site as { title: string; summitBlurb: string }
 export const generatedAt = new Date(snapshot.generatedAt)
 export const windowStart = new Date(snapshot.since)
 export const items = snapshot.items as unknown as Record<string, Item>
