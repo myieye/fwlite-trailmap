@@ -1748,5 +1748,10 @@
   "title": "Edits with an unregistered change type are rejected up front",
   "for": "Reject authoring a change whose type isn't registered",
   "area": "backstage"
+ },
+ "harmony#149": {
+  "title": "Internal sync code reorganized to prepare for better logging",
+  "for": "[claude] Make sync an injectable SyncService",
+  "area": "backstage"
  }
 }
