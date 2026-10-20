@@ -1723,5 +1723,20 @@
   "title": "Fixed a race when two edits arrive at the same moment",
   "for": "Move HasCommit check inside lock in DataModel.Add",
   "area": "data"
+ },
+ "lexbox#2747": {
+  "title": "Mark all unread comments as read in one click",
+  "for": "Bulk mark as read",
+  "area": "feature"
+ },
+ "lexbox#2746": {
+  "title": "A comment-only role for people who can only add comments",
+  "for": "Comment only permission",
+  "area": "feature"
+ },
+ "lexbox#2745": {
+  "title": "Adding a sense or example opens a dialog instead of a blank entry",
+  "for": "Use dialogs for adding Senses and Examples in entry editor",
+  "area": "feature"
  }
 }
