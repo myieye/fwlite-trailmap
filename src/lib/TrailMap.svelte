@@ -168,7 +168,15 @@
 
       <g transform="translate({hiker.x} {hiker.y})" class="hiker">
         <circle r="27" fill="var(--c-sun)" stroke="var(--ink)" stroke-width="3" />
-        <text y="11" text-anchor="middle" class="hiker-face">🤠</text>
+        <!-- Fixed dark ink: the sun disc stays light in both themes. -->
+        <g fill="none" stroke="#1d2a3f" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="-9.5" y="-9" width="7" height="11" rx="2.5" fill="#1d2a3f" stroke="none" />
+          <circle cx="2" cy="-14" r="4.5" fill="#1d2a3f" stroke="none" />
+          <path d="M1 -8 L-1 4" stroke-width="5" />
+          <path d="M-1 4 L5 15 M-1 4 L-6 15" stroke-width="4" />
+          <path d="M1 -5 L8 0" stroke-width="3.5" />
+          <path d="M10 -7 L7 17" stroke-width="2.5" />
+        </g>
         <g transform="translate(36 0)">
           <path d="M0 0 L12 -9 L12 9Z" fill="var(--ink)" />
           <rect x="10" y="-15" width="150" height="30" rx="15" fill="var(--ink)" />
@@ -252,10 +260,6 @@
   }
   .hiker {
     animation: bob 2.4s ease-in-out infinite;
-  }
-  .hiker-face {
-    font-size: 30px;
-    font-family: var(--font-emoji);
   }
   figcaption {
     padding: 10px 16px 14px;
