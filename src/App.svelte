@@ -22,8 +22,7 @@
         <span class="eyebrow">The camps</span>
         <h2>What's left before 1.0</h2>
         <p>
-          The 1.0 plan, grouped into camps along the trail. Camps say what we'll do, not when: we'd rather be honest than
-          promise a date.
+          The 1.0 plan, grouped into camps along the trail.
         </p>
       </div>
     </div>
@@ -32,10 +31,10 @@
     </div>
   </section>
 
-  <River />
   <Campfire />
-  <Journal />
   <Voices />
+  <Journal />
+  <River />
 </main>
 
 <footer class="wrap">

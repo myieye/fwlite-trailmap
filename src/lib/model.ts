@@ -157,6 +157,10 @@ export const inFlight = Object.values(items)
   .filter((i) => i.kind === 'pr' && i.state === 'open' && human(i))
   .sort((a, b) => Number(Boolean(a.draft)) - Number(Boolean(b.draft)) || b.createdAt.localeCompare(a.createdAt))
 
+// Same non-draft PRs that "Being worked on" calls ready, minus those for 1.0 issues, so the banner and that section agree.
+const summitKeys = new Set(summitItems.map((i) => i.key))
+export const otherWork = inFlight.filter((p) => !p.draft && !p.refs?.some((r) => summitKeys.has(r)))
+
 export const releases = (snapshot.releases as { repo: string; tag: string; name: string; date: string; url: string }[]).filter(
   (r) => inWindow(r.date),
 )

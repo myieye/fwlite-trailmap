@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { camps, fmtDate, generatedAt, site, summit } from './model'
+  import { camps, fmtDate, generatedAt, otherWork, site, summit } from './model'
 
   const next = camps.find((c) => c.pct < 1)
   const left = summit.total - summit.done - summit.working
@@ -31,7 +31,7 @@
     <div class="detail">
       <p class="counts">
         <strong>{summit.done} of {summit.total}</strong> pieces of work done,
-        <strong>{summit.working}</strong> being worked on, <strong>{left}</strong> still to start.
+        <strong>{summit.working}</strong> with a change in review, <strong>{left}</strong> still to start.
       </p>
       <div class="bar" aria-hidden="true">
         <span class="done" style="width: {seg(summit.done)}"></span>
@@ -43,6 +43,12 @@
         <span><i></i>To do</span>
         {#if next}<span class="next">Next camp: <a href="#camp-{next.id}">{next.icon} {next.name}</a> ({next.done} of {next.total})</span>{/if}
       </p>
+      {#if otherWork.length}
+        <p class="meanwhile">
+          Meanwhile: {otherWork.length} other {otherWork.length === 1 ? 'change' : 'changes'} in review, on fixes, devices and
+          behind-the-scenes work. <a href="#campfire">See what's on the go →</a>
+        </p>
+      {/if}
     </div>
   </section>
 </header>
@@ -135,6 +141,13 @@
   .working,
   .legend i.working {
     background: var(--c-sun);
+  }
+  .meanwhile {
+    margin: 12px 0 0;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
   }
   .legend {
     display: flex;

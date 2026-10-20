@@ -21,6 +21,9 @@
   const hikerAt = $derived(leg < 0 ? 1 : ((stops[leg - 1] ?? 0) + stops[leg]) / 2)
   const hiker = $derived(length ? at(hikerAt) : { x: 0, y: 0 })
 
+  const done = $derived(camps.reduce((n, c) => n + c.done, 0))
+  const total = $derived(camps.reduce((n, c) => n + c.total, 0))
+
   const status = (c: Camp) => (c.pct === 1 ? 'reached' : c.done > 0 ? 'climbing' : 'ahead')
 
   const pines: [number, number, number][] = [
@@ -168,12 +171,16 @@
         <text y="11" text-anchor="middle" class="hiker-face">🤠</text>
         <g transform="translate(36 0)">
           <path d="M0 0 L12 -9 L12 9Z" fill="var(--ink)" />
-          <rect x="10" y="-15" width="112" height="30" rx="15" fill="var(--ink)" />
-          <text x="66" y="6" text-anchor="middle" class="you-are-here">We're here</text>
+          <rect x="10" y="-15" width="150" height="30" rx="15" fill="var(--ink)" />
+          <text x="85" y="6" text-anchor="middle" class="you-are-here">{done} of {total} done</text>
         </g>
       </g>
     {/if}
   </svg>
+  <figcaption>
+    All {camps.length} camps are being worked on at once; each ring shows how far along it is. Camps say what we'll do, not
+    when: we'd rather be honest than promise a date.
+  </figcaption>
 </figure>
 
 <style>
@@ -249,6 +256,12 @@
   .hiker-face {
     font-size: 30px;
     font-family: var(--font-emoji);
+  }
+  figcaption {
+    padding: 10px 16px 14px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
   }
   .you-are-here {
     font-size: 16px;
