@@ -37,4 +37,4 @@ npm run build:single  # dist-single/index.html with everything inlined
 
 ## Hosting
 
-`.github/workflows/publish.yaml` syncs every 6 hours and deploys to GitHub Pages; `plain-words.yaml` asks Claude for new plain titles weekly and opens a PR (needs an `ANTHROPIC_API_KEY` secret). Both only run once this folder is its own repo.
+`.github/workflows/publish.yaml` syncs every 6 hours and deploys to GitHub Pages. `plain-words.yaml` asks Claude for new plain titles weekly and opens a PR; it needs a `CLAUDE_CODE_OAUTH_TOKEN` secret (from `claude setup-token`) in the `claude` environment, which only `main` can use.
