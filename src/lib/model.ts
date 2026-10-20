@@ -244,7 +244,7 @@ export const voices: Voice[] = snapshot.forum
             : 'heard'
     return { ...t, linked, camp, status, heat: t.votes * 3 + t.likes + t.replies }
   })
-  .sort((a, b) => b.votes - a.votes || b.heat - a.heat || b.views - a.views)
+  .sort((a, b) => b.votes - a.votes || b.heat - a.heat || b.createdAt.localeCompare(a.createdAt) || a.title.localeCompare(b.title))
 
 export const weekOf = (d: string | Date) => {
   const date = new Date(d)
