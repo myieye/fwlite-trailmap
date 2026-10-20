@@ -127,7 +127,7 @@
         stroke-width="6"
         stroke-linecap="round"
         stroke-dasharray="{hikerAt * length * 0.985} {length}"
-        style="--len: {length}"
+        style="--walked: {hikerAt * length * 0.985}"
       />
     {/if}
 
@@ -292,9 +292,10 @@
   .walked {
     animation: walk 2.2s cubic-bezier(0.6, 0, 0.2, 1) both;
   }
+  /* Shift by the dash's own length: shifting further makes it start past the hiker and wrap round from the base. */
   @keyframes walk {
     from {
-      stroke-dashoffset: var(--len);
+      stroke-dashoffset: var(--walked);
     }
   }
   @keyframes flow {
