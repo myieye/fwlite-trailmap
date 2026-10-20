@@ -168,6 +168,8 @@ jobs:
 
   deploy:
     needs: build
+    # Without this, a skipped `titles` job further up makes GitHub skip the deploy too.
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
