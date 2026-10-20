@@ -5,11 +5,17 @@
   const left = summit.total - summit.done - summit.working
   const seg = (n: number) => `${(n / summit.total) * 100}%`
 
-  let theme = $state<string | null>(null)
+  // Choosing the theme the system already uses clears the override, so the page follows the system again.
   function toggleTheme() {
-    const dark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
-    theme = dark ? 'light' : 'dark'
-    document.documentElement.dataset.theme = theme
+    const root = document.documentElement
+    const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    const next = (root.dataset.theme ?? system) === 'dark' ? 'light' : 'dark'
+    if (next === system) delete root.dataset.theme
+    else root.dataset.theme = next
+    try {
+      if (next === system) localStorage.removeItem('theme')
+      else localStorage.setItem('theme', next)
+    } catch {}
   }
 </script>
 
