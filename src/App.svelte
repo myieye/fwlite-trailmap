@@ -40,8 +40,7 @@
 <footer class="wrap">
   <p>
     Pulled from GitHub (<a href={summit.url}>the {summit.name} milestone</a>, FW Lite, Lexbox and Harmony) and the SIL
-    community forum on {fmtDate(generatedAt.toISOString())}. Plain-language titles are written by an AI from the GitHub titles,
-    and the original title is always shown beside them.
+    community forum on {fmtDate(generatedAt.toISOString())}.
   </p>
 </footer>
 

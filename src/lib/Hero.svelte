@@ -19,6 +19,11 @@
     <button class="theme" onclick={toggleTheme} aria-label="Switch between day and night">☀️ / 🌙</button>
   </div>
   <p class="lede">{site.summitBlurb}</p>
+  <p class="ai-note">
+    <span class="ai-tag">AI</span>
+    This page updates itself. The plain-language titles are written by AI and not checked by a person; every item links to
+    its original on GitHub.
+  </p>
 
   <section class="strip card" aria-label="Progress to 1.0">
     <div class="big">
@@ -76,10 +81,28 @@
     font-size: clamp(1.9rem, 4.5vw, 2.9rem);
     font-weight: 900;
   }
+  .ai-note {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    max-width: 70ch;
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .ai-tag {
+    flex: none;
+    padding: 0 6px;
+    border: 1.5px solid currentColor;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
   .lede {
     font-size: 1rem;
     max-width: 60ch;
-    margin: 6px 0 16px;
+    margin: 6px 0 8px;
     color: var(--ink-soft);
   }
   .strip {
