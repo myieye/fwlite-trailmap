@@ -1,19 +1,4 @@
 {
- "lexbox#2747": {
-  "title": "Mark all comments as read at once",
-  "for": "Bulk mark as read",
-  "area": "feature"
- },
- "lexbox#2746": {
-  "title": "A comment-only role for reviewers",
-  "for": "Comment only permission",
-  "area": "feature"
- },
- "lexbox#2745": {
-  "title": "Add a sense or example through a dialog",
-  "for": "Use dialogs for adding Senses and Examples in entry editor",
-  "area": "feature"
- },
  "lexbox#2743": {
   "title": "App errors are reported to the team automatically",
   "for": "Report errors to mixpanel",
