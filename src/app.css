@@ -29,9 +29,9 @@
   --a-devices: #5e9a2e;
   --a-backstage: #8e55a8;
   --shadow: 0 1px 0 #2a273314, 0 8px 24px -12px #2a273340;
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Figtree', system-ui, sans-serif, 'Noto Color Emoji';
-  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+  --font-body: 'Figtree Variable', 'Figtree', system-ui, sans-serif, 'Noto Color Emoji';
+  --font-hand: 'Caveat Variable', 'Caveat', 'Comic Sans MS', cursive;
   color-scheme: light;
 }
 

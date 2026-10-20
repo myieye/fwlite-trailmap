@@ -1,0 +1,2 @@
+/* Inlining the bundled fonts would make the single file about 16 MB, mostly the emoji font. */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Caveat:wght@500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,50..100,1&family=Noto+Color+Emoji&display=swap');
