@@ -137,64 +137,10 @@ export const campOf = (key: string) => camps.find((c) => c.items.some((i) => i.k
 
 export const river: Camp[] = ((config.river ?? []) as typeof campConfigs).map((c) => toCamp(c, c.issues.map(get)))
 
-export type Step = { label: string; done: boolean; signal?: string; link?: string }
-export type Beast = {
-  item: Item
-  name: string
-  creature: string
-  lore: string
-  camp?: string
-  steps: Step[]
-  left: number
-  slain: boolean
-  sleeping: boolean
-  days: number
-}
-
 const fmt = (d: string) => new Date(d).toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })
 export const fmtDate = fmt
-const prsFor = (key: string) => Object.values(items).filter((i) => i.kind === 'pr' && i.refs?.includes(key))
-
-export const beasts: Beast[] = (
-  (config.beasts ?? []) as {
-    issue: string
-    name: string
-    creature: string
-    lore: string
-    camp?: string
-    causeFound?: boolean
-    progress?: string[]
-  }[]
-).map((b) => {
-  const item = get(b.issue)
-  const prs = prsFor(b.issue)
-  const building = [...prs.filter((p) => p.state === 'open'), ...(b.progress ?? []).map(get)]
-  const merged = prs.find((p) => p.state === 'merged')
-  const slain = isDone(item)
-  const steps: Step[] = [
-    { label: 'Spotted', done: true, signal: `Reported ${fmt(item.createdAt)}`, link: item.url },
-    { label: 'Cause found', done: Boolean(b.causeFound) },
-    {
-      label: 'Fix under way',
-      done: building.length > 0,
-      signal: building.length ? building.map((p) => `#${p.number}`).join(', ') : undefined,
-      link: building[0]?.url,
-    },
-    { label: 'Fix merged', done: Boolean(merged), signal: merged ? `#${merged.number}` : undefined, link: merged?.url },
-    { label: 'Defeated', done: slain, signal: slain ? `Closed ${fmt(item.closedAt!)}` : undefined },
-  ]
-  // A later step implies the earlier ones, even if nobody ticked them.
-  for (let i = steps.length - 2; i >= 0; i--) if (steps[i + 1].done) steps[i].done = true
-  return {
-    ...b,
-    item,
-    steps,
-    left: steps.filter((s) => !s.done).length,
-    slain,
-    sleeping: !slain && daysBetween(item.updatedAt, generatedAt) > 60,
-    days: ageDays(item),
-  }
-})
+// The `Data bug` label is how the team marks bugs that can lose or hide someone's work.
+export const isDataRisk = (i: Item) => i.state === 'open' && i.labels.includes('Data bug')
 
 const inWindow = (d?: string) => Boolean(d && new Date(d) >= windowStart)
 const human = (i: Item) => !i.bot

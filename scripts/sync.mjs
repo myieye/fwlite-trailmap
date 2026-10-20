@@ -130,7 +130,6 @@ for (const repo of config.repos) {
 const configRefs = [
   ...(config.camps ?? []).flatMap((c) => c.issues ?? []),
   ...(config.river ?? []).flatMap((c) => c.issues ?? []),
-  ...(config.beasts ?? []).flatMap((b) => [b.issue, ...(b.progress ?? [])]),
   ...Object.values(config.forum?.links ?? {}).flat(),
 ];
 for (const ref of new Set(configRefs)) {

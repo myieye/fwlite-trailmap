@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Beasts from './lib/Beasts.svelte'
   import Campfire from './lib/Campfire.svelte'
   import CampCard from './lib/CampCard.svelte'
   import Hero from './lib/Hero.svelte'
@@ -7,14 +6,14 @@
   import River from './lib/River.svelte'
   import TrailMap from './lib/TrailMap.svelte'
   import Voices from './lib/Voices.svelte'
-  import { beasts, camps, fmtDate, generatedAt, summit } from './lib/model'
+  import { camps, fmtDate, generatedAt, summit } from './lib/model'
 </script>
 
 <Hero />
 
 <main>
   <div class="wrap">
-    <TrailMap {camps} {beasts} start={summit.start} />
+    <TrailMap {camps} start={summit.start} />
   </div>
 
   <section class="wrap section" id="camps">
@@ -29,13 +28,12 @@
       </div>
     </div>
     <div class="camps">
-      {#each camps as camp, i (camp.id)}<CampCard {camp} n={i + 1} />{/each}
+      {#each camps as camp, i (camp.id)}<div class="slot"><CampCard {camp} n={i + 1} /></div>{/each}
     </div>
   </section>
 
   <River />
   <Campfire />
-  <Beasts />
   <Journal />
   <Voices />
 </main>
@@ -53,9 +51,10 @@
     columns: 3 330px;
     column-gap: 22px;
   }
-  .camps :global(.camp) {
+  /* Padding, not margin: browsers drop margins at a column break, and the camp number sticks out above its card. */
+  .slot {
     break-inside: avoid;
-    margin: 0 0 26px;
+    padding: 14px 0 12px;
   }
   footer {
     padding: 64px 16px 48px;

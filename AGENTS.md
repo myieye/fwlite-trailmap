@@ -14,7 +14,7 @@ The rules for `title` and `area` are in `scripts/plain-words/prompt.md`, which i
 
 ## Changing the roadmap
 
-Edit `trailmap.config.yaml`. Camps, Harmony goals, beasts and forum links are all there with comments. Run `npm run sync` after adding issue refs the snapshot doesn't have yet; the build fails loudly on a ref it can't find. Forum links must be checked by hand: a wrong "on the road to 1.0" misleads the people who voted.
+Edit `trailmap.config.yaml`. Camps, Harmony goals and forum links are all there with comments. Run `npm run sync` after adding issue refs the snapshot doesn't have yet; the build fails loudly on a ref it can't find. Forum links must be checked by hand: a wrong "on the road to 1.0" misleads the people who voted.
 
 ## Checking your work
 

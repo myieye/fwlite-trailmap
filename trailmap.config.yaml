@@ -94,52 +94,6 @@ river:
     blurb: Syncs finish sooner and project files stay small enough for phones.
     issues: [harmony#143, harmony#77, harmony#86, harmony#118, harmony#64, harmony#72, harmony#66]
 
-# Beasts: long, hard bugs we hunt on purpose. The page lights a step ladder from GitHub
-# (reported, fix in progress, fix merged, closed); set `causeFound` once we know why it happens.
-beasts:
-  - issue: lexbox#1391
-    name: The Uninstall Bear
-    creature: 🐻
-    lore: Eats a whole project when someone uninstalls the app.
-    camp: your-data-is-safe
-  - issue: lexbox#2169
-    name: The Last-Second Raccoon
-    creature: 🦝
-    lore: Snatches your final edit if you close the app right after typing.
-    camp: your-data-is-safe
-    causeFound: true
-  - issue: lexbox#2498
-    name: The Fake-Synced Chameleon
-    creature: 🦎
-    lore: Marks edits as synced before they leave the device, so gaps go unnoticed.
-    camp: your-data-is-safe
-    causeFound: true
-  - issue: lexbox#2431
-    name: The Copycat
-    creature: 🐈‍⬛
-    lore: When a project folder is copied, two devices start pretending to be one.
-    camp: your-data-is-safe
-    causeFound: true
-  - issue: lexbox#2292
-    name: The Stuck-Download Spider
-    creature: 🕷️
-    lore: A download that fails halfway leaves a project that looks fine but is empty.
-    camp: your-data-is-safe
-    causeFound: true
-  - issue: lexbox#2693
-    name: The Reinstall Crow
-    creature: 🐦‍⬛
-    lore: Hides your audio and pictures after an iPhone or iPad app update.
-    camp: pictures-and-audio
-    causeFound: true
-    # Harmony now stores media paths relative to the app folder.
-    progress: [harmony#136]
-  - issue: lexbox#2700
-    name: The Look-alike Sheep
-    creature: 🐑
-    lore: Two different media files with the same name get treated as one.
-    camp: pictures-and-audio
-
 forum:
   base: https://community.software.sil.org
   # FieldWorks Lite Feature Requests

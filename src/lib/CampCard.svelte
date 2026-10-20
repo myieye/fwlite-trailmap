@@ -1,10 +1,11 @@
 <script lang="ts">
   import ItemRow from './ItemRow.svelte'
-  import { dropped, isDone, type Camp } from './model'
+  import { dropped, isDataRisk, isDone, type Camp } from './model'
 
   let { camp, n }: { camp: Camp; n: number } = $props()
 
-  const open = $derived(camp.items.filter((i) => !isDone(i)))
+  const open = $derived(camp.items.filter((i) => !isDone(i)).sort((a, b) => +isDataRisk(b) - +isDataRisk(a)))
+  const risks = $derived(open.filter(isDataRisk).length)
   const done = $derived(camp.items.filter((i) => isDone(i) && !dropped(i)))
   const status = $derived(camp.pct === 1 ? 'Reached' : camp.done ? 'Climbing' : 'Up ahead')
 </script>
@@ -25,6 +26,7 @@
     <span style="width: {camp.pct * 100}%"></span>
   </div>
   <p class="count"><strong>{camp.done}</strong> of {camp.total} done{#if open.length}, {open.length} to go{/if}</p>
+  {#if risks}<p class="risks">{risks} known data-risk {risks === 1 ? 'bug' : 'bugs'} still open</p>{/if}
   {#if open.length}
     <ul>
       {#each open as item (item.key)}<ItemRow {item} showAge />{/each}
@@ -41,6 +43,12 @@
 </article>
 
 <style>
+  .risks {
+    margin: -4px 0 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--c-rust);
+  }
   .camp {
     padding: 20px 22px 16px;
     scroll-margin-top: 24px;

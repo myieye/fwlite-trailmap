@@ -19,7 +19,6 @@ const config = parse(await readFile(new URL('../trailmap.config.yaml', import.me
 const extra = new Set([
   ...snapshot.forum.flatMap((t) => t.refs),
   ...config.river.flatMap((g) => g.issues),
-  ...config.beasts.flatMap((b) => [b.issue, ...(b.progress ?? [])]),
 ])
 for (const key of extra) if (snapshot.items[key]) shown.push(snapshot.items[key])
 

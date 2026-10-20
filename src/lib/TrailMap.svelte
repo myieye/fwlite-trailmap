@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Beast, Camp } from './model'
+  import type { Camp } from './model'
 
-  let { camps, beasts, start }: { camps: Camp[]; beasts: Beast[]; start: string } = $props()
+  let { camps, start }: { camps: Camp[]; start: string } = $props()
 
   const trailD =
     'M 70 598 C 230 606 330 560 268 506 S 250 420 420 428 S 640 452 650 380 S 560 292 700 270 S 860 262 852 206 S 900 128 984 104'
@@ -22,7 +22,6 @@
   const hiker = $derived(length ? at(hikerAt) : { x: 0, y: 0 })
 
   const status = (c: Camp) => (c.pct === 1 ? 'reached' : c.done > 0 ? 'climbing' : 'ahead')
-  const beastFor = (c: Camp) => beasts.filter((b) => b.camp === c.id && !b.slain)
 
   const pines: [number, number, number][] = [
     [40, 520, 1], [74, 540, 0.8], [130, 470, 1.2], [160, 500, 0.9], [340, 600, 1], [372, 586, 0.7],
@@ -160,14 +159,6 @@
                 {camp.pct === 1 ? 'reached! 🎉' : `${camp.done} of ${camp.total} done`}
               </text>
             </g>
-            {#each beastFor(camp) as beast, j}
-              <text
-                x={left ? 30 + j * 36 : -60 - j * 36}
-                y="-26"
-                class="beast"
-                style="animation-delay: {j * 0.7}s"
-              >{beast.creature}<title>{beast.name} blocks this camp</title></text>
-            {/each}
           </g>
         </a>
       {/each}
@@ -223,7 +214,7 @@
   }
   .camp-icon {
     font-size: 24px;
-    font-family: 'Noto Color Emoji', sans-serif;
+    font-family: var(--font-emoji);
   }
   .camp-name {
     font-family: var(--font-display);
@@ -252,17 +243,12 @@
   .camp.ahead .camp-icon {
     opacity: 0.55;
   }
-  .beast {
-    font-size: 30px;
-    font-family: 'Noto Color Emoji', sans-serif;
-    animation: lurk 3.2s ease-in-out infinite;
-  }
   .hiker {
     animation: bob 2.4s ease-in-out infinite;
   }
   .hiker-face {
     font-size: 30px;
-    font-family: 'Noto Color Emoji', sans-serif;
+    font-family: var(--font-emoji);
   }
   .you-are-here {
     font-size: 16px;

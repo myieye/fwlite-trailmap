@@ -30,7 +30,8 @@
   --a-backstage: #8e55a8;
   --shadow: 0 1px 0 #2a273314, 0 8px 24px -12px #2a273340;
   --font-display: 'Fraunces Variable', 'Fraunces', Georgia, serif;
-  --font-body: 'Figtree Variable', 'Figtree', system-ui, sans-serif, 'Noto Color Emoji';
+  --font-body: 'Figtree Variable', 'Figtree', system-ui, sans-serif;
+  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
   --font-hand: 'Caveat Variable', 'Caveat', 'Comic Sans MS', cursive;
   color-scheme: light;
 }
