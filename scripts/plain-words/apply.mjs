@@ -2,7 +2,7 @@
 // The model reads text anyone can write on GitHub, so its output is treated as hostile: only known keys, a strict
 // character set and a fixed area list get through, and `for` comes from the todo list, never from the model.
 // A title that breaks the rules is skipped (it stays on the todo list); a malformed draft fails the run.
-// Node built-ins only: this runs in the job that can push and open PRs.
+// Node built-ins only: this runs in the job that can push to main.
 import { readFile, writeFile } from 'node:fs/promises'
 
 const KEY = /^(lexbox|harmony)#\d{1,6}$/

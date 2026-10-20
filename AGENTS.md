@@ -8,9 +8,9 @@ A static Svelte 5 + Vite page. `npm run sync` pulls GitHub and forum data into `
 2. For each, add or update `content/plain-words.json`: `{"lexbox#123": {"title": "...", "for": "<exact GitHub title>", "area": "..."}}`. Read the issue on GitHub if the title alone is unclear.
 3. Re-run `npm run plain:todo` until it reports 0.
 
-The rules for `title` and `area` are in `scripts/plain-words/prompt.md`, which is also the weekly workflow's system prompt.
+The rules for `title` and `area` are in `scripts/plain-words/prompt.md`, which is also the system prompt Claude gets in CI.
 
-The weekly workflow (`.github/workflows/plain-words.yaml`) is locked down on purpose: the model gets no tools and only GitHub titles, and `scripts/plain-words/apply.mjs` re-checks everything it returns. Keep it that way: don't give it tools, issue bodies, write access, or npm packages in the job that holds the token.
+`.github/workflows/publish.yaml` does this every 6 hours and commits the titles straight to main, unreviewed. It is locked down on purpose: the model gets no tools, only GitHub titles, labels and trimmed descriptions, and `scripts/plain-words/apply.mjs` re-checks everything it returns. Keep it that way: no tools, no write access, and no npm packages in the job that holds the token.
 
 ## Changing the roadmap
 

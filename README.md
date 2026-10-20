@@ -16,7 +16,7 @@ flowchart LR
   gh[GitHub REST<br/>lexbox + harmony] --> sync[npm run sync]
   forum[community.software.sil.org] --> sync
   sync --> snap[src/data/snapshot.json] --> build[vite build] --> site[static site]
-  agent[AI agent, weekly PR] --> plain[content/plain-words.json] --> build
+  agent[Claude, every sync] --> plain[content/plain-words.json] --> build
 ```
 
 - `trailmap.config.yaml` is the one file people edit: the summit milestone, camps (themed groups of issues, in walking order), the Harmony goals, the beasts, and which forum topics map to which issues. Milestone issues not in any camp land in a "Still to sort" camp, so nothing silently drops off the map.
@@ -37,4 +37,4 @@ npm run build:single  # dist-single/index.html with everything inlined
 
 ## Hosting
 
-`.github/workflows/publish.yaml` syncs every 6 hours and deploys to GitHub Pages. `plain-words.yaml` asks Claude for new plain titles weekly and opens a PR; it needs a `CLAUDE_CODE_OAUTH_TOKEN` secret (from `claude setup-token`) in the `claude` environment, which only `main` can use.
+`.github/workflows/publish.yaml` runs every 6 hours: it syncs, asks Claude for plain titles for any new items and commits them to main, then deploys to GitHub Pages. Claude needs a `CLAUDE_CODE_OAUTH_TOKEN` secret (from `claude setup-token`) in the `claude` environment, which only `main` can use.

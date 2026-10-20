@@ -16,6 +16,7 @@ const items = Object.entries(todo)
     key,
     github: String(t.github).slice(0, 300),
     labels: (t.labels ?? []).map((l) => String(l).slice(0, 50)).slice(0, 10),
+    description: String(t.body ?? '').slice(0, 1500),
     ...(t.stale ? { stale: String(t.stale).slice(0, 100) } : {}),
   }))
 
