@@ -5,9 +5,7 @@
   import Hero from './lib/Hero.svelte'
   import Journal from './lib/Journal.svelte'
   import River from './lib/River.svelte'
-  import TimeSplit from './lib/TimeSplit.svelte'
   import TrailMap from './lib/TrailMap.svelte'
-  import Trophies from './lib/Trophies.svelte'
   import Voices from './lib/Voices.svelte'
   import { beasts, camps, fmtDate, generatedAt, summit } from './lib/model'
 </script>
@@ -38,10 +36,8 @@
   <River />
   <Campfire />
   <Beasts />
-  <TimeSplit />
   <Journal />
   <Voices />
-  <Trophies />
 </main>
 
 <footer class="wrap">

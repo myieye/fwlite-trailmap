@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { areaOf, areas, closedIssues, fmtDate, isBehindScenes, plainTitle, releases, shipped, weekOf, type Item } from './model'
+  import { areaOf, areas, closedIssues, fmtDate, isBehindScenes, plainTitle, releases, shipped, weekOf, type AreaId, type Item } from './model'
 
   // An issue closed by a PR shown here would be a duplicate line.
   const closedByShipped = new Set(shipped.flatMap((p) => p.refs ?? []))
@@ -18,6 +18,11 @@
       }
     })
 
+  const split = (Object.keys(areas) as AreaId[])
+    .map((id) => ({ id, ...areas[id], n: shipped.filter((i) => areaOf(i) === id).length }))
+    .filter((g) => g.n)
+  const pct = (n: number) => Math.round((n / shipped.length) * 100)
+
   let count = $state(4)
 </script>
 
@@ -26,8 +31,21 @@
     <div>
       <span class="eyebrow">Field journal</span>
       <h2>What we finished, week by week</h2>
-      <p>The newest week is on top. Releases are when the finished work reached your device.</p>
+      <p>
+        {shipped.length} changes in the last 10 weeks, newest week on top. Releases are when the finished work reached your
+        device.
+      </p>
     </div>
+  </div>
+  <div class="split">
+    <div class="bar" role="img" aria-label={split.map((g) => `${g.name}: ${g.n}`).join(', ')}>
+      {#each split as g (g.id)}<span style="flex: {g.n}; background: {g.color}"></span>{/each}
+    </div>
+    <ul class="legend">
+      {#each split as g (g.id)}
+        <li title={g.blurb}><span class="dot" style="background: {g.color}"></span>{g.name} <span class="n">{g.n} · {pct(g.n)}%</span></li>
+      {/each}
+    </ul>
   </div>
   <ol class="weeks">
     {#each weeks.slice(0, count) as w (w.week)}
@@ -71,6 +89,37 @@
 </section>
 
 <style>
+  .split {
+    margin: 0 0 28px;
+  }
+  .bar {
+    display: flex;
+    gap: 2px;
+    height: 14px;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+  .bar span {
+    min-width: 4px;
+  }
+  .legend {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 0.9rem;
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend .n {
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
   .weeks {
     list-style: none;
     padding: 0;
