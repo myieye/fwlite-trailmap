@@ -1445,8 +1445,8 @@
   "area": "data"
  },
  "harmony#145": {
-  "title": "Register change types through model versions only",
-  "for": "[claude] Register change types through model versions only",
+  "title": "Change types are registered only through model versions",
+  "for": "Register change types through model versions only",
   "area": "backstage"
  },
  "harmony#142": {
@@ -1738,5 +1738,15 @@
   "title": "Adding a sense or example opens a dialog instead of a blank entry",
   "for": "Use dialogs for adding Senses and Examples in entry editor",
   "area": "feature"
+ },
+ "harmony#148": {
+  "title": "A failed pull no longer blocks pushing your edits in a sync",
+  "for": "Keep applying the other sync direction when one fails",
+  "area": "data"
+ },
+ "harmony#146": {
+  "title": "Edits with an unregistered change type are rejected up front",
+  "for": "Reject authoring a change whose type isn't registered",
+  "area": "backstage"
  }
 }
