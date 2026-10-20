@@ -19,3 +19,7 @@ Edit `trailmap.config.yaml`. Camps, Harmony goals and forum links are all there 
 ## Checking your work
 
 `npm run check` (svelte-check) and `npm run build`. For visuals, `npm run dev` and `npm run shot -- http://localhost:5173/ /tmp/shot 1280` writes light and dark full-page screenshots (Chromium at `/opt/pw-browsers/chromium`; change `executablePath` in `scripts/shot.mjs` elsewhere).
+
+## Committing and pushing
+
+Tim has given a standing go-ahead: commit and push straight to `main` once `npm run check` and `npm run build` pass. A push deploys the live site.
