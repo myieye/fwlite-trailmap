@@ -1753,5 +1753,10 @@
   "title": "Internal sync code reorganized to prepare for better logging",
   "for": "[claude] Make sync an injectable SyncService",
   "area": "backstage"
+ },
+ "lexbox#2771": {
+  "title": "Role changes on Lexbox reach an open project after syncing",
+  "for": "Refresh FW Lite project role on sync",
+  "area": "data"
  }
 }
