@@ -1751,12 +1751,27 @@
  },
  "harmony#149": {
   "title": "Internal sync code reorganized to prepare for better logging",
-  "for": "[claude] Make sync an injectable SyncService",
+  "for": "Make sync an injectable SyncService",
   "area": "backstage"
  },
  "lexbox#2771": {
   "title": "Role changes on Lexbox reach an open project after syncing",
   "for": "Refresh FW Lite project role on sync",
   "area": "data"
+ },
+ "lexbox#2775": {
+  "title": "Sync a project between computers using a USB drive or folder",
+  "for": "Add folder (USB drive) sync for FW Lite",
+  "area": "feature"
+ },
+ "lexbox#2772": {
+  "title": "Sync button no longer waits on the slow FieldWorks Classic status",
+  "for": "Don't block the FW Lite sync on the slow FieldWorks Classic status",
+  "area": "fix"
+ },
+ "lexbox#2773": {
+  "title": "New Commenter role can view a project and add comments",
+  "for": "Add a Commenter project role",
+  "area": "feature"
  }
 }
