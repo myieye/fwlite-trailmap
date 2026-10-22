@@ -1783,5 +1783,20 @@
   "title": "Automatic NuGet dependency updates can run again",
   "for": "Skip Android RIDs under Dependabot so the NuGet update job can run",
   "area": "backstage"
+ },
+ "lexbox#2788": {
+  "title": "Sync engine updated with groundwork for versioned changes",
+  "for": "Update Harmony to 0.2.1-rc.397",
+  "area": "backstage"
+ },
+ "lexbox#2789": {
+  "title": "Windows projects are kept when FW Lite is uninstalled",
+  "for": "Keep FW Lite Windows projects when the app is uninstalled",
+  "area": "data"
+ },
+ "lexbox#2784": {
+  "title": "Pull requests only run the checks their changes affect",
+  "for": "Add a PR CI workflow that runs only the affected FW Lite checks",
+  "area": "backstage"
  }
 }
