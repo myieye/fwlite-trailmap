@@ -1798,5 +1798,15 @@
   "title": "Pull requests only run the checks their changes affect",
   "for": "Add a PR CI workflow that runs only the affected FW Lite checks",
   "area": "backstage"
+ },
+ "lexbox#2790": {
+  "title": "New documentation site for FieldWorks Lite and Lexbox",
+  "for": "Add a documentation site for FieldWorks Lite and Lexbox",
+  "area": "feature"
+ },
+ "lexbox#2791": {
+  "title": "Org admins no longer see 'Ask to join project' on their projects",
+  "for": "[claude] Don't offer \"Ask to join project\" to org admins",
+  "area": "fix"
  }
 }
