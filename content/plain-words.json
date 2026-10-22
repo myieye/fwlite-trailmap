@@ -1773,5 +1773,15 @@
   "title": "New Commenter role can view a project and add comments",
   "for": "Add a Commenter project role",
   "area": "feature"
+ },
+ "lexbox#2780": {
+  "title": "Dev server's certificate upkeep job no longer fails on permissions",
+  "for": "Fix oauth-cert-retainer RBAC in the develop namespace",
+  "area": "backstage"
+ },
+ "lexbox#2776": {
+  "title": "Automatic NuGet dependency updates can run again",
+  "for": "Skip Android RIDs under Dependabot so the NuGet update job can run",
+  "area": "backstage"
  }
 }
