@@ -1808,5 +1808,25 @@
   "title": "Org admins no longer see 'Ask to join project' on their projects",
   "for": "[claude] Don't offer \"Ask to join project\" to org admins",
   "area": "fix"
+ },
+ "lexbox#2792": {
+  "title": "New 'Editor Lite' role: edit in FW Lite without send/receive",
+  "for": "Add an Editor Lite project role",
+  "area": "feature"
+ },
+ "lexbox#2793": {
+  "title": "Mercurial 3 tests now really run on Mercurial 3",
+  "for": "Make the Mercurial 3 integration test leg actually use Mercurial 3",
+  "area": "backstage"
+ },
+ "harmony#151": {
+  "title": "Test that deleting an item also deletes what depends on it",
+  "for": "[claude] Test that deleting an entity cascades through referrers",
+  "area": "backstage"
+ },
+ "harmony#97": {
+  "title": "Tests for removing references and cascade deletes",
+  "for": "Test coverage: SnapshotWorker reference removal and cascade delete",
+  "area": "backstage"
  }
 }
