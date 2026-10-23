@@ -1828,5 +1828,30 @@
   "title": "Tests for removing references and cascade deletes",
   "for": "Test coverage: SnapshotWorker reference removal and cascade delete",
   "area": "backstage"
+ },
+ "lexbox#2796": {
+  "title": "Activity detail view no longer crashes on unrecognized changes",
+  "for": "[claude] Stop the activity detail view crashing on opaque changes",
+  "area": "fix"
+ },
+ "lexbox#2797": {
+  "title": "Updated translations",
+  "for": "New Crowdin updates",
+  "area": "feature"
+ },
+ "lexbox#2794": {
+  "title": "Parallel tests no longer delete each other's media files",
+  "for": "[claude] Give each LcmCrdt test fixture its own media cache folder",
+  "area": "backstage"
+ },
+ "lexbox#2795": {
+  "title": "Sign-in fails clearly when the browser can't be opened",
+  "for": "[claude] Fail FW Lite sign-in when the system browser can't be opened",
+  "area": "fix"
+ },
+ "harmony#152": {
+  "title": "Commits missing required fields are rejected, not read as blank",
+  "for": "[claude] Enforce required members when deserializing commits",
+  "area": "data"
  }
 }
