@@ -1853,5 +1853,15 @@
   "title": "Commits missing required fields are rejected, not read as blank",
   "for": "[claude] Enforce required members when deserializing commits",
   "area": "data"
+ },
+ "lexbox#2798": {
+  "title": "A 'What's new' dialog after updates and in the help menu",
+  "for": "[claude] Add a What's new dialog to FW Lite",
+  "area": "feature"
+ },
+ "lexbox#2799": {
+  "title": "Older projects update with a progress screen when opened",
+  "for": "[claude] Rebuild snapshots when a project without checkpoints opens",
+  "area": "data"
  }
 }
