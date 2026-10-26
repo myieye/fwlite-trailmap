@@ -1863,5 +1863,10 @@
   "title": "Older projects update with a progress screen when opened",
   "for": "[claude] Rebuild snapshots when a project without checkpoints opens",
   "area": "data"
+ },
+ "lexbox#2782": {
+  "title": "Automatic security updates for dependencies work again",
+  "for": "Use lockfile v2 for the Platform.Bible extension so Dependabot can fetch it",
+  "area": "backstage"
  }
 }
