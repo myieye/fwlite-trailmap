@@ -1868,5 +1868,55 @@
   "title": "Automatic security updates for dependencies work again",
   "for": "Use lockfile v2 for the Platform.Bible extension so Dependabot can fetch it",
   "area": "backstage"
+ },
+ "lexbox#2815": {
+  "title": "Build check blocks random or clock values in sync changes",
+  "for": "Add analyzer banning non-deterministic calls in CRDT change types",
+  "area": "backstage"
+ },
+ "lexbox#2814": {
+  "title": "Before/after views for changes in the activity list, groundwork",
+  "for": "[claude] Add read-only diff components for activity previews",
+  "area": "backstage"
+ },
+ "lexbox#2813": {
+  "title": "Example sentence translations stay consistent across devices",
+  "for": "Add major FW Lite CRDT model version to regenerate snapshots",
+  "area": "data"
+ },
+ "lexbox#2812": {
+  "title": "Project data is rebuilt once when a project opens",
+  "for": "[claude] Rebuild FW Lite snapshots when a project opens, not on its first new commit",
+  "area": "data"
+ },
+ "lexbox#2803": {
+  "title": "Docs screenshots are generated automatically",
+  "for": "Generate docs-site screenshots",
+  "area": "backstage"
+ },
+ "lexbox#2802": {
+  "title": "Admins can find a project by pasting its ID",
+  "for": "Search admin project list by project ID",
+  "area": "feature"
+ },
+ "harmony#156": {
+  "title": "Sync errors say what failed and what was already applied",
+  "for": "[claude] Throw a SyncException that says what failed and what landed",
+  "area": "data"
+ },
+ "harmony#157": {
+  "title": "Sync logs a warning when devices are left with different edits",
+  "for": "[claude] Warn when a sync will leave a client's commits still differing",
+  "area": "data"
+ },
+ "harmony#155": {
+  "title": "Server traces show when a sync needs recovery",
+  "for": "[claude] Trace sync planning through a public SIL.Harmony ActivitySource",
+  "area": "backstage"
+ },
+ "harmony#154": {
+  "title": "Flash drive sync survives a drive pulled mid-write",
+  "for": "Make JsonSyncable tolerate an interrupted write",
+  "area": "data"
  }
 }
