@@ -1918,5 +1918,10 @@
   "title": "Flash drive sync survives a drive pulled mid-write",
   "for": "Make JsonSyncable tolerate an interrupted write",
   "area": "data"
+ },
+ "lexbox#2816": {
+  "title": "Updated translations of the app's text pulled in",
+  "for": "New Crowdin updates",
+  "area": "backstage"
  }
 }
