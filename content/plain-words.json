@@ -1958,5 +1958,10 @@
   "title": "Server repo file operations moved to the hgresume service",
   "for": "Move HgService repo filesystem ops onto hgresume's manage API",
   "area": "backstage"
+ },
+ "lexbox#2835": {
+  "title": "Lexicon menu items in Scripture Editor show only in Power mode",
+  "for": "Show Lexicon extension menu items only in Power mode",
+  "area": "feature"
  }
 }
