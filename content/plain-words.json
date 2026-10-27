@@ -1923,5 +1923,40 @@
   "title": "Updated translations of the app's text pulled in",
   "for": "New Crowdin updates",
   "area": "backstage"
+ },
+ "lexbox#2832": {
+  "title": "Shared build setup steps moved into reusable CI actions",
+  "for": "Extract shared CI setup steps into composite actions",
+  "area": "backstage"
+ },
+ "lexbox#2830": {
+  "title": "Header size test uses a safer length so it stops failing randomly",
+  "for": "Lower the Cloudflare header size test to 10,000 chars",
+  "area": "backstage"
+ },
+ "lexbox#2824": {
+  "title": "Local dev health check reaches the headless FW Lite service",
+  "for": "Fix port_forward for fw-headless in Tiltfile",
+  "area": "backstage"
+ },
+ "lexbox#2822": {
+  "title": "Slow project opens show a message explaining the wait",
+  "for": "Explain slow FW Lite project opens with a toast",
+  "area": "feature"
+ },
+ "lexbox#2820": {
+  "title": "UI tests no longer fail when screenshot upload is rejected",
+  "for": "Don't fail FW Lite UI tests when the Argos upload is rejected",
+  "area": "backstage"
+ },
+ "lexbox#2819": {
+  "title": "UI tests fail CI when the screenshot upload quota runs out",
+  "for": "FW Lite UI tests fail CI when Argos screenshot quota is exhausted",
+  "area": "backstage"
+ },
+ "lexbox#2821": {
+  "title": "Server repo file operations moved to the hgresume service",
+  "for": "Move HgService repo filesystem ops onto hgresume's manage API",
+  "area": "backstage"
  }
 }
