@@ -1910,8 +1910,8 @@
   "area": "data"
  },
  "harmony#155": {
-  "title": "Server traces show when a sync needs recovery",
-  "for": "[claude] Trace sync planning through a public SIL.Harmony ActivitySource",
+  "title": "Server traces show when a sync falls back to full recovery",
+  "for": "Trace sync planning and recovery",
   "area": "backstage"
  },
  "harmony#154": {
@@ -1968,5 +1968,10 @@
   "title": "Web app no longer logs a settings file error on every load",
   "for": "Only load the FW Lite settings file where the host has one",
   "area": "fix"
+ },
+ "lexbox#2837": {
+  "title": "Viewer-only changes no longer trigger the server API build",
+  "for": "Don't run develop API workflow on viewer-only changes",
+  "area": "backstage"
  }
 }
