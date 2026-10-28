@@ -1831,7 +1831,7 @@
  },
  "lexbox#2796": {
   "title": "Activity detail view no longer crashes on unrecognized changes",
-  "for": "[claude] Stop the activity detail view crashing on opaque changes",
+  "for": "Stop the activity detail view crashing on opaque changes",
   "area": "fix"
  },
  "lexbox#2797": {
@@ -1972,6 +1972,36 @@
  "lexbox#2837": {
   "title": "Viewer-only changes no longer trigger the server API build",
   "for": "Don't run develop API workflow on viewer-only changes",
+  "area": "backstage"
+ },
+ "lexbox#2839": {
+  "title": "Server project list no longer freezes the app while loading",
+  "for": "[claude] Run heavy FW Lite JSInvokables off the UI thread",
+  "area": "fix"
+ },
+ "lexbox#2844": {
+  "title": "Windows integration tests release their temp files properly",
+  "for": "Dispose the upload stream in the integration fixture",
+  "area": "backstage"
+ },
+ "lexbox#2823": {
+  "title": "Local dev setup forwards to the right headless port",
+  "for": "Tiltfile still forwards to port 80 for fw-headless, that should be port 8081",
+  "area": "backstage"
+ },
+ "lexbox#2843": {
+  "title": "Dependabot opens major updates as separate PRs",
+  "for": "Split Dependabot majors into their own group PRs",
+  "area": "backstage"
+ },
+ "lexbox#2840": {
+  "title": "Minor and patch updates to NuGet dependencies",
+  "for": "Bump NuGet minor and patch versions from the Dependabot \"other\" group",
+  "area": "backstage"
+ },
+ "lexbox#2838": {
+  "title": "Sync library update with tracing of sync planning",
+  "for": "Bump Harmony to 0.2.1-rc.445 and export its traces",
   "area": "backstage"
  }
 }
