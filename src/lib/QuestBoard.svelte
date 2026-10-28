@@ -35,7 +35,7 @@
       {#if toGo}
         <p class="pace">
           <strong>{toGo} to go</strong> before 1.0 · {weeks.at(-1)!.n} closed this week · {lastFour} in the last 4 weeks. Each one
-          moves the 🤠 up the trail.
+          moves the hiker on the map up the trail.
         </p>
       {:else}
         <p class="pace"><strong>All done.</strong> Ship it. 🚩</p>
