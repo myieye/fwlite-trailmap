@@ -1963,5 +1963,10 @@
   "title": "Lexicon menu items in Scripture Editor show only in Power mode",
   "for": "Show Lexicon extension menu items only in Power mode",
   "area": "feature"
+ },
+ "lexbox#2836": {
+  "title": "Web app no longer logs a settings file error on every load",
+  "for": "Only load the FW Lite settings file where the host has one",
+  "area": "fix"
  }
 }
