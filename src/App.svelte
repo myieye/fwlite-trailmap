@@ -1,8 +1,10 @@
 <script lang="ts">
   import Campfire from './lib/Campfire.svelte'
+  import { dev, enableDevMode } from './lib/dev.svelte'
   import CampCard from './lib/CampCard.svelte'
   import Hero from './lib/Hero.svelte'
   import Journal from './lib/Journal.svelte'
+  import QuestBoard from './lib/QuestBoard.svelte'
   import River from './lib/River.svelte'
   import TrailMap from './lib/TrailMap.svelte'
   import Voices from './lib/Voices.svelte'
@@ -15,6 +17,8 @@
   <div class="wrap">
     <TrailMap {camps} start={summit.start} />
   </div>
+
+  {#if dev.on}<QuestBoard />{/if}
 
   <section class="wrap section" id="camps">
     <div class="section-head">
@@ -44,6 +48,10 @@
   </p>
 </footer>
 
+{#if dev.on}
+  <button class="dev-off" onclick={() => enableDevMode(false)}>Dev mode · <u>turn off</u></button>
+{/if}
+
 <style>
   .camps {
     columns: 3 330px;
@@ -53,6 +61,19 @@
   .slot {
     break-inside: avoid;
     padding: 14px 0 12px;
+  }
+  .dev-off {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 101;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border-radius: 99px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
   }
   footer {
     padding: 64px 16px 48px;

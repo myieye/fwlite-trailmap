@@ -98,8 +98,11 @@ function toCamp(c: { id: string; name: string; icon: string; blurb: string }, li
   return { ...c, items: list, done, total: counted.length, pct: counted.length ? done / counted.length : 0 }
 }
 
-export const hasOpenPr = (item: Item) =>
-  Object.values(items).some((pr) => pr.kind === 'pr' && pr.state === 'open' && !pr.draft && pr.refs?.includes(item.key))
+const openPrs = (item: Item) =>
+  Object.values(items).filter((pr) => pr.kind === 'pr' && pr.state === 'open' && pr.refs?.includes(item.key))
+export const hasOpenPr = (item: Item) => openPrs(item).some((pr) => !pr.draft)
+// A draft PR counts: someone has started.
+export const claimedBy = (item: Item): string | undefined => item.assignees[0] ?? openPrs(item)[0]?.author
 
 const summitItems = (snapshot.summit.items as string[]).map(get)
 const campConfigs = (config.camps ?? []) as { id: string; name: string; icon: string; blurb: string; issues: string[] }[]

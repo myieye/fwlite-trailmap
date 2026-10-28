@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { ageDays, dropped, hasOpenPr, isDataRisk, plainTitle, type Item } from './model'
+  import { dev } from './dev.svelte'
+  import { ageDays, claimedBy, dropped, hasOpenPr, isDataRisk, plainTitle, type Item } from './model'
 
   let { item, showAge = false }: { item: Item; showAge?: boolean } = $props()
 
@@ -22,6 +23,10 @@
   <span class="meta">
     {#if isDataRisk(item)}<span class="chip" style="--chip: var(--c-rust)" title="Known bug that can lose or hide data">data risk</span>{/if}
     {#if state === 'working'}<span class="chip" style="--chip: var(--c-sun)">in progress</span>{/if}
+    {#if dev.on && item.state === 'open'}
+      {@const who = claimedBy(item)}
+      <span class="who" class:free={!who}>{who ? `@${who}` : 'up for grabs'}</span>
+    {/if}
     {#if showAge && item.state === 'open'}<span title="Days since it was reported">{ageDays(item)}d</span>{/if}
   </span>
 </li>
@@ -69,6 +74,15 @@
   }
   .working .glyph {
     color: var(--c-sun);
+  }
+  .who {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .who.free {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-soft);
   }
   .meta {
     font-size: 0.78rem;

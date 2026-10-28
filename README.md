@@ -24,6 +24,10 @@ flowchart LR
 - `content/plain-words.json` holds a plain-language title and an area for each item, plus the GitHub title it was written for, so `npm run plain:todo` can tell when one is missing or stale. `AGENTS.md` has the rules an agent follows to fill it.
 - Progress is counted, never estimated: a camp is closed issues over all issues (dropped ones don't count). Nothing on the page shows a date it can't back up.
 
+## Dev mode
+
+The team gets a quest board (unclaimed 1.0 issues, best next one first) and sees who's on each camp item. Turn it on with `?dev` in the URL, `enableDevMode()` in the console, or the same `devMode` localStorage flag Lexbox and FW Lite use; `?dev=0` or the corner button turns it off. Stakeholders never see it unless they turn it on.
+
 ## Run it
 
 ```sh
