@@ -2008,5 +2008,35 @@
   "title": "Integration tests upload test projects more reliably",
   "for": "Upload reset zips in integration tests without the Squidex tus client",
   "area": "backstage"
+ },
+ "lexbox#2861": {
+  "title": "Newer Mercurial version used for send and receive",
+  "for": "[claude] Bump SIL.Chorus.Mercurial to 7.2.4 and go back to ubuntu-latest",
+  "area": "backstage"
+ },
+ "lexbox#2857": {
+  "title": "Lexicon API available on Lexbox for other tools to use",
+  "for": "Ship the lexicon API on Lexbox, served by FwHeadless",
+  "area": "feature"
+ },
+ "lexbox#2856": {
+  "title": "Old Windows App Installer update path removed from the server",
+  "for": "[claude] Remove the FW Lite App Installer server path",
+  "area": "devices"
+ },
+ "lexbox#2859": {
+  "title": "Test jobs pinned to an older Ubuntu to avoid a Mercurial crash",
+  "for": "Pin hg-running CI jobs to ubuntu-24.04",
+  "area": "backstage"
+ },
+ "lexbox#2855": {
+  "title": "Shared web routes for the lexicon API moved into their own project",
+  "for": "Extract MiniLcm web routes into MiniLcmWeb and apply the lexicon route table",
+  "area": "backstage"
+ },
+ "harmony#159": {
+  "title": "Older apps skip changes from newer versions instead of failing sync",
+  "for": "[claude] Skip changes from newer model versions that throw on apply",
+  "area": "data"
  }
 }
