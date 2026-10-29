@@ -1990,8 +1990,8 @@
   "area": "backstage"
  },
  "lexbox#2843": {
-  "title": "Dependabot opens major updates as separate PRs",
-  "for": "Split Dependabot majors into their own group PRs",
+  "title": "Major dependency updates are grouped into their own separate PRs",
+  "for": "Ignore major versions in Dependabot",
   "area": "backstage"
  },
  "lexbox#2840": {
@@ -2002,6 +2002,11 @@
  "lexbox#2838": {
   "title": "Sync library update with tracing of sync planning",
   "for": "Bump Harmony to 0.2.1-rc.445 and export its traces",
+  "area": "backstage"
+ },
+ "lexbox#2854": {
+  "title": "Integration tests upload test projects more reliably",
+  "for": "Upload reset zips in integration tests without the Squidex tus client",
   "area": "backstage"
  }
 }
