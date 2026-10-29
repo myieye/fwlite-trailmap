@@ -2038,5 +2038,10 @@
   "title": "Older apps skip changes from newer versions instead of failing sync",
   "for": "[claude] Skip changes from newer model versions that throw on apply",
   "area": "data"
+ },
+ "lexbox#2863": {
+  "title": "Loading all LF Classic entries no longer fails; sort order is honored",
+  "for": "Omit $limit stage for LF Classic QueryAll queries",
+  "area": "fix"
  }
 }
