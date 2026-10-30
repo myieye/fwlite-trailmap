@@ -2043,5 +2043,20 @@
   "title": "Loading all LF Classic entries no longer fails; sort order is honored",
   "for": "Omit $limit stage for LF Classic QueryAll queries",
   "area": "fix"
+ },
+ "lexbox#2865": {
+  "title": "Entry list loads when a picture is linked outside LinkedFiles",
+  "for": "Don't fail entry mapping for pictures outside LinkedFiles",
+  "area": "fix"
+ },
+ "lexbox#2866": {
+  "title": "Slow tests on pull requests use a pinned Ubuntu version",
+  "for": "[claude] Pin remaining hg-running CI jobs to ubuntu-24.04",
+  "area": "backstage"
+ },
+ "harmony#160": {
+  "title": "Snapshot replay code simplified to pass settings less often",
+  "for": "[claude] Inject SnapshotReplay instead of passing config to static helpers",
+  "area": "backstage"
  }
 }
