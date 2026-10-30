@@ -2063,5 +2063,30 @@
   "title": "Plugin studio for trying and editing plugins, with an examples shelf",
   "for": "Add a plugin studio and a managers-only examples shelf",
   "area": "feature"
+ },
+ "lexbox#2871": {
+  "title": "Project server recovers on its own after a sync backend crash",
+  "for": "[claude] Make hgweb recover when its CGI daemon is gone",
+  "area": "backstage"
+ },
+ "lexbox#2875": {
+  "title": "Project closes properly when media sync fails",
+  "for": "[claude] Close the fwdata project when media sync fails",
+  "area": "backstage"
+ },
+ "lexbox#2874": {
+  "title": "Monitoring collector no longer runs out of memory under load",
+  "for": "[claude] Make the otel collector's memory limiter effective",
+  "area": "backstage"
+ },
+ "lexbox#2873": {
+  "title": "Huge changeset pages no longer crash the project server",
+  "for": "[claude] Refuse hgweb diff pages too large to render",
+  "area": "backstage"
+ },
+ "lexbox#2872": {
+  "title": "A project server outage no longer takes the whole site down",
+  "for": "[claude] Stop an hg outage from restarting the lexbox pod",
+  "area": "backstage"
  }
 }
