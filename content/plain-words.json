@@ -2058,5 +2058,10 @@
   "title": "Snapshot replay code simplified to pass settings less often",
   "for": "[claude] Inject SnapshotReplay instead of passing config to static helpers",
   "area": "backstage"
+ },
+ "lexbox#2870": {
+  "title": "Plugin studio for trying and editing plugins, with an examples shelf",
+  "for": "Add a plugin studio and a managers-only examples shelf",
+  "area": "feature"
  }
 }
