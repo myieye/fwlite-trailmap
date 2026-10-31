@@ -2111,12 +2111,32 @@
  },
  "lexbox#2881": {
   "title": "Homograph numbers show as subscripts after headwords",
-  "for": "[claude] Show homograph numbers on headwords",
+  "for": "Show homograph numbers on headwords in FW Lite",
   "area": "feature"
  },
  "lexbox#2880": {
   "title": "Snapshot regeneration reports a missing commit as not found",
   "for": "Pass FwHeadless status through on snapshot regeneration",
   "area": "backstage"
+ },
+ "lexbox#2884": {
+  "title": "Sync errors from the server are reported consistently",
+  "for": "Report FwHeadless failures with one exception and one status mapping",
+  "area": "backstage"
+ },
+ "lexbox#2888": {
+  "title": "Test builds now use the production error handling",
+  "for": "Run the CI cluster with Lexbox's production exception handler",
+  "area": "backstage"
+ },
+ "lexbox#2885": {
+  "title": "Each activity change shows one clear header with its entry",
+  "for": "[claude] Give every activity change one identity header",
+  "area": "feature"
+ },
+ "lexbox#2886": {
+  "title": "Complex form badges show homograph numbers",
+  "for": "[claude] Show homograph numbers on complex form badges",
+  "area": "feature"
  }
 }
