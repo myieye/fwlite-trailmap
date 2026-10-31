@@ -2101,7 +2101,7 @@
  },
  "lexbox#2882": {
   "title": "Activity preview shows before and after for each change",
-  "for": "[claude] Show before/after diffs in the activity preview",
+  "for": "Show before/after diffs in the activity change preview",
   "area": "feature"
  },
  "lexbox#2878": {
@@ -2138,5 +2138,30 @@
   "title": "Complex form badges show homograph numbers",
   "for": "[claude] Show homograph numbers on complex form badges",
   "area": "feature"
+ },
+ "lexbox#2889": {
+  "title": "Activity previews highlight what changed and compare with now",
+  "for": "[claude] Focus activity change previews and show what changed later",
+  "area": "feature"
+ },
+ "lexbox#2890": {
+  "title": "Complex form links show the homograph number of the linked entry",
+  "for": "[claude] Show homograph numbers on complex form and component links",
+  "area": "feature"
+ },
+ "harmony#163": {
+  "title": "Viewing past history stays consistent while a sync is running",
+  "for": "[claude] Isolate point-in-time reads from a concurrent sync in WAL mode",
+  "area": "data"
+ },
+ "harmony#161": {
+  "title": "Faster reading of several items as they were at one commit",
+  "for": "[claude] Add OpenViewAtCommit to replay once and read the view several ways",
+  "area": "backstage"
+ },
+ "harmony#162": {
+  "title": "Faster loading of activity pages that cover many commits",
+  "for": "[claude] Add StartCommitReplay to read every commit in a range from one replay",
+  "area": "backstage"
  }
 }
