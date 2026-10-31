@@ -2066,7 +2066,7 @@
  },
  "lexbox#2871": {
   "title": "Project server recovers on its own after a sync backend crash",
-  "for": "[claude] Make hgweb recover when its CGI daemon is gone",
+  "for": "[claude] Make hgweb recover when one of its daemons is gone",
   "area": "backstage"
  },
  "lexbox#2875": {
@@ -2087,6 +2087,36 @@
  "lexbox#2872": {
   "title": "A project server outage no longer takes the whole site down",
   "for": "[claude] Stop an hg outage from restarting the lexbox pod",
+  "area": "backstage"
+ },
+ "lexbox#2883": {
+  "title": "Activity preview shows only the fields that changed",
+  "for": "[claude] Focus activity diffs on what changed",
+  "area": "feature"
+ },
+ "lexbox#2877": {
+  "title": "Blocked projects refuse edits that could be lost later",
+  "for": "Harden the lexicon API: blocked writes, commit-pinned snapshots, fw-headless ingress",
+  "area": "data"
+ },
+ "lexbox#2882": {
+  "title": "Activity preview shows before and after for each change",
+  "for": "[claude] Show before/after diffs in the activity preview",
+  "area": "feature"
+ },
+ "lexbox#2878": {
+  "title": "New template projects ask for your name to sign edits",
+  "for": "[claude] Ask for the author's name when creating a template project",
+  "area": "feature"
+ },
+ "lexbox#2881": {
+  "title": "Homograph numbers show as subscripts after headwords",
+  "for": "[claude] Show homograph numbers on headwords",
+  "area": "feature"
+ },
+ "lexbox#2880": {
+  "title": "Snapshot regeneration reports a missing commit as not found",
+  "for": "Pass FwHeadless status through on snapshot regeneration",
   "area": "backstage"
  }
 }
