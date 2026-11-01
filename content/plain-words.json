@@ -2163,5 +2163,25 @@
   "title": "Faster loading of activity pages that cover many commits",
   "for": "[claude] Add StartCommitReplay to read every commit in a range from one replay",
   "area": "backstage"
+ },
+ "lexbox#2893": {
+  "title": "Activity changes have an Edit Entry button and clearer component cards",
+  "for": "[claude] Restore activity entry actions and rework component change cards",
+  "area": "feature"
+ },
+ "lexbox#2894": {
+  "title": "Activity shows a list with details beside it, and works on phones",
+  "for": "[claude] Show activity as a list-detail view",
+  "area": "feature"
+ },
+ "lexbox#2891": {
+  "title": "Activity list reads as sentences grouped by entry",
+  "for": "[claude] Summarize activity as readable sentences grouped by entry",
+  "area": "feature"
+ },
+ "lexbox#2892": {
+  "title": "Emails that needed a retry are no longer sent repeatedly",
+  "for": "[claude] Stop retried emails from resending after a successful send",
+  "area": "fix"
  }
 }
