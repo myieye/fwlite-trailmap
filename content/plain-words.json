@@ -2011,8 +2011,8 @@
  },
  "lexbox#2861": {
   "title": "Newer Mercurial version used for send and receive",
-  "for": "[claude] Bump SIL.Chorus.Mercurial to 7.2.4 and go back to ubuntu-latest",
-  "area": "backstage"
+  "for": "[claude] Bump SIL.Chorus.Mercurial to 7.2.4 and run hg client tests on 3, 6 and 7 only",
+  "area": "data"
  },
  "lexbox#2857": {
   "title": "Lexicon API available on Lexbox for other tools to use",
@@ -2166,7 +2166,7 @@
  },
  "lexbox#2893": {
   "title": "Activity list has an Edit Entry button and clearer component links",
-  "for": "[claude] Restore activity entry actions and show component links as two equal entries",
+  "for": "Restore activity entry actions and show component links as two equal entries",
   "area": "feature"
  },
  "lexbox#2894": {
@@ -2183,5 +2183,10 @@
   "title": "Emails that needed a retry are no longer sent repeatedly",
   "for": "[claude] Stop retried emails from resending after a successful send",
   "area": "fix"
+ },
+ "lexbox#2905": {
+  "title": "Documentation site builds for its own web address",
+  "for": "[claude] Build the docs for docs.lexbox.org",
+  "area": "backstage"
  }
 }
