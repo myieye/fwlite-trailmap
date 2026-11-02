@@ -2165,8 +2165,8 @@
   "area": "backstage"
  },
  "lexbox#2893": {
-  "title": "Activity changes have an Edit Entry button and clearer component cards",
-  "for": "[claude] Restore activity entry actions and rework component change cards",
+  "title": "Activity list has an Edit Entry button and clearer component links",
+  "for": "[claude] Restore activity entry actions and show component links as two equal entries",
   "area": "feature"
  },
  "lexbox#2894": {
