@@ -2010,9 +2010,9 @@
   "area": "backstage"
  },
  "lexbox#2861": {
-  "title": "Newer Mercurial version used for send and receive",
-  "for": "[claude] Bump SIL.Chorus.Mercurial to 7.2.4 and run hg client tests on 3, 6 and 7 only",
-  "area": "data"
+  "title": "Send and receive uses a newer Mercurial, tested on three versions",
+  "for": "Move to Mercurial 7 and test hg 3, 6 and 7 clients in their own workflow",
+  "area": "backstage"
  },
  "lexbox#2857": {
   "title": "Lexicon API available on Lexbox for other tools to use",
@@ -2150,13 +2150,13 @@
   "area": "feature"
  },
  "harmony#163": {
-  "title": "Viewing past history stays consistent while a sync is running",
-  "for": "[claude] Isolate point-in-time reads from a concurrent sync in WAL mode",
+  "title": "Viewing past history stays consistent while a sync runs",
+  "for": "[claude] Hold the repository lock for point-in-time reads",
   "area": "data"
  },
  "harmony#161": {
-  "title": "Faster reading of several items as they were at one commit",
-  "for": "[claude] Add OpenViewAtCommit to replay once and read the view several ways",
+  "title": "Reading several items as of one past commit is faster",
+  "for": "[claude] Add OpenAtCommit to read several entities from one replay",
   "area": "backstage"
  },
  "harmony#162": {
@@ -2187,6 +2187,16 @@
  "lexbox#2905": {
   "title": "Documentation site builds for its own web address",
   "for": "[claude] Build the docs for docs.lexbox.org",
+  "area": "backstage"
+ },
+ "harmony#165": {
+  "title": "An edit that reuses an id from another kind of item is rejected",
+  "for": "Reject an authored change whose entity id belongs to another type",
+  "area": "data"
+ },
+ "harmony#164": {
+  "title": "Fixed a broken build caused by out-of-date tests",
+  "for": "Fix JsonSyncableTests for the SyncService constructor",
   "area": "backstage"
  }
 }
