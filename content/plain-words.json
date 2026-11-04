@@ -2198,5 +2198,25 @@
   "title": "Fixed a broken build caused by out-of-date tests",
   "for": "Fix JsonSyncableTests for the SyncService constructor",
   "area": "backstage"
+ },
+ "lexbox#2910": {
+  "title": "Automated checks now run on pull requests stacked on other branches",
+  "for": "Run PR CI on stacked PRs too",
+  "area": "backstage"
+ },
+ "lexbox#2911": {
+  "title": "Turned off a noisy build warning about returning tasks",
+  "for": "Disable VSTHRD202 analyzer warning",
+  "area": "backstage"
+ },
+ "lexbox#2909": {
+  "title": "Audio and other media changes record who made them",
+  "for": "Stamp media commits with the current author and client version",
+  "area": "data"
+ },
+ "harmony#166": {
+  "title": "A failed first upload no longer leaves an empty history entry",
+  "for": "Skip the commit when no pending upload succeeds",
+  "area": "data"
  }
 }
