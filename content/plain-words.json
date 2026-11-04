@@ -2218,5 +2218,30 @@
   "title": "A failed first upload no longer leaves an empty history entry",
   "for": "Skip the commit when no pending upload succeeds",
   "area": "data"
+ },
+ "lexbox#2922": {
+  "title": "Test setup hook restored for shared test fixtures",
+  "for": "[claude] Bring back MiniLcmApiFixture's configureServices hook",
+  "area": "backstage"
+ },
+ "lexbox#2913": {
+  "title": "On tablets the project sidebar opens over the content",
+  "for": "Pop the project sidebar over the content on tablets",
+  "area": "feature"
+ },
+ "lexbox#2921": {
+  "title": "Creating and deleting entries no longer freezes the app",
+  "for": "[claude] Run CreateEntry, DeleteEntry and CountPendingCrdtCommits off the UI thread",
+  "area": "fix"
+ },
+ "lexbox#2915": {
+  "title": "Older apps keep syncing when newer apps add new change types",
+  "for": "Enable opaque changes instead of failing sync",
+  "area": "data"
+ },
+ "lexbox#2912": {
+  "title": "Media uploads with unsafe folder or file names are rejected",
+  "for": "[claude] Validate media upload paths",
+  "area": "backstage"
  }
 }
