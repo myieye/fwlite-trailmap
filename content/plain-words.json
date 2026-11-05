@@ -480,8 +480,8 @@
   "area": "backstage"
  },
  "lexbox#2432": {
-  "title": "Plugins: add small custom tools to FW Lite",
-  "for": "FW Lite plugins MVP: resource-backed storage, hardened API v1, research-backed trust UX",
+  "title": "FW Lite plugins: small custom tools stored and synced with the project",
+  "for": "Add FW Lite plugins (beta)",
   "area": "feature"
  },
  "lexbox#2764": {
@@ -2061,7 +2061,7 @@
  },
  "lexbox#2870": {
   "title": "Plugin studio for trying and editing plugins, with an examples shelf",
-  "for": "Add a plugin studio and a managers-only examples shelf",
+  "for": "Add a plugin studio and an examples shelf (beta)",
   "area": "feature"
  },
  "lexbox#2871": {
@@ -2080,8 +2080,8 @@
   "area": "backstage"
  },
  "lexbox#2873": {
-  "title": "Huge changeset pages no longer crash the project server",
-  "for": "[claude] Refuse hgweb diff pages too large to render",
+  "title": "Very large changeset pages no longer crash the Send/Receive server",
+  "for": "Refuse hgweb diff pages too large to render",
   "area": "backstage"
  },
  "lexbox#2872": {
@@ -2240,8 +2240,73 @@
   "area": "data"
  },
  "lexbox#2912": {
-  "title": "Media uploads with unsafe folder or file names are rejected",
-  "for": "[claude] Validate media upload paths",
+  "title": "Media files with names Windows can't store are rejected clearly",
+  "for": "[claude] Validate media upload filenames",
+  "area": "data"
+ },
+ "lexbox#2939": {
+  "title": "History dialog shows each change in a multi-change edit separately",
+  "for": "[claude] Show each history row's own change in the History dialog",
+  "area": "fix"
+ },
+ "lexbox#2928": {
+  "title": "Docs now include screenshots of FW Lite in light and dark themes",
+  "for": "Add generated FW Lite screenshots to the docs",
+  "area": "feature"
+ },
+ "lexbox#2938": {
+  "title": "History dialog skips an unneeded lookup when selecting a row",
+  "for": "[claude] Stop fetching unused snapshots when selecting a history row",
+  "area": "backstage"
+ },
+ "lexbox#2532": {
+  "title": "Paratext: Browse Lexicon window can't be moved in Simple Mode",
+  "for": "[PT ext] Broken simple-mode tab/window control",
+  "area": "fix"
+ },
+ "lexbox#2926": {
+  "title": "History button works on writing system changes in Activity view",
+  "for": "Open history for writing system changes in the activity view",
+  "area": "fix"
+ },
+ "lexbox#2924": {
+  "title": "Activity view History button does nothing on writing system edits",
+  "for": "Activity view: History button does nothing for writing system edit changes",
+  "area": "fix"
+ },
+ "lexbox#2933": {
+  "title": "Removed an unused folder option from media uploads",
+  "for": "[claude] Remove unused LinkedFiles subfolder override from media uploads",
+  "area": "backstage"
+ },
+ "lexbox#2937": {
+  "title": "Viewer cleanups: consistent headword and gloss display",
+  "for": "[claude] Viewer cleanups after the activity preview work",
+  "area": "backstage"
+ },
+ "lexbox#2935": {
+  "title": "Picture order is hidden from API callers like sense order",
+  "for": "[claude] Make Picture.Order MiniLcmInternal",
+  "area": "backstage"
+ },
+ "lexbox#2934": {
+  "title": "New senses keep their pictures in the listed order",
+  "for": "[claude] Use picture list order when creating senses",
+  "area": "data"
+ },
+ "lexbox#2846": {
+  "title": "Language Forge entries API no longer fails when asked for all entries",
+  "for": "LF Classic entries API returns 500 for Count=-1",
+  "area": "fix"
+ },
+ "lexbox#2927": {
+  "title": "Sync server stops sending detailed database logs to monitoring",
+  "for": "Stop fw-headless exporting LinqToDB SQL logs below Warning",
+  "area": "backstage"
+ },
+ "lexbox#2925": {
+  "title": "Plugin HTML files are filed under their own folder on the server",
+  "for": "[claude] File uploaded HTML under LinkedFiles/Plugins",
   "area": "backstage"
  }
 }
