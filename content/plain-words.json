@@ -1020,8 +1020,8 @@
   "area": "feature"
  },
  "lexbox#2549": {
-  "title": "Upgrade to .NET 11 RC1",
-  "for": "Upgrade to .NET 11 RC1",
+  "title": "Upgrade the app to .NET 11 release candidate",
+  "for": "Upgrade to .NET 11 RC3",
   "area": "backstage"
  },
  "lexbox#2633": {
@@ -2286,13 +2286,13 @@
  },
  "lexbox#2935": {
   "title": "Picture order is hidden from API callers like sense order",
-  "for": "[claude] Make Picture.Order MiniLcmInternal",
+  "for": "Make Picture.Order MiniLcmInternal",
   "area": "backstage"
  },
  "lexbox#2934": {
   "title": "New senses keep their pictures in the listed order",
-  "for": "[claude] Use picture list order when creating senses",
-  "area": "data"
+  "for": "Use picture list order when creating senses",
+  "area": "fix"
  },
  "lexbox#2846": {
   "title": "Language Forge entries API no longer fails when asked for all entries",
@@ -2312,6 +2312,31 @@
  "lexbox#2942": {
   "title": "Updated SIL libraries so project files no longer stay locked",
   "for": "Bump SIL packages to latest",
+  "area": "backstage"
+ },
+ "lexbox#2949": {
+  "title": "Lexicon items grouped in one Tools submenu in Scripture Editor",
+  "for": "Group the lexicon items in a Scripture Editor Tools submenu",
+  "area": "feature"
+ },
+ "lexbox#2947": {
+  "title": "Sync dialog tabs are named Cloud, Nearby and Lexbox",
+  "for": "[claude] Name the sync dialog tabs Cloud, Nearby and Lexbox",
+  "area": "feature"
+ },
+ "lexbox#2945": {
+  "title": "Add Meaning and Add Example open a dialog before adding",
+  "for": "Open a dialog for Add Meaning and Add Example",
+  "area": "feature"
+ },
+ "lexbox#2946": {
+  "title": "Editor fields look plain until you click into them",
+  "for": "Show editor fields borderless until focused",
+  "area": "feature"
+ },
+ "lexbox#2944": {
+  "title": "Windows FW Lite can be launched at a chosen start page",
+  "for": "Add --start-url launch option to FW Lite on Windows",
   "area": "backstage"
  }
 }
