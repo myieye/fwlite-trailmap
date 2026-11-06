@@ -2308,5 +2308,10 @@
   "title": "Plugin HTML files are filed under their own folder on the server",
   "for": "[claude] File uploaded HTML under LinkedFiles/Plugins",
   "area": "backstage"
+ },
+ "lexbox#2942": {
+  "title": "Updated SIL libraries so project files no longer stay locked",
+  "for": "Bump SIL packages to latest",
+  "area": "backstage"
  }
 }
