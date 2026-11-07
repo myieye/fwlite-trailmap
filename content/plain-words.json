@@ -2338,5 +2338,10 @@
   "title": "Windows FW Lite can be launched at a chosen start page",
   "for": "Add --start-url launch option to FW Lite on Windows",
   "area": "backstage"
+ },
+ "lexbox#2950": {
+  "title": "Automatic launch checks for iOS and Android builds",
+  "for": "Add iOS and Android smoke tests; label-trigger app smoke tests on PRs",
+  "area": "backstage"
  }
 }
