@@ -2343,5 +2343,10 @@
   "title": "Automatic launch checks for iOS and Android builds",
   "for": "Add iOS and Android smoke tests; label-trigger app smoke tests on PRs",
   "area": "backstage"
+ },
+ "lexbox#2951": {
+  "title": "Screen readers announce the dialog backdrop button as \"Close\"",
+  "for": "Label the modal backdrop close button \"Close\"",
+  "area": "fix"
  }
 }
