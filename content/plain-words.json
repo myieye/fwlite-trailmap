@@ -2348,5 +2348,10 @@
   "title": "Screen readers announce the dialog backdrop button as \"Close\"",
   "for": "Label the modal backdrop close button \"Close\"",
   "area": "fix"
+ },
+ "lexbox#2952": {
+  "title": "Sort project tables by clicking column headers",
+  "for": "Sort project tables by clicking column headers",
+  "area": "feature"
  }
 }
