@@ -50,9 +50,19 @@ const preloadFonts: Plugin = {
   },
 }
 
+const root = fileURLToPath(new URL('.', import.meta.url))
+
 // SINGLE_FILE=1 inlines everything into one index.html, for hosts that only take one file.
+// TOWN_ONLY=1 builds the town prototype into dist/town/, a folder that can also be hosted on its own.
 export default defineConfig({
   base: './',
+  ...(process.env.TOWN_ONLY ? { root: `${root}town`, build: {
+          outDir: `${root}dist/town`,
+          emptyOutDir: true,
+          chunkSizeWarningLimit: 900,
+          // Claude artifacts won't serve .glb files, so INLINE_MODELS=1 bakes them into the JS as data: URLs.
+          ...(process.env.INLINE_MODELS ? { assetsInlineLimit: (file: string) => file.endsWith('.glb') || undefined } : {}),
+        } } : {}),
   plugins: [svelte(), yaml, trimData, preloadFonts, ...(process.env.SINGLE_FILE ? [viteSingleFile()] : [])],
   resolve: {
     alias: process.env.SINGLE_FILE
