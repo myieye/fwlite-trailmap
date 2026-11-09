@@ -2340,8 +2340,8 @@
   "area": "backstage"
  },
  "lexbox#2950": {
-  "title": "Automatic launch checks for iOS and Android builds",
-  "for": "Add iOS and Android smoke tests; label-trigger app smoke tests on PRs",
+  "title": "Launch checks run automatically on iOS and Android builds",
+  "for": "Add iOS & Android smoke tests",
   "area": "backstage"
  },
  "lexbox#2951": {
