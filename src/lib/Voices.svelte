@@ -10,7 +10,8 @@
   const newest = [...voices].sort(
     (a, b) => b.createdAt.localeCompare(a.createdAt) || b.votes - a.votes || a.title.localeCompare(b.title),
   )
-  const month = (d: string) => new Date(d).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })
+  const monthFormat = new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' })
+  const month = (d: string) => monthFormat.format(new Date(d))
   let filter = $state<Voice['status'] | null>(null)
   let sort = $state<'votes' | 'newest'>('votes')
   let all = $state(false)

@@ -239,3 +239,9 @@ button {
     transition: none !important;
   }
 }
+
+/* Long sections lay out only as they near the screen, which roughly halves start-up layout on a phone. */
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1500px;
+}

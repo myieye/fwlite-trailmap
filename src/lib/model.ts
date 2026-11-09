@@ -15,10 +15,7 @@ export type Item = {
   author: string
   bot?: boolean
   assignees: string[]
-  comments: number
-  milestone?: string
   createdAt: string
-  updatedAt: string
   closedAt?: string
   stateReason?: string
   refs?: string[]
@@ -98,8 +95,10 @@ function toCamp(c: { id: string; name: string; icon: string; blurb: string }, li
   return { ...c, items: list, done, total: counted.length, pct: counted.length ? done / counted.length : 0 }
 }
 
-const openPrs = (item: Item) =>
-  Object.values(items).filter((pr) => pr.kind === 'pr' && pr.state === 'open' && pr.refs?.includes(item.key))
+const prsFor = new Map<string, Item[]>()
+for (const pr of Object.values(items))
+  if (pr.kind === 'pr' && pr.state === 'open') for (const ref of pr.refs ?? []) prsFor.set(ref, [...(prsFor.get(ref) ?? []), pr])
+const openPrs = (item: Item) => prsFor.get(item.key) ?? []
 export const hasOpenPr = (item: Item) => openPrs(item).some((pr) => !pr.draft)
 // A draft PR counts: someone has started.
 export const claimedBy = (item: Item): string | undefined => item.assignees[0] ?? openPrs(item)[0]?.author
@@ -140,8 +139,8 @@ export const campOf = (key: string) => camps.find((c) => c.items.some((i) => i.k
 
 export const river: Camp[] = ((config.river ?? []) as typeof campConfigs).map((c) => toCamp(c, c.issues.map(get)))
 
-const fmt = (d: string) => new Date(d).toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })
-export const fmtDate = fmt
+const dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' })
+export const fmtDate = (d: string) => dateFormat.format(new Date(d))
 // The `Data bug` label is how the team marks bugs that can lose or hide someone's work.
 export const isDataRisk = (i: Item) => i.state === 'open' && i.labels.includes('Data bug')
 
@@ -164,7 +163,7 @@ export const inFlight = Object.values(items)
 const summitKeys = new Set(summitItems.map((i) => i.key))
 export const otherWork = inFlight.filter((p) => !p.draft && !p.refs?.some((r) => summitKeys.has(r)))
 
-export const releases = (snapshot.releases as { repo: string; tag: string; name: string; date: string; url: string }[]).filter(
+export const releases = (snapshot.releases as { repo: string; date: string; url: string }[]).filter(
   (r) => inWindow(r.date),
 )
 
