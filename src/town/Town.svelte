@@ -7,7 +7,7 @@
   import Scene from './Scene.svelte'
   import { town as data } from './model'
   import { icons, uiIcons } from './icons'
-  import { date, stateInfo, states, summary, visible } from './info'
+  import { date, stateInfo, states, summary, totals, visible } from './info'
   import type { TownNode } from './types'
   import type { View, World } from './world'
 
@@ -16,6 +16,7 @@
   const nodes = Object.values(town.nodes)
   const districtName = Object.fromEntries(town.districts.map((d) => [d.id, d.name]))
   const districtSize = Object.fromEntries(town.districts.map((d) => [d.id, d.nodes.length]))
+  const total = totals(nodes)
 
   let world = $state.raw<World>()
   let error = $state('')
@@ -41,6 +42,7 @@
   type Label =
     | { kind: 'district'; id: string; x: number; y: number }
     | { kind: 'dot'; id: string; x: number; y: number; n: TownNode }
+    | { kind: 'spot'; id: string; x: number; y: number; n: TownNode; head: number; side?: 'l' | 'r'; state: boolean }
     | { kind: 'tag'; id: string; x: number; y: number; dx: number; n: TownNode }
 
   const labels = $derived.by(() => {
@@ -53,27 +55,52 @@
     }
     const onNodes = view.points.filter((p) => p.on && town.nodes[p.id])
     if (!near) {
-      const dot = (n: TownNode, x: number, y: number) => {
-        const r = n.counts.fires ? 16 : 8
-        return fits([x - r, y - 11, x + r, y + 11]) || selectedId === n.id
+      // Fire counts claim their spot first, then districts; names and states fill what's left.
+      const spots: Extract<Label, { kind: 'spot' }>[] = []
+      const fires = onNodes.filter((p) => town.nodes[p.id].counts.fires).sort((a, b) => town.nodes[b.id].counts.fires - town.nodes[a.id].counts.fires)
+      for (const p of fires) {
+        const n = town.nodes[p.id]
+        const head = 30 + String(n.counts.fires).length * 7
+        if (fits([p.x - head / 2, p.y - 12, p.x + head / 2, p.y + 12]) || selectedId === n.id) spots.push({ kind: 'spot', id: n.id, x: p.x, y: p.y, n, head, state: false })
       }
-      const fires = onNodes.filter((p) => town.nodes[p.id].counts.fires)
-      for (const p of fires) if (dot(town.nodes[p.id], p.x, p.y)) out.push({ kind: 'dot', id: p.id, x: p.x, y: p.y, n: town.nodes[p.id] })
       const ds = view.points
         .filter((p) => p.on && p.id.startsWith('d:'))
         .sort((a, b) => (districtSize[b.id.slice(2)] ?? 0) - (districtSize[a.id.slice(2)] ?? 0))
       for (const p of ds) {
         const id = p.id.slice(2)
-        const bw = (districtName[id] ?? id).length * 8.6 + 30
+        const bw = (districtName[id] ?? id).length * (w < 700 ? 7.7 : 8.6) + 30
         const spots = [[0, 0], [0, -30], [0, 30], [bw / 3, -24], [-bw / 3, -24], [bw / 3, 24], [-bw / 3, 24]]
         const at = spots.find(([dx, dy]) => fits([p.x + dx - bw / 2, p.y + dy - 17, p.x + dx + bw / 2, p.y + dy + 17]))
         if (at) out.push({ kind: 'district', id, x: p.x + at[0], y: p.y + at[1] })
       }
+      const name = (s: (typeof spots)[number], extra: number) => {
+        const nw = s.n.name.length * 6.9 + 12 + extra
+        const from = s.head / 2
+        if (s.x + from + nw < w - 4 && fits([s.x + from, s.y - 12, s.x + from + nw, s.y + 12])) s.side = 'r'
+        else if (s.x - from - nw > 4 && fits([s.x - from - nw, s.y - 12, s.x - from, s.y + 12])) s.side = 'l'
+        return !!s.side
+      }
+      for (const s of spots) {
+        const sw = s.n.state === 'open' ? 0 : stateInfo[s.n.state].label.length * 6.2 + 26
+        if (sw && name(s, sw)) s.state = true
+        else name(s, 0)
+      }
       for (const p of onNodes) {
         const n = town.nodes[p.id]
-        if (!n.counts.fires && (n.counts.bugs || selectedId === n.id) && dot(n, p.x, p.y)) out.push({ kind: 'dot', id: n.id, x: p.x, y: p.y, n })
+        if (n.counts.fires || n.state === 'open') continue
+        const head = stateInfo[n.state].label.length * 6.2 + 30
+        const nw = n.name.length * 6.9 + 12
+        const [l, r] = [p.x - head / 2, p.x + head / 2]
+        // A state with no name beside it is a guessing game, so it's both or neither.
+        for (const y of [p.y, p.y - 26, p.y + 26]) {
+          const side = r + nw < w - 4 && fits([l, y - 12, r + nw, y + 12]) ? 'r' : l - nw > 4 && fits([l - nw, y - 12, r, y + 12]) ? 'l' : undefined
+          if (!side) continue
+          spots.push({ kind: 'spot', id: n.id, x: p.x, y, n, head, side, state: true })
+          break
+        }
       }
-      return out
+      for (const p of onNodes) if (selectedId === p.id && !spots.some((s) => s.id === p.id)) out.push({ kind: 'dot', id: p.id, x: p.x, y: p.y, n: town.nodes[p.id] })
+      return [...out, ...spots]
     }
     const cap = w < 640 ? 9 : 18
     const score = (p: (typeof onNodes)[number]) => {
@@ -84,7 +111,7 @@
     for (const p of onNodes.sort((a, b) => score(a) - score(b))) {
       if (out.length >= cap) break
       const n = town.nodes[p.id]
-      const bw = Math.max(n.name.length * 7.3, badgeWidth(n)) + 18
+      const bw = Math.max(n.name.length * 7.3 + (n.state === 'open' ? 17 : 0), badgeWidth(n)) + 18
       const x = Math.min(Math.max(p.x, bw / 2 + 6), w - bw / 2 - 6)
       if (fits([x - bw / 2, p.y - 58, x + bw / 2, p.y - 6])) out.push({ kind: 'tag', id: n.id, x: p.x, y: p.y, dx: x - p.x, n })
     }
@@ -178,15 +205,27 @@
           </button>
         {:else if l.kind === 'dot'}
           {@const n = l.n}
+          <button class="dot active" style="transform: translate({l.x}px, {l.y}px)" onclick={() => pick(n.id)} aria-label={n.name}></button>
+        {:else if l.kind === 'spot'}
+          {@const n = l.n}
           <button
-            class="dot"
-            class:fire={n.counts.fires > 0}
+            class="spot {l.side ?? ''}"
             class:active={selectedId === n.id}
-            style="transform: translate({l.x}px, {l.y}px)"
+            style="transform: translate({l.x}px, {l.y}px); --head: {l.head}px"
             onclick={() => pick(n.id)}
-            aria-label="{n.name}: {n.counts.fires ? `${n.counts.fires} urgent` : `${n.counts.bugs} bugs`}"
+            aria-label="{n.name}: {stateInfo[n.state].label}{n.counts.fires ? `, ${n.counts.fires} data-loss or urgent bugs` : ''}"
           >
-            {#if n.counts.fires}{@html icons.fire}{n.counts.fires}{/if}
+            <span class="head">
+              {#if n.counts.fires}
+                <span class="badge o-fire">{@html icons.fire}{n.counts.fires}</span>
+              {:else}
+                <span class="badge s-{n.state}">{@html icons[n.state]}{stateInfo[n.state].label}</span>
+              {/if}
+            </span>
+            {#if l.side}
+              <span class="name">{n.name}</span>
+              {#if n.counts.fires && l.state}<span class="badge s-{n.state}">{@html icons[n.state]}{stateInfo[n.state].label}</span>{/if}
+            {/if}
           </button>
         {:else}
           {@const n = l.n}
@@ -198,7 +237,7 @@
               onclick={() => pick(n.id)}
               aria-label="{n.name}: {stateInfo[n.state].label}"
             >
-              <span class="name">{n.name}</span>
+              <span class="name">{#if n.state === 'open'}<span class="ok" title={stateInfo.open.label}>{@html icons.open}</span>{/if}{n.name}</span>
               <span class="badges">
                 {#if n.state !== 'open'}<span class="badge s-{n.state}">{@html icons[n.state]}{stateInfo[n.state].label}</span>{/if}
                 {#if n.counts.fires}<span class="badge o-fire" title="Data-loss / urgent bugs">{@html icons.fire}{n.counts.fires}</span>{/if}
@@ -239,13 +278,15 @@
     <div class="legend" class:open={legendOpen}>
       <button class="key" onclick={() => (legendOpen = !legendOpen)} aria-expanded={legendOpen}>Key</button>
       <ul aria-label="Key">
-        {#each states as s}
-          <li class="badge s-{s}">{@html icons[s]}{stateInfo[s].label}</li>
+        <li class="lead">{nodes.length - (town.nodes.unsorted ? 1 : 0)} features</li>
+        {#each [...states].reverse() as s}
+          <li class="badge s-{s}">{@html icons[s]}<b>{total.states[s]}</b>{stateInfo[s].label}</li>
         {/each}
-        <li class="badge o-fire">{@html icons.fire}Data-loss / urgent bugs</li>
-        <li class="badge o-broken">{@html icons.broken}Bugs</li>
-        <li class="badge o-working">{@html icons.working}Being worked on</li>
-        <li class="badge o-items">{@html uiIcons.items}Open items</li>
+        <li class="lead">Open work</li>
+        <li class="badge o-fire">{@html icons.fire}<b>{total.fires}</b>Data-loss / urgent bugs</li>
+        <li class="badge o-broken">{@html icons.broken}<b>{total.bugs}</b>Bugs</li>
+        <li class="badge o-working">{@html icons.working}<b>{total.active}</b>Being worked on</li>
+        <li class="badge o-items">{@html uiIcons.items}<b>{total.open}</b>Open items</li>
       </ul>
     </div>
   {/if}

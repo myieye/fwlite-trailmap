@@ -133,10 +133,45 @@ button {
   color: #fff;
 }
 
-.dot.fire {
-  height: 20px;
-  padding: 0 6px 0 4px;
-  background: #d8401c;
+.spot {
+  translate: calc(var(--head) / -2 - 3px) -50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.spot.l {
+  flex-direction: row-reverse;
+  translate: calc(-100% + var(--head) / 2 + 3px) -50%;
+}
+
+.spot .head {
+  display: flex;
+  justify-content: center;
+  min-width: var(--head);
+}
+
+.spot .name {
+  font-weight: 650;
+  font-size: 0.78rem;
+}
+
+.spot.r .name:last-child {
+  padding-right: 7px;
+}
+
+.spot.l .name:last-child {
+  padding-left: 7px;
+}
+
+.spot.active {
+  background: var(--ink);
+  color: var(--card);
 }
 
 .dot.active {
@@ -259,6 +294,45 @@ button {
 
 .tag.active .s-planned {
   background: #ffffffdd;
+}
+
+.tag.active .o-items {
+  color: inherit;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.tag .ok {
+  display: inline-grid;
+  place-items: center;
+  width: 13px;
+  height: 13px;
+  margin-right: 4px;
+  border-radius: 999px;
+  vertical-align: -1px;
+  background: var(--forest);
+  color: #fff;
+}
+
+.tag .ok svg {
+  width: 9px;
+  height: 9px;
+  stroke-width: 2.4;
+}
+
+.badge b {
+  font-weight: 800;
+}
+
+.legend .lead {
+  align-self: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.legend .lead:not(:first-child) {
+  margin-left: 8px;
 }
 
 .title {
@@ -671,6 +745,9 @@ a svg {
   }
   .key {
     display: block;
+  }
+  .legend:not(.open) .lead {
+    display: none;
   }
   .legend:not(.open) ul {
     flex-wrap: nowrap;

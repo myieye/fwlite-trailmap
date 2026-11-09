@@ -395,9 +395,9 @@ export function fire(group: THREE.Group, x: number, y: number, z: number, size =
     glow.material.opacity = 0.45 + 0.1 * Math.sin(t * 7)
     for (const p of smoke) {
       const u = (t * 0.16 + p.ph) % 1
-      p.s.position.set(Math.sin(u * 5 + p.ph * 9) * 0.15 + u * 0.9, 0.35 + u * 4.2, -u * 0.4)
-      p.s.scale.setScalar(0.35 + u * 1.9)
-      p.s.material.opacity = Math.min(1, u * 6) * (1 - u) * 0.75
+      p.s.position.set(Math.sin(u * 5 + p.ph * 9) * 0.12 + u * 0.5, 0.35 + u * 2.3, -u * 0.25)
+      p.s.scale.setScalar(0.3 + u * 1.0)
+      p.s.material.opacity = Math.min(1, u * 6) * (1 - u) * 0.5
     }
   }
   tick(0)

@@ -14,9 +14,9 @@ A full-screen map that shows a product as a small town: each feature, platform o
   | Planned | Signposted empty lot | In config, nothing done yet |
   | Under construction | Scaffold, fence | Counted from issues and PRs |
   | Beta | Finished, ribbon across the door: usable, not ready for the public | Declared in config with a date and a link |
-  | Open | Lit and alive | Declared in config with a release link |
+  | Released | Lit and alive | Declared in config with a release link |
 
-- **Overlays** (stack on any building): broken window = open `bug`; fire = open `Data bug` or `High Priority`; hard hats = someone is working on it ("improving" when the building is open). Each has a count badge. The badge carries the facts; the 3D is mood.
+- **Overlays** (stack on any building): broken window = open `bug`; fire = open `Data bug` or `High Priority`; hard hats = someone is working on it ("improving" when the building is released). Each has a count badge. The badge carries the facts; the 3D is mood.
 - **Honesty:** progress is counted, never estimated. No half-built towers, no dates except a declared `since`.
 - **On the FW Lite map:** user-facing features, platforms (Windows, Mac, Linux, Android, iOS, Paratext), Harmony, local storage, Lexbox with sign-in, FwHeadless (first class: it's a feature we ship), FieldWorks Classic as the old town across the river. Docs and translation are secondary buildings. Not on the map: CI, hgweb.
 - **History:** record a dated snapshot every sync from now on, so playback is possible later. GitHub doesn't keep history for labels, milestones or assignees.

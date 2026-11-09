@@ -8,7 +8,7 @@ export const icons = {
   open: svg('<path d="m3.5 8.4 2.9 2.9 6.1-6.6"/>'),
   broken: svg('<rect x="2.5" y="2.5" width="11" height="11" rx="1.5"/><path d="M8 2.5 6.6 6.4l2.6 1.8-1.6 5.3"/>'),
   fire: `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8.4 1c.3 2.4 3.9 3.9 3.9 8a4.3 4.3 0 0 1-8.6 0c0-2 1.1-3.3 2-4 .1 1.3.7 2.2 1.5 2.5C6.8 5.3 7.3 2.8 8.4 1Z"/></svg>`,
-  working: svg('<path d="M2.5 11.5h11M3.5 11.5a4.5 4.5 0 0 1 9 0"/><path d="M8 4.5V7"/>'),
+  working: svg('<path d="m6.2 6.6-4 4a1.4 1.4 0 0 0 2 2l4-4"/><path d="m7 3.6 1.6-1.6 5.4 5.4-1.6 1.6-1.4-1.4-1.2 1.2-2.6-2.6 1.2-1.2z"/>'),
 }
 
 export const uiIcons = {
