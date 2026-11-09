@@ -17,6 +17,7 @@
   const districtName = Object.fromEntries(town.districts.map((d) => [d.id, d.name]))
   const districtSize = Object.fromEntries(town.districts.map((d) => [d.id, d.nodes.length]))
   const total = totals(nodes)
+  const focus = nodes.filter((n) => n.counts.fires || n.state !== 'open').map((n) => n.id)
 
   let world = $state.raw<World>()
   let error = $state('')
@@ -40,7 +41,7 @@
 
   type Box = [number, number, number, number]
   type Label =
-    | { kind: 'district'; id: string; x: number; y: number }
+    | { kind: 'district'; id: string; x: number; y: number; small: boolean }
     | { kind: 'dot'; id: string; x: number; y: number; n: TownNode }
     | { kind: 'spot'; id: string; x: number; y: number; n: TownNode; head: number; side?: 'l' | 'r'; state: boolean }
     | { kind: 'tag'; id: string; x: number; y: number; dx: number; n: TownNode }
@@ -55,23 +56,13 @@
     }
     const onNodes = view.points.filter((p) => p.on && town.nodes[p.id])
     if (!near) {
-      // Fire counts claim their spot first, then districts; names and states fill what's left.
+      // Buildings that need attention claim space before district names, which nudge aside or drop.
       const spots: Extract<Label, { kind: 'spot' }>[] = []
       const fires = onNodes.filter((p) => town.nodes[p.id].counts.fires).sort((a, b) => town.nodes[b.id].counts.fires - town.nodes[a.id].counts.fires)
       for (const p of fires) {
         const n = town.nodes[p.id]
         const head = 30 + String(n.counts.fires).length * 7
         if (fits([p.x - head / 2, p.y - 12, p.x + head / 2, p.y + 12]) || selectedId === n.id) spots.push({ kind: 'spot', id: n.id, x: p.x, y: p.y, n, head, state: false })
-      }
-      const ds = view.points
-        .filter((p) => p.on && p.id.startsWith('d:'))
-        .sort((a, b) => (districtSize[b.id.slice(2)] ?? 0) - (districtSize[a.id.slice(2)] ?? 0))
-      for (const p of ds) {
-        const id = p.id.slice(2)
-        const bw = (districtName[id] ?? id).length * (w < 700 ? 7.7 : 8.6) + 30
-        const spots = [[0, 0], [0, -30], [0, 30], [bw / 3, -24], [-bw / 3, -24], [bw / 3, 24], [-bw / 3, 24]]
-        const at = spots.find(([dx, dy]) => fits([p.x + dx - bw / 2, p.y + dy - 17, p.x + dx + bw / 2, p.y + dy + 17]))
-        if (at) out.push({ kind: 'district', id, x: p.x + at[0], y: p.y + at[1] })
       }
       const name = (s: (typeof spots)[number], extra: number) => {
         const nw = s.n.name.length * 6.9 + 12 + extra
@@ -93,9 +84,23 @@
         const [l, r] = [p.x - head / 2, p.x + head / 2]
         // A state with no name beside it is a guessing game, so it's both or neither.
         for (const y of [p.y, p.y - 26, p.y + 26]) {
-          const side = r + nw < w - 4 && fits([l, y - 12, r + nw, y + 12]) ? 'r' : l - nw > 4 && fits([l - nw, y - 12, r, y + 12]) ? 'l' : undefined
+          const side = l > 4 && r + nw < w - 4 && fits([l, y - 12, r + nw, y + 12]) ? 'r' : r < w - 4 && l - nw > 4 && fits([l - nw, y - 12, r, y + 12]) ? 'l' : undefined
           if (!side) continue
           spots.push({ kind: 'spot', id: n.id, x: p.x, y, n, head, side, state: true })
+          break
+        }
+      }
+      const ds = view.points
+        .filter((p) => p.on && p.id.startsWith('d:'))
+        .sort((a, b) => (districtSize[b.id.slice(2)] ?? 0) - (districtSize[a.id.slice(2)] ?? 0))
+      for (const p of ds) {
+        const id = p.id.slice(2)
+        const len = (districtName[id] ?? id).length
+        for (const [bw, bh] of [[len * (w < 700 ? 7.7 : 8.6) + 30, 17], [len * 6.7 + 22, 12]]) {
+          const offsets = [[0, 0], [0, -30], [0, 30], [bw / 3, -24], [-bw / 3, -24], [bw / 3, 24], [-bw / 3, 24], [bw / 2, 0], [-bw / 2, 0], [0, -52], [0, 52], [bw / 2, -24], [-bw / 2, -24], [bw / 2, 24], [-bw / 2, 24]]
+          const at = offsets.find(([dx, dy]) => p.x + dx - bw / 2 > 4 && p.x + dx + bw / 2 < w - 4 && fits([p.x + dx - bw / 2, p.y + dy - bh, p.x + dx + bw / 2, p.y + dy + bh]))
+          if (!at) continue
+          out.push({ kind: 'district', id, x: p.x + at[0], y: p.y + at[1], small: bh < 17 })
           break
         }
       }
@@ -130,6 +135,12 @@
       const r = el.getBoundingClientRect()
       return [r.left - 4, r.top - 4, r.right + 4, r.bottom + 4]
     })
+  }
+
+  function insets() {
+    const top = document.querySelector('.title')?.getBoundingClientRect().bottom ?? 0
+    const key = document.querySelector('.legend')?.getBoundingClientRect().top
+    return { top, bottom: key ? innerHeight - key : 0 }
   }
 
   function readHash() {
@@ -189,7 +200,7 @@
   <div class="stage" role="img" aria-label="Map of {town.districts.filter((d) => d.nodes.length).length} districts and {summary(nodes)} Use the list view to read it as text.">
     {#if world}
       <Canvas renderMode="on-demand" dpr={[1, 2]} toneMapping={NeutralToneMapping} shadows={PCFShadowMap}>
-        <Scene bind:this={scene} {world} onview={(v) => (view = v)} onpick={pick} />
+        <Scene bind:this={scene} {world} onview={(v) => (view = v)} onpick={pick} {focus} {insets} />
       </Canvas>
     {:else}
       <p class="loading">{error || 'Building the town…'}</p>
@@ -200,7 +211,7 @@
     <div class="labels">
       {#each labels as l (l.kind + l.id)}
         {#if l.kind === 'district'}
-          <button class="district" style="transform: translate({l.x}px, {l.y}px)" onclick={() => zoomDistrict(l.id)}>
+          <button class="district" class:small={l.small} style="transform: translate({l.x}px, {l.y}px)" onclick={() => zoomDistrict(l.id)}>
             {districtName[l.id] ?? l.id}
           </button>
         {:else if l.kind === 'dot'}
@@ -283,10 +294,10 @@
           <li class="badge s-{s}">{@html icons[s]}<b>{total.states[s]}</b>{stateInfo[s].label}</li>
         {/each}
         <li class="lead">Open work</li>
-        <li class="badge o-fire">{@html icons.fire}<b>{total.fires}</b>Data-loss / urgent bugs</li>
-        <li class="badge o-broken">{@html icons.broken}<b>{total.bugs}</b>Bugs</li>
-        <li class="badge o-working">{@html icons.working}<b>{total.active}</b>Being worked on</li>
-        <li class="badge o-items">{@html uiIcons.items}<b>{total.open}</b>Open items</li>
+        <li class="badge o-fire">{@html icons.fire}<b>{total.fires}</b><span class="long">Data-loss / urgent bugs</span><span class="short">Urgent bugs</span></li>
+        <li class="badge o-broken more">{@html icons.broken}<b>{total.bugs}</b>Bugs</li>
+        <li class="badge o-working more">{@html icons.working}<b>{total.active}</b>Being worked on</li>
+        <li class="badge o-items more">{@html uiIcons.items}<b>{total.open}</b>Open items</li>
       </ul>
     </div>
   {/if}

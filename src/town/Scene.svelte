@@ -8,16 +8,20 @@
     world: worldProp,
     onview,
     onpick,
+    focus,
+    insets,
   }: {
     world: World
     onview: (v: View) => void
     onpick: (id: string | null) => void
+    focus: string[]
+    insets: () => { top: number; bottom: number }
   } = $props()
 
   const world = untrack(() => worldProp)
   const { renderer, invalidate, dom, size } = useThrelte()
   const AZ = (38 * Math.PI) / 180
-  const EL = ((innerHeight > innerWidth ? 46 : 34) * Math.PI) / 180
+  const EL = ((innerHeight > innerWidth ? 62 : 34) * Math.PI) / 180
   const dir = new THREE.Vector3(Math.sin(AZ) * Math.cos(EL), Math.sin(EL), Math.cos(AZ) * Math.cos(EL))
 
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 400)
@@ -96,13 +100,35 @@
     const b = world.box
     const ext = new THREE.Box3()
     for (const x of [b.min.x, b.max.x]) for (const y of [b.min.y, b.max.y]) for (const z of [b.min.z, b.max.z]) ext.expandByPoint(v.set(x, y, z).applyMatrix4(inv))
+    const { top, bottom } = insets()
+    const room = Math.max(height * 0.5, height - top - bottom)
     const portrait = height > width
-    minZoom = Math.min((width * (portrait ? 1.02 : 0.9)) / (ext.max.x - ext.min.x), (height * 0.86) / (ext.max.y - ext.min.y))
+    minZoom = Math.min((width * (portrait ? 1.02 : 0.9)) / (ext.max.x - ext.min.x), Math.min(height * 0.86, room * 1.04) / (ext.max.y - ext.min.y))
     maxZoom = Math.max(minZoom * 6, 140)
-    const c = new THREE.Vector3((ext.min.x + ext.max.x) / 2, (ext.min.y + ext.max.y) / 2, 0).applyMatrix4(camera.matrixWorld)
+    homeZoom = minZoom
+    let cx = (ext.min.x + ext.max.x) / 2
+    let cy = (ext.min.y + ext.max.y) / 2
+    if (portrait || height < 500) {
+      // Fit the buildings worth labelling rather than the island: on a phone the whole island is too small to read.
+      const f = new THREE.Box3()
+      for (const id of focus) {
+        const p = world.anchors.get(id)
+        if (p) f.expandByPoint(v.copy(p).applyMatrix4(inv))
+      }
+      if (!f.isEmpty()) {
+        const fw = Math.max(f.max.x - f.min.x, 1)
+        const fh = Math.max(f.max.y - f.min.y, 1)
+        homeZoom = Math.min(Math.max(minZoom, Math.min((width - 40) / fw, (room * 0.85 - 30) / fh)), minZoom * 2.4)
+        cx = (f.min.x + f.max.x) / 2
+        if (!portrait) cy = (f.min.y + f.max.y) / 2
+      }
+    }
+    cy -= (height / 2 - (top + room / 2)) / homeZoom
+    const c = new THREE.Vector3(cx, cy, 0).applyMatrix4(camera.matrixWorld)
     home.copy(c).addScaledVector(dir, -c.y / dir.y)
   }
 
+  let homeZoom = 1
   const home = new THREE.Vector3()
 
   /** Moves a node out from under the sheet or panel; `close` also zooms in to building level. */
@@ -143,15 +169,11 @@
   $effect(() => {
     const s = $size
     if (!s.width) return
-    const wasMin = !fitted
+    const first = !fitted
     fit()
-    const portrait = s.height > s.width
-    if (wasMin) {
-      zoom = portrait ? minZoom * 1.8 : minZoom
-      if (portrait) {
-        const c = [...world.anchors.values()].reduce((a, p) => a.add(p), new THREE.Vector3()).divideScalar(world.anchors.size || 1)
-        target.set(c.x, 0, c.z)
-      } else target.copy(home)
+    if (first) {
+      zoom = homeZoom
+      target.copy(home)
     }
     fitted = true
     apply()
@@ -171,8 +193,9 @@
   }
 
   export function fitAll() {
+    fit()
     target.copy(home)
-    zoom = minZoom
+    zoom = homeZoom
     apply()
   }
 

@@ -16,6 +16,7 @@
   let snap = $state<'half' | 'full'>('half')
   let drag = $state(0)
   let start = $state<number | null>(null)
+  let trail: [number, number][] = []
   $effect(() => {
     full = snap === 'full'
   })
@@ -33,18 +34,26 @@
   function down(e: PointerEvent) {
     if (!matchMedia('(max-width: 700px)').matches) return
     start = e.clientY
+    trail = [[e.timeStamp, e.clientY]]
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
   }
   function move(e: PointerEvent) {
-    if (start !== null) drag = e.clientY - start
-  }
-  function up() {
     if (start === null) return
-    if (drag < -50) snap = 'full'
-    else if (drag > 60) {
+    drag = e.clientY - start
+    trail = [...trail.filter(([t]) => e.timeStamp - t < 100), [e.timeStamp, e.clientY]]
+  }
+  function up(e: PointerEvent) {
+    if (start === null) return
+    const [t0, y0] = trail[0]
+    const [t1, y1] = trail[trail.length - 1]
+    // Where the sheet would have coasted to in 150ms; a finger that stopped before lifting has no speed.
+    const fling = drag + (t1 > t0 && e.timeStamp - t1 < 80 ? ((y1 - y0) / (t1 - t0)) * 150 : 0)
+    if (Math.abs(drag) < 4) snap = snap === 'half' ? 'full' : 'half'
+    else if (fling < -50) snap = 'full'
+    else if (fling > 60) {
       if (snap === 'full') snap = 'half'
       else onclose()
-    } else if (Math.abs(drag) < 4) snap = snap === 'half' ? 'full' : 'half'
+    }
     start = null
     drag = 0
   }
