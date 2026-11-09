@@ -2345,13 +2345,28 @@
   "area": "backstage"
  },
  "lexbox#2951": {
-  "title": "Screen readers announce the dialog backdrop button as \"Close\"",
-  "for": "Label the modal backdrop close button \"Close\"",
+  "title": "Screen readers no longer announce a hidden dialog button",
+  "for": "Hide the modal backdrop button from assistive tech",
   "area": "fix"
  },
  "lexbox#2952": {
   "title": "Sort project tables by clicking column headers",
   "for": "Sort project tables by clicking column headers",
   "area": "feature"
+ },
+ "lexbox#2960": {
+  "title": "Syncing a project already being synced now says to try again",
+  "for": "Refuse a sync request while that project is already syncing",
+  "area": "data"
+ },
+ "lexbox#2961": {
+  "title": "Admins can create a FieldWorks project with a ready-made repo",
+  "for": "Add an admin API to create a FLEx project with a populated repo",
+  "area": "feature"
+ },
+ "lexbox#2959": {
+  "title": "New FieldWorks projects can start with several writing systems",
+  "for": "Let a new FLEx project start with several writing systems of each type",
+  "area": "backstage"
  }
 }
