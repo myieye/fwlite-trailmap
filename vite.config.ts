@@ -14,23 +14,33 @@ const yaml: Plugin = {
 
 // Leaves out synced data the page never reads, so phones download and parse less.
 const omit = (o: Record<string, unknown>, keys: string[]) => Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k)))
+// The dev server serves both pages from one module, so it keeps everything; only builds split by page.
+let serving = false
 const trimData: Plugin = {
   name: 'trim-data',
   enforce: 'pre',
+  configResolved(config) {
+    serving = config.command === 'serve'
+  },
   transform(code, id) {
+    if (serving) return
     if (id.endsWith('/src/data/snapshot.json')) {
       const s = JSON.parse(code)
+      const town = Boolean(process.env.TOWN_ONLY)
       s.items = Object.fromEntries(
-        Object.entries(s.items).map(([k, v]) => [k, omit(v as Record<string, unknown>, ['updatedAt', 'comments', 'reactions', 'milestone'])]),
+        Object.entries(s.items as Record<string, Record<string, unknown>>)
+          .filter(([, v]) => town || !v.townOnly)
+          .map(([k, v]) => [k, omit(v, ['updatedAt', 'comments', 'reactions', 'milestone', 'townOnly'])]),
       )
+      if (town) return { code: JSON.stringify(omit(s, ['forum', 'releases', 'summit'])), map: null }
       s.forum = s.forum.map((t: Record<string, unknown>) => omit(t, ['views', 'lastActivityAt']))
       s.releases = s.releases.map((r: Record<string, unknown>) => omit(r, ['tag', 'name', 'prerelease']))
-      return { code: JSON.stringify(s), map: null }
+      return { code: JSON.stringify(omit(s, ['town'])), map: null }
     }
     if (id.endsWith('/content/plain-words.json')) {
       const { items } = JSON.parse(readFileSync(new URL('./src/data/snapshot.json', import.meta.url), 'utf8'))
       const plain = Object.entries(JSON.parse(code) as Record<string, { title: string; area?: string }>)
-        .filter(([k]) => items[k])
+        .filter(([k]) => items[k] && (process.env.TOWN_ONLY || !items[k].townOnly))
         .map(([k, { title, area }]) => [k, { title, area }])
       return { code: JSON.stringify(Object.fromEntries(plain)), map: null }
     }

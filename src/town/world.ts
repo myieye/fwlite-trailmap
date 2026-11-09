@@ -2,12 +2,12 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
-import type { Building, DistrictId } from './data'
 
 export interface World {
   root: THREE.Group
+  /** Label point above each node's building. */
   anchors: Map<string, THREE.Vector3>
-  districtAnchors: Record<DistrictId, THREE.Vector3>
+  districtAnchors: Map<string, THREE.Vector3>
   /** Ellipse the camera target stays inside. */
   bounds: { cx: number; cz: number; rx: number; rz: number }
   radius: number
@@ -16,8 +16,10 @@ export interface World {
   focusZoom: number
   /** What the default view frames. */
   box: THREE.Box3
-  animated: { pos: THREE.Vector3; tick: (t: number) => void }[]
+  animated: Animated[]
 }
+
+export type Animated = { pos: THREE.Vector3; tick: (t: number) => void }
 
 export type Projected = { id: string; x: number; y: number; on: boolean }
 export type View = { zoom: number; minZoom: number; points: Projected[] }
@@ -379,10 +381,10 @@ export function fire(group: THREE.Group, x: number, y: number, z: number, size =
   glow.position.y = 0.2
   g.add(glow)
   const smoke: { s: THREE.Sprite; ph: number }[] = []
-  for (let i = 0; i < 9; i++) {
-    const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: puffTexture(), color: '#6f7482', transparent: true, depthWrite: false }))
+  for (let i = 0; i < 12; i++) {
+    const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: puffTexture(), color: '#5d6270', transparent: true, depthWrite: false }))
     g.add(s)
-    smoke.push({ s, ph: i / 9 })
+    smoke.push({ s, ph: i / 12 })
   }
   const tick = (t: number) => {
     for (const f of flames) {
@@ -392,10 +394,10 @@ export function fire(group: THREE.Group, x: number, y: number, z: number, size =
     }
     glow.material.opacity = 0.45 + 0.1 * Math.sin(t * 7)
     for (const p of smoke) {
-      const u = (t * 0.22 + p.ph) % 1
-      p.s.position.set(Math.sin(u * 5 + p.ph * 9) * 0.12 + u * 0.5, 0.35 + u * 2.4, -u * 0.25)
-      p.s.scale.setScalar(0.3 + u * 1.1)
-      p.s.material.opacity = Math.min(1, u * 6) * (1 - u) * 0.7
+      const u = (t * 0.16 + p.ph) % 1
+      p.s.position.set(Math.sin(u * 5 + p.ph * 9) * 0.15 + u * 0.9, 0.35 + u * 4.2, -u * 0.4)
+      p.s.scale.setScalar(0.35 + u * 1.9)
+      p.s.material.opacity = Math.min(1, u * 6) * (1 - u) * 0.75
     }
   }
   tick(0)
@@ -414,4 +416,3 @@ export function dashedBox(group: THREE.Group, x: number, y: number, z: number, w
   group.add(line)
 }
 
-export type BuildingSpot = { b: Building; x: number; z: number; rot: number; top: number }

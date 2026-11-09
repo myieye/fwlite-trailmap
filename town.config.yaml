@@ -1,0 +1,318 @@
+# Town config: the buildings on the town page (/town/) and which GitHub issues and PRs land on each.
+# Repos and people come from trailmap.config.yaml. Refs are "<repo key>#<number>".
+#
+# Each node has exactly one state:
+#   planned  nothing usable yet, nobody building it
+#   building being built, not usable yet
+#   beta     usable, but not ready for everyone
+#   open     released to everyone
+# `since` and `evidence` only when a release, store listing, doc page or merged PR backs them. No guesses.
+#
+# Attaching items, first tier that matches wins (an item lands on every node that matches in that tier):
+#   issues   pins, beat every rule below; a pinned item can sit on several nodes
+#   repos    every item from that repo
+#   (a PR goes where the issues it closes go)
+#   epics    the epic and its GitHub sub-issues
+#   labels   exact label names
+#   titles   case-insensitive regexes on the GitHub title
+# Open items that match nothing land in "Still to sort".
+# Run `npm run town:report` after editing to see the counts and what landed in "Still to sort".
+
+# Which items the town shows: everything open or recently done in these repos...
+include:
+  repos: [harmony]
+  # ...and lexbox items with one of these labels. Other lexbox items (mostly the Lexbox website and admin tools)
+  # only show when a node's rules claim them.
+  labels: ['💻 FW Lite', '🔩 FW Lite Core', '📖 MiniLcm', '📙 Platform.Bible']
+
+# Not on the map: CI, tests and dev tooling (decided in docs/town/VISION.md). Pins override this.
+skip:
+  # Lexbox website and admin work that a title pattern catches by accident.
+  issues: [lexbox#2336, lexbox#2225, lexbox#57, lexbox#277, lexbox#2657, lexbox#629, lexbox#2414, lexbox#259, lexbox#1137,
+    lexbox#841, lexbox#2864, lexbox#2862, lexbox#1094, lexbox#1095]
+  labels: ['🧑‍💻 DX', testing, dependencies, Code Debt, OpenTelemetry]
+  titles:
+    - '\bCI\b'
+    - '\be2e\b'
+    - 'playwright'
+    - 'flak(e|y)'
+    - 'prettier'
+    - '\btests?\b'
+    - '\bAGENTS\.md'
+    - 'steering'
+    - 'mixpanel|analytics'
+    - '\.NET \d+'
+    - '\b(workflow|runner)s?\b'
+    - 'opentelemetry|\botel\b'
+    - 'housekeeping'
+    - '\bbump\b|\bpnpm\b|vitest'
+
+districts:
+  - id: editing
+    name: Dictionary editing
+    blurb: Where people write, find and fix dictionary entries.
+    nodes:
+      - id: entry-editor
+        name: Entry editor
+        blurb: Write and fix entries, senses, definitions and example sentences.
+        state: open
+        issues: [lexbox#1284, lexbox#2480, lexbox#1633, lexbox#1050]
+        evidence: https://docs.lexbox.org/fw-lite/faq#what-can-i-work-on-in-fieldworks-lite
+        epics: [lexbox#1845]
+        titles:
+          - 'entry editor|\beditor\b'
+          - '\bsenses?\b'
+          - 'example sentence|\bexamples?\b'
+          - 'headword|citation form|lexeme form'
+          - 'morph.?type|allomorph|homograph|variant'
+          - '\b(create|update)entry\b|\bentry mapping\b'
+      - id: browse-search
+        name: Browse & search
+        blurb: Scroll the entry list, search it and filter it.
+        state: open
+        issues: [lexbox#2659, lexbox#2002, lexbox#1396]
+        evidence: https://docs.lexbox.org/fw-lite/getting-started
+        titles:
+          - '\bsearch\b'
+          - '\bfilter(s|ing|ed)?\b'
+          - 'entry list|\bbrowse\b'
+      - id: complex-forms
+        name: Complex forms
+        blurb: Link compound words and phrases to the entries they're built from.
+        state: open
+        issues: [lexbox#2742]
+        titles:
+          - 'complex.?forms?|\bcomponents?\b'
+      - id: history
+        name: Edit history
+        blurb: See who changed what, and when.
+        state: open
+        issues: [lexbox#1369, lexbox#1862, lexbox#1691]
+        titles:
+          - '\bhistory\b|\bactivity\b'
+      - id: media
+        name: Pictures & audio
+        blurb: Add pictures and sound recordings to entries and senses.
+        state: open
+        issues: [lexbox#2865, lexbox#2607]
+        evidence: https://docs.lexbox.org/fw-lite/faq#what-can-i-work-on-in-fieldworks-lite
+        epics: [lexbox#1764, lexbox#1023]
+        titles:
+          - '\bmedia\b|\bpictures?\b|\bimages?\b|\baudio\b|recording|\brecorder\b|camera|\bphotos?\b|LinkedFiles'
+      - id: custom-fields
+        name: Custom fields
+        blurb: Show and edit the extra fields a FieldWorks project defines for itself.
+        state: planned
+        epics: [lexbox#1302]
+        titles:
+          - 'custom fields?'
+      - id: plugins
+        name: Plugins
+        blurb: Add small tools to a project that read and edit its entries.
+        state: building
+        epics: [lexbox#2930]
+        titles:
+          - '\bplugins?\b'
+
+  - id: collaboration
+    name: Collaboration
+    blurb: Working on a dictionary as a team.
+    nodes:
+      - id: comments
+        name: Comments
+        blurb: Leave comments on entries and reply to teammates.
+        state: open
+        since: 2026-09
+        # "Enable comments in production" (#2640) is in this release.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2026-09-28-553eb3f8
+        epics: [lexbox#1765]
+        titles:
+          - '\bcomments?\b|commenter|mark as read'
+      - id: tasks
+        name: Tasks & review
+        blurb: Work through one kind of job across many entries, like picking semantic domains.
+        state: open
+        # "Redesign the tasks view" (#2642) is in this release.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2026-09-28-553eb3f8
+        epics: [lexbox#1763]
+        titles:
+          - '\btasks? (view|list)\b'
+
+  - id: project-setup
+    name: Project setup
+    blurb: The settings and lists a dictionary is built on.
+    nodes:
+      - id: writing-systems
+        name: Writing systems & sorting
+        blurb: The languages and scripts a project uses, and the order entries sort in.
+        state: open
+        issues: [lexbox#2229]
+        epics: [lexbox#1289]
+        titles:
+          - 'writing systems?|\bWS\b|\bWS.?s\b'
+          - '\bsort(s|ing|ed)?\b|collation|\bICU\b'
+      - id: lists
+        name: Lists
+        blurb: Parts of speech, semantic domains, publications and the other lists entries pick from.
+        state: open
+        issues: [lexbox#1396]
+        titles:
+          - 'semantic domains?|parts? of speech|\bPOS\b|publications?|publish ?in|option lists?|possibility'
+      - id: keyboards
+        name: Keyman keyboards
+        blurb: Type in any language with a Keyman keyboard inside the app.
+        state: planned
+        epics: [lexbox#1336]
+        titles:
+          - 'keyman|keyboards?'
+
+  - id: platforms
+    name: Platforms
+    blurb: The devices FW Lite runs on.
+    nodes:
+      - id: windows
+        name: Windows
+        blurb: Install FW Lite on a Windows computer.
+        state: open
+        since: 2025-01
+        # First release with the MAUI app's Windows installer.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2025-01-15-68e81195
+        titles:
+          - '\bwindows\b|\bmsix\b'
+      - id: mac
+        name: Mac
+        blurb: An early-tester Mac version. It doesn't update itself yet.
+        state: beta
+        issues: [lexbox#2678]
+        since: 2026-09
+        # First release with FieldWorksLite.dmg.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2026-09-28-553eb3f8
+        titles:
+          - '\bmac\b|macos|catalyst|\bdmg\b|velopack|\bapple\b'
+      - id: linux
+        name: Linux
+        blurb: Run FW Lite on a Linux computer.
+        state: open
+        since: 2025-01
+        # First release with fw-lite-web-linux.zip.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2025-01-15-68e81195
+        titles:
+          - '\blinux\b|electron'
+      - id: android
+        name: Android
+        blurb: Install FW Lite on an Android phone or tablet from Google Play.
+        state: open
+        issues: [lexbox#1485]
+        since: 2025-01
+        # First release with the signed Android app.
+        evidence: https://github.com/sillsdev/languageforge-lexbox/releases/tag/v2025-01-23-9cdd4d81
+        titles:
+          - '\bandroid\b|play store|google play'
+      - id: ios
+        name: iPhone & iPad
+        blurb: FW Lite on iPhone and iPad. Builds run in a simulator so far; there's no store version.
+        state: building
+        issues: [lexbox#2678]
+        titles:
+          - '\bios\b|iphone|ipad|\bapple\b'
+      - id: paratext
+        name: Paratext extension
+        blurb: Look up and add dictionary entries from inside Paratext 10 (Platform.Bible).
+        state: building
+        issues: [lexbox#2941, lexbox#2647]
+        labels: ['📙 Platform.Bible']
+        titles:
+          - 'platform\.?bible|paratext|\bPT ?10\b|\bPB\b|lexicon (selector|webview)|interlinear'
+
+  - id: sync
+    name: Sync & server
+    blurb: How work gets from one device to the team, and to FieldWorks Classic.
+    nodes:
+      - id: harmony
+        name: Harmony sync
+        blurb: The sync engine that merges everyone's edits without losing any.
+        state: open
+        issues: [lexbox#2625, lexbox#1949, lexbox#2775, lexbox#2947]
+        repos: [harmony]
+        titles:
+          - '\bharmony\b|\bclientid\b|crdt commits?|\bsync gaps?\b|un-?pushed commits'
+          - 'opaque changes?|model versions?|regenerate snapshots|commits from newer|push listener'
+      - id: local-storage
+        name: Local storage
+        blurb: Keeps each project on the device so the app works offline.
+        state: open
+        issues: [lexbox#2662]
+        titles:
+          - 'uninstall|orphaned|data paths?|BaseDataDir|closing (the )?app|project files'
+      - id: lexbox
+        name: Lexbox server
+        blurb: The online service that stores each team's projects and syncs them.
+        state: open
+        issues: [lexbox#2758, lexbox#1938, lexbox#1838, lexbox#1041, lexbox#1052, lexbox#2665, lexbox#2365, lexbox#2607, lexbox#1691]
+        evidence: https://lexbox.org
+        titles:
+          - '\blexbox\b'
+          - 'resumable|sync requests?|lexicon api|web api'
+      - id: sign-in
+        name: Sign-in
+        blurb: Log in with a Lexbox account, from the app or the website.
+        state: open
+        issues: [lexbox#1941, lexbox#1889]
+        titles:
+          - 'log(ging)? ?in|sign.?in|oauth|\bauth\b|password|\bjwt\b|msal|current user|accounts?\b'
+      - id: fw-sync
+        name: FieldWorks sync
+        blurb: Moves changes between FW Lite and FieldWorks Classic projects when someone presses Sync (FwHeadless).
+        state: open
+        issues: [lexbox#2869, lexbox#2229, lexbox#2506, lexbox#1313, lexbox#1766, lexbox#2195, lexbox#2439, lexbox#2961]
+        evidence: https://docs.lexbox.org/fw-lite/how-sync-works
+        titles:
+          - 'fw-?headless|fwdata|flex project|\bmerge\b'
+      - id: flex
+        name: FieldWorks Classic
+        blurb: The FieldWorks desktop program (FLEx). Its projects reach Lexbox through Send/Receive.
+        state: open
+        evidence: https://software.sil.org/fieldworks/
+        labels: [Send & Receive]
+        titles:
+          - '\bflex\b|fieldworks classic|send ?(&|and|/) ?receive|open in fieldworks'
+
+  - id: help
+    name: Help & translation
+    blurb: Help pages and the app in other languages.
+    nodes:
+      - id: help-docs
+        name: Help docs
+        blurb: User guides for FW Lite and Lexbox at docs.lexbox.org.
+        state: open
+        issues: [lexbox#2211, lexbox#1480, lexbox#1122]
+        since: 2026-11
+        # The docs site went up with #2790 (merged 2026-11-02).
+        evidence: https://docs.lexbox.org/fw-lite/
+        titles:
+          - '\bdocs\b|documentation|\bhelp\b|release notes|what.s new|instructions|explain'
+      - id: translation
+        name: App translation
+        blurb: The app's menus and buttons in other languages, translated on Crowdin.
+        state: open
+        titles:
+          - 'crowdin|locali[sz]|\bl10n\b|i18n|\blanguage picker\b|change language'
+
+unsorted:
+  name: Still to sort
+  blurb: Open work no building claims yet. Pin it in town.config.yaml.
+  district:
+    id: unsorted
+    name: Still to sort
+    blurb: Items waiting for a building.
+
+# Real dependencies. Every platform depends on Harmony, so those edges are left out.
+edges:
+  - [local-storage, harmony]
+  - [harmony, lexbox]
+  - [sign-in, lexbox]
+  - [lexbox, fw-sync]
+  - [fw-sync, flex]
+  - [media, lexbox]
+  - [comments, harmony]
+  - [paratext, local-storage]

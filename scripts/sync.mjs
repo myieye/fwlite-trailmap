@@ -5,9 +5,11 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { attacher, epicRefs, pinnedRefs, townFilter } from '../src/town/build.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const config = parse(await readFile(resolve(root, 'trailmap.config.yaml'), 'utf8'));
+const townConfig = parse(await readFile(resolve(root, 'town.config.yaml'), 'utf8'));
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
 const now = new Date();
 const since = new Date(now.getTime() - (config.activity?.days ?? 70) * 86400_000);
@@ -131,6 +133,7 @@ const configRefs = [
   ...(config.camps ?? []).flatMap((c) => c.issues ?? []),
   ...(config.river ?? []).flatMap((c) => c.issues ?? []),
   ...Object.values(config.forum?.links ?? {}).flat(),
+  ...pinnedRefs(townConfig),
 ];
 for (const ref of new Set(configRefs)) {
   if (items[ref]) continue;
@@ -139,7 +142,31 @@ for (const ref of new Set(configRefs)) {
   addItem(repoKey, await gh(`/repos/${repo.owner}/${repo.name}/issues/${n}`));
 }
 
-// 4. Forum feature requests and the GitHub issues they point at.
+// 4. The town: epic sub-issues, then every open item a building could show.
+// Items only the town needs are marked, so the trail map's build can leave them out.
+const townOnly = (key) => ((items[key].townOnly = true), key);
+const epics = {};
+for (const ref of epicRefs(townConfig)) {
+  const [repoKey, n] = parseRef(ref);
+  const repo = repoByKey[repoKey];
+  if (!items[ref]) townOnly(addItem(repoKey, await gh(`/repos/${repo.owner}/${repo.name}/issues/${n}`)));
+  epics[ref] = (await ghPages(`/repos/${repo.owner}/${repo.name}/issues/${n}/sub_issues`, 3)).map((raw) =>
+    items[`${repoKey}#${raw.number}`] ? `${repoKey}#${raw.number}` : townOnly(addItem(repoKey, raw)),
+  );
+}
+const { relevant } = townFilter(townConfig, attacher(townConfig, epics, items));
+let townOpen = 0;
+for (const repo of config.repos) {
+  for (const raw of await ghPages(`/repos/${repo.owner}/${repo.name}/issues?state=open`, 10)) {
+    const key = `${repo.key}#${raw.number}`;
+    if (items[key]) continue;
+    townOnly(addItem(repo.key, raw));
+    if (relevant(items[key])) townOpen++;
+    else delete items[key];
+  }
+}
+
+// 5. Forum feature requests and the GitHub issues they point at.
 const forum = [];
 if (config.forum) {
   const { base, categoryId, categorySlug } = config.forum;
@@ -190,11 +217,12 @@ const snapshot = {
   releases: releases.sort((a, b) => b.date.localeCompare(a.date)),
   forum,
   items,
+  town: { epics },
 };
 
 const out = resolve(root, 'src/data/snapshot.json');
 await mkdir(dirname(out), { recursive: true });
 await writeFile(out, JSON.stringify(snapshot, null, 1) + '\n');
 console.log(
-  `Wrote ${Object.keys(items).length} items, ${releases.length} releases, ${forum.length} forum topics (${requests} requests${token ? '' : ', no token'})`,
+  `Wrote ${Object.keys(items).length} items (${townOpen} more open for the town), ${releases.length} releases, ${forum.length} forum topics (${requests} requests${token ? '' : ', no token'})`,
 );

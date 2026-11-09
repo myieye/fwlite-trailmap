@@ -2368,5 +2368,55 @@
   "title": "New FieldWorks projects can start with several writing systems",
   "for": "Let a new FLEx project start with several writing systems of each type",
   "area": "backstage"
+ },
+ "lexbox#2868": {
+  "title": "Adding a translation can't block later edits to the entry",
+  "for": "Translations created without an id break every later UpdateEntry on the entry",
+  "area": "fix"
+ },
+ "lexbox#1435": {
+  "title": "A hidden citation form isn't used as the headword",
+  "for": "Citation form is used for headwords even when the citation form field is hidden",
+  "area": "fix"
+ },
+ "lexbox#1284": {
+  "title": "Headwords use the default writing system, not the first by name",
+  "for": "headword code should pick default ws, choses first alphabetically",
+  "area": "fix"
+ },
+ "lexbox#2625": {
+  "title": "Changes from a newer app version don't stop older apps syncing",
+  "for": "The target location specified by path segment 'Abbreviation' was not found.",
+  "area": "data"
+ },
+ "lexbox#2665": {
+  "title": "Clearer instructions for setting up a project on Lexbox",
+  "for": "Users confused about setup project instructions ",
+  "area": "fix"
+ },
+ "lexbox#2491": {
+  "title": "Shows the right user when a project is on two servers",
+  "for": "FW Lite shows the wrong current user when a project's GUID exists on more than one logged-in server",
+  "area": "fix"
+ },
+ "lexbox#1444": {
+  "title": "Login from FW Lite recovers if you cancel a Google sign-up",
+  "for": "logging in from fw lite breaks if you abort in the middle of google registration",
+  "area": "fix"
+ },
+ "lexbox#2512": {
+  "title": "FieldWorks sync can't leave a project half-saved",
+  "for": "[claude] Make fw-headless sync commit the CRDT and its merge base atomically",
+  "area": "data"
+ },
+ "lexbox#2506": {
+  "title": "Settings deleted in FieldWorks stay deleted after a sync",
+  "for": "FwHeadless never clears untracked files, so settings a user deleted come back on every sync",
+  "area": "data"
+ },
+ "lexbox#2869": {
+  "title": "FieldWorks sync works for projects without morph types",
+  "for": "FwHeadless merge throws NullReferenceException in MorphTypeSync when the snapshot has no morph types and the CRDT copy has none either",
+  "area": "fix"
  }
 }

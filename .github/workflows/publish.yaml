@@ -1,7 +1,8 @@
-# Sync GitHub and forum data, let Claude write plain titles for anything new, and deploy.
+# Sync GitHub and forum data, let Claude write plain titles for anything new, record the town's daily history, and deploy.
 # The model reads text anyone can write on GitHub, so it gets no tools, no repo and no GitHub token: text in, JSON out.
 # Each job holds only what it needs: `sync` and `build` run npm packages but hold no secret, `draft` has the Claude
-# token but runs no npm packages, `titles` can push to main but never sees the token and re-checks the model's output.
+# token but runs no npm packages, `commit` can push to main but never sees the token, runs no npm packages and
+# re-checks both the model's output and the history file before committing them.
 name: Sync and publish
 
 on:
@@ -40,6 +41,7 @@ jobs:
           cp src/data/snapshot.json "$RUNNER_TEMP/snapshot.json"
           node scripts/plain-todo.mjs > "$RUNNER_TEMP/todo.json"
           node scripts/plain-words/context.mjs "$RUNNER_TEMP/todo.json"
+          node scripts/town/history.mjs "$RUNNER_TEMP/history"
           echo "count=$(node -p 'Object.keys(require(process.argv[1])).length' "$RUNNER_TEMP/todo.json")" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -47,6 +49,7 @@ jobs:
           path: |
             ${{ runner.temp }}/todo.json
             ${{ runner.temp }}/snapshot.json
+            ${{ runner.temp }}/history/
           retention-days: 3
 
   draft:
@@ -109,8 +112,10 @@ jobs:
           path: ${{ runner.temp }}/draft.json
           retention-days: 3
 
-  titles:
-    needs: draft
+  # Runs even when there were no titles to draft, so the history still gets committed.
+  commit:
+    needs: [sync, draft]
+    if: ${{ !cancelled() && needs.sync.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -123,24 +128,28 @@ jobs:
         with:
           path: ${{ runner.temp }}
           merge-multiple: true
-      - run: node scripts/plain-words/apply.mjs "$RUNNER_TEMP/todo.json" "$RUNNER_TEMP/draft.json"
+      - if: needs.draft.result == 'success'
+        run: node scripts/plain-words/apply.mjs "$RUNNER_TEMP/todo.json" "$RUNNER_TEMP/draft.json"
+      - run: node scripts/town/history-check.mjs "$RUNNER_TEMP/history"
       # A push made with the workflow token doesn't trigger another run, so this can't loop.
       - name: Commit to main
         run: |
-          [ -z "$(git status --porcelain)" ] && exit 0
-          if [ "$(git status --porcelain)" != " M content/plain-words.json" ]; then
-            git status --porcelain
-            echo "Expected only content/plain-words.json to change" >&2
+          changes="$(git status --porcelain --untracked-files=all)"
+          [ -z "$changes" ] && exit 0
+          if echo "$changes" | grep -vqE '^( M content/plain-words\.json|( M|\?\?) history/[0-9]{4}-[0-9]{2}-[0-9]{2}\.json)$'; then
+            echo "$changes"
+            echo "Expected only content/plain-words.json and history/*.json to change" >&2
             exit 1
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -qam "Refresh plain words"
+          git add -A
+          git commit -qm "Refresh plain words and town history"
           git push -q origin HEAD:main
 
   # Deploys even when drafting titles failed (say, an expired token): the page then shows raw GitHub titles for new items.
   build:
-    needs: [sync, titles]
+    needs: [sync, commit]
     if: ${{ !cancelled() && needs.sync.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -168,7 +177,7 @@ jobs:
 
   deploy:
     needs: build
-    # Without this, a skipped `titles` job further up makes GitHub skip the deploy too.
+    # Without this, a skipped job further up makes GitHub skip the deploy too.
     if: ${{ !cancelled() && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10

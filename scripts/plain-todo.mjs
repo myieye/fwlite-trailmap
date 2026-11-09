@@ -21,11 +21,16 @@ const extra = new Set([
   ...config.river.flatMap((g) => g.issues),
 ])
 for (const key of extra) if (snapshot.items[key]) shown.push(snapshot.items[key])
+// Then the town's items, fires first, since CI titles at most 100 per run.
+const { town } = await import('./town/load.mjs')
+const rank = { fire: 0, bug: 1, work: 2, done: 3 }
+const townItems = [...new Map(Object.values(town.nodes).flatMap((n) => n.items.map((i) => [i.key, i]))).values()]
+for (const i of townItems.sort((a, b) => rank[a.kind] - rank[b.kind])) shown.push(snapshot.items[i.key])
 
 const todo = {}
-for (const i of shown) {
+for (const i of new Set(shown)) {
   const p = plain[i.key]
   if (!p || p.for !== i.title) todo[i.key] = { github: i.title, url: i.url, labels: i.labels, ...(p ? { stale: p.title } : {}) }
 }
 console.log(JSON.stringify(todo, null, 1))
-console.error(`${Object.keys(todo).length} of ${shown.length} shown items need plain words`)
+console.error(`${Object.keys(todo).length} of ${new Set(shown).size} shown items need plain words`)

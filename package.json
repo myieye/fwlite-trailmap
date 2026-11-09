@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "sync": "node scripts/sync.mjs",
-    "plain:todo": "node scripts/plain-todo.mjs",
+    "sync": "node --disable-warning=ExperimentalWarning scripts/sync.mjs",
+    "plain:todo": "node --disable-warning=ExperimentalWarning scripts/plain-todo.mjs",
+    "town:report": "node --disable-warning=ExperimentalWarning scripts/town/report.mjs",
+    "town:history": "node --disable-warning=ExperimentalWarning scripts/town/history.mjs",
     "build": "vite build && TOWN_ONLY=1 vite build",
     "build:town": "TOWN_ONLY=1 vite build",
     "build:single": "SINGLE_FILE=1 vite build --outDir dist-single",

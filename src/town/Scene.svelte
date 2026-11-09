@@ -2,24 +2,22 @@
   import { T, useTask, useThrelte } from '@threlte/core'
   import * as THREE from 'three'
   import { onMount, untrack } from 'svelte'
-  import type { Projected, View, World } from './world'
+  import type { Animated, Projected, View, World } from './world'
 
   let {
     world: worldProp,
     onview,
     onpick,
-    focus,
   }: {
     world: World
     onview: (v: View) => void
     onpick: (id: string | null) => void
-    focus?: { id: string; n: number }
   } = $props()
 
   const world = untrack(() => worldProp)
   const { renderer, invalidate, dom, size } = useThrelte()
   const AZ = (38 * Math.PI) / 180
-  const EL = (34 * Math.PI) / 180
+  const EL = ((innerHeight > innerWidth ? 46 : 34) * Math.PI) / 180
   const dir = new THREE.Vector3(Math.sin(AZ) * Math.cos(EL), Math.sin(EL), Math.cos(AZ) * Math.cos(EL))
 
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 400)
@@ -28,7 +26,8 @@
   let minZoom = 10
   let maxZoom = 160
 
-  const light = new THREE.DirectionalLight('#ffe7c2', 2.6)
+  const dusk = matchMedia('(prefers-color-scheme: dark)').matches
+  const light = new THREE.DirectionalLight(dusk ? '#ffb489' : '#ffe7c2', dusk ? 1.7 : 2.6)
   light.position.set(-14, 22, 12)
   light.castShadow = true
   const r = world.radius
@@ -70,17 +69,20 @@
     camera.updateProjectionMatrix()
     camera.updateMatrixWorld()
     const points: Projected[] = []
-    const all = [...world.anchors, ...Object.entries(world.districtAnchors).map(([k, p]) => [`d:${k}`, p] as const)]
+    const all = [...world.anchors, ...[...world.districtAnchors].map(([k, p]) => [`d:${k}`, p] as const)]
     for (const [id, p] of all) {
       v.copy(p).project(camera)
       const x = ((v.x + 1) / 2) * width
       const y = ((1 - v.y) / 2) * height
       points.push({ id, x, y, on: x > -40 && x < width + 40 && y > -40 && y < height + 40 })
     }
-    fireOn = !reduced && world.animated.some((a) => {
-      v.copy(a.pos).project(camera)
-      return Math.abs(v.x) < 1.2 && Math.abs(v.y) < 1.2
-    })
+    visible = reduced
+      ? []
+      : world.animated.filter((a) => {
+          v.copy(a.pos).project(camera)
+          return Math.abs(v.x) < 1.2 && Math.abs(v.y) < 1.3
+        })
+    fireOn = visible.length > 0
     onview({ zoom, minZoom, points })
     invalidate()
   }
@@ -103,9 +105,15 @@
 
   const home = new THREE.Vector3()
 
-  export function reveal(id: string) {
+  /** Moves a node out from under the sheet or panel; `close` also zooms in to building level. */
+  export function reveal(id: string, close = false) {
     const p = world.anchors.get(id)
     if (!p) return
+    if (close && zoom < world.focusZoom) {
+      target.set(p.x, 0, p.z)
+      zoom = Math.max(world.focusZoom, minZoom * 1.6)
+      apply()
+    }
     const { width, height } = size.current
     v.copy(p).project(camera)
     const x = ((v.x + 1) / 2) * width
@@ -121,11 +129,12 @@
   }
 
   let fireOn = $state(false)
+  let visible: Animated[] = []
   let t = 0
   useTask(
     (delta) => {
       t += delta
-      for (const a of world.animated) a.tick(t)
+      for (const a of visible) a.tick(t)
     },
     { running: () => fireOn },
   )
@@ -136,8 +145,14 @@
     if (!s.width) return
     const wasMin = !fitted
     fit()
-    if (!fitted) target.copy(home)
-    if (wasMin) zoom = s.height > s.width ? minZoom * 1.55 : minZoom
+    const portrait = s.height > s.width
+    if (wasMin) {
+      zoom = portrait ? minZoom * 1.8 : minZoom
+      if (portrait) {
+        const c = [...world.anchors.values()].reduce((a, p) => a.add(p), new THREE.Vector3()).divideScalar(world.anchors.size || 1)
+        target.set(c.x, 0, c.z)
+      } else target.copy(home)
+    }
     fitted = true
     apply()
   })
@@ -155,17 +170,19 @@
     zoomAt({ x: size.current.width / 2, y: size.current.height / 2 }, f)
   }
 
-  export function zoomTo(id: string | null, z?: number) {
-    const p = id ? (world.anchors.get(id) ?? world.districtAnchors[id as keyof World['districtAnchors']]) : null
-    if (p) target.set(p.x, 0, p.z)
-    else target.copy(home)
-    zoom = z ?? minZoom
+  export function fitAll() {
+    target.copy(home)
+    zoom = minZoom
     apply()
   }
 
-  $effect(() => {
-    if (focus) zoomTo(focus.id, Math.max(minZoom * 1.6, world.focusZoom))
-  })
+  export function zoomToDistrict(id: string) {
+    const p = world.districtAnchors.get(id)
+    if (!p) return
+    target.set(p.x, 0, p.z)
+    zoom = Math.max(minZoom * 1.6, world.focusZoom * 0.85)
+    apply()
+  }
 
   onMount(() => {
     const el = dom
@@ -255,7 +272,7 @@
 </script>
 
 <T is={camera} makeDefault manual />
-<T.HemisphereLight args={['#fff4e0', '#5d7f6c', 1.5]} />
-<T.AmbientLight args={['#c9dcff', 0.25]} />
+<T.HemisphereLight args={dusk ? ['#b9b6ff', '#3d4a66', 1.15] : ['#fff4e0', '#5d7f6c', 1.5]} />
+<T.AmbientLight args={dusk ? ['#8090c0', 0.3] : ['#c9dcff', 0.25]} />
 <T is={light} />
 <T is={world.root} />

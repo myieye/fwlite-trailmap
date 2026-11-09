@@ -20,9 +20,13 @@ flowchart LR
 ```
 
 - `trailmap.config.yaml` is the one file people edit: the summit milestone, camps (themed groups of issues, in walking order) and the Harmony goals, and which forum topics map to which issues. Milestone issues not in any camp land in a "Still to sort" camp, so nothing silently drops off the map.
-- `npm run sync` uses only the REST API (about 80 requests), so the Actions `GITHUB_TOKEN` is plenty.
+- `npm run sync` uses only the REST API (about 100 requests), so the Actions `GITHUB_TOKEN` is plenty.
 - `content/plain-words.json` holds a plain-language title and an area for each item, plus the GitHub title it was written for, so `npm run plain:todo` can tell when one is missing or stale. `AGENTS.md` has the rules an agent follows to fill it.
 - Progress is counted, never estimated: a camp is closed issues over all issues (dropped ones don't count). Nothing on the page shows a date it can't back up.
+
+## The town
+
+`/town/` shows FieldWorks Lite as a town: each feature, platform or service is a building that is planned, being built, in beta or open, with fires (open `Data bug` or `High Priority` issues), broken windows (other open bugs) and work in progress on top. `town.config.yaml` lists the buildings and which issues land on each; `npm run town:report` prints the counts. A dated record in `history/` is kept on every sync so the town can be played back later.
 
 ## Dev mode
 
@@ -40,4 +44,4 @@ npm run build:single  # dist-single/index.html with everything inlined
 
 ## Hosting
 
-`.github/workflows/publish.yaml` runs every 6 hours: it syncs, asks Claude for plain titles for any new items and commits them to main, then deploys to GitHub Pages. Claude needs a `CLAUDE_CODE_OAUTH_TOKEN` secret (from `claude setup-token`) in the `claude` environment, which only `main` can use.
+`.github/workflows/publish.yaml` runs every 6 hours: it syncs, asks Claude for plain titles for any new items, commits them and the town history to main, then deploys to GitHub Pages. Claude needs a `CLAUDE_CODE_OAUTH_TOKEN` secret (from `claude setup-token`) in the `claude` environment, which only `main` can use.
