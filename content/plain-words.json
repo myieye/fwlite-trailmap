@@ -2798,5 +2798,25 @@
   "title": "Idea: guided tour of the viewer",
   "for": "Idea: Tour of viewer UI",
   "area": "feature"
+ },
+ "lexbox#2964": {
+  "title": "Sync Changes dialog opens on a list of sync methods",
+  "for": "[claude] Open the sync dialog on a list of sync methods instead of tabs",
+  "area": "feature"
+ },
+ "lexbox#2962": {
+  "title": "Different files with the same name are saved separately",
+  "for": "Save different media files with the same name as separate files",
+  "area": "data"
+ },
+ "lexbox#2963": {
+  "title": "Media copied by folder sync should be checked for damage",
+  "for": "Media copied by folder sync isn't verified",
+  "area": "data"
+ },
+ "harmony#169": {
+  "title": "Record a content hash for media files to detect damaged copies",
+  "for": "Record a content hash on resources",
+  "area": "data"
  }
 }
