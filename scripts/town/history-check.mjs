@@ -1,7 +1,7 @@
 // Checks history files from the sync job and copies them into history/. The sync job runs npm packages, so its
 // output is checked here before it reaches main: strict names, shapes and sizes, and no field the format lacks.
 // Node built-ins only: this runs in the job that can push to main. Usage: node history-check.mjs <dir>
-import { copyFile, readdir, readFile, stat } from 'node:fs/promises'
+import { copyFile, mkdir, readdir, readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const NAME = /^\d{4}-\d{2}-\d{2}\.json$/
@@ -44,6 +44,7 @@ for (const f of files) {
     if (!Array.isArray(i.labels) || i.labels.length > 20 || !i.labels.every(text)) fail(`${f} ${key}: bad labels`)
     if (!Array.isArray(i.nodes) || !i.nodes.every((id) => Object.hasOwn(r.nodes, id))) fail(`${f} ${key}: bad nodes`)
   }
+  await mkdir(new URL('../../history/', import.meta.url), { recursive: true })
   await copyFile(path, new URL(`../../history/${f}`, import.meta.url))
   console.error(`history-check: ${f} ok`)
 }
