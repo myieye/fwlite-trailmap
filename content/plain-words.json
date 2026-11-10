@@ -2418,5 +2418,385 @@
   "title": "FieldWorks sync works for projects without morph types",
   "for": "FwHeadless merge throws NullReferenceException in MorphTypeSync when the snapshot has no morph types and the CRDT copy has none either",
   "area": "fix"
+ },
+ "lexbox#1848": {
+  "title": "Choose a morph type when creating an entry",
+  "for": "Allow selecting morph-type in create entry dialog",
+  "area": "feature"
+ },
+ "lexbox#1845": {
+  "title": "Show and set morph type when creating entries",
+  "for": "Support morph type",
+  "area": "feature"
+ },
+ "lexbox#1762": {
+  "title": "Homograph numbers for entries with the same headword",
+  "for": "Model Homograph number",
+  "area": "feature"
+ },
+ "lexbox#1683": {
+  "title": "Discussion: mini editor versus full editor options",
+  "for": "Mini editor vs. everything",
+  "area": "feature"
+ },
+ "lexbox#1050": {
+  "title": "Project managers can set the default view for everyone",
+  "for": "Allow setting default View",
+  "area": "feature"
+ },
+ "lexbox#2002": {
+  "title": "Advanced filters include example sentence and definition",
+  "for": "Advanced filters add Example Sentence & Definition",
+  "area": "feature"
+ },
+ "lexbox#1054": {
+  "title": "Faster entry filtering by skipping fields in other scripts",
+  "for": "Optimize entry filtering based on search script",
+  "area": "backstage"
+ },
+ "lexbox#910": {
+  "title": "Show filtered entry count and a way to clear filters",
+  "for": "Allow clearing filters and display entry filtered count",
+  "area": "feature"
+ },
+ "lexbox#2105": {
+  "title": "Faster creation checks for components and complex forms",
+  "for": "Optimize Component and Complex form creation/validation",
+  "area": "backstage"
+ },
+ "lexbox#2170": {
+  "title": "Activity preview compares before and after a change",
+  "for": "Activity preview: want to compare before/after, not compare with current version",
+  "area": "feature"
+ },
+ "lexbox#1862": {
+  "title": "Hover or tap relative times to see the exact date",
+  "for": "Relative durations (\"5 minutes ago\") should allow hovering / tapping to view absolute date",
+  "area": "feature"
+ },
+ "lexbox#1691": {
+  "title": "Show project history on the Lexbox project page",
+  "for": "Show Harmony history on project page",
+  "area": "feature"
+ },
+ "lexbox#2754": {
+  "title": "Deleting a media file on the server no longer fails midway",
+  "for": "FwHeadless media delete throws after removing the file, leaving the DB row and an uncommitted hg deletion",
+  "area": "data"
+ },
+ "lexbox#2701": {
+  "title": "Record audio in the Mac app with a native recorder",
+  "for": "Support audio recording in FW Lite on Mac Catalyst via a native recorder",
+  "area": "feature"
+ },
+ "lexbox#2607": {
+  "title": "Unused media files are cleaned up on the server",
+  "for": "Orphaned media resources (and reserved Files rows) are never garbage-collected",
+  "area": "data"
+ },
+ "lexbox#2404": {
+  "title": "Pictures can have their own publish-in setting",
+  "for": "Picture model should include PublishIn",
+  "area": "feature"
+ },
+ "lexbox#1969": {
+  "title": "Audio files are deleted when removed or replaced",
+  "for": "Delete audio files when they are removed/replaced",
+  "area": "feature"
+ },
+ "lexbox#1966": {
+  "title": "Model for custom field definitions",
+  "for": "Custom field definition model",
+  "area": "backstage"
+ },
+ "lexbox#1965": {
+  "title": "Model for storing custom field data",
+  "for": "Custom field data storage model",
+  "area": "backstage"
+ },
+ "lexbox#2932": {
+  "title": "Review and tidy the bundled example plugins",
+  "for": "[claude] Review and curate the example plugins",
+  "area": "backstage"
+ },
+ "lexbox#2931": {
+  "title": "Server enforces that only managers can add plugins",
+  "for": "[claude] Enforce the plugin manager rule on the server",
+  "area": "data"
+ },
+ "lexbox#2930": {
+  "title": "Plugin work after the first release",
+  "for": "FW Lite plugins",
+  "area": "backstage"
+ },
+ "lexbox#2929": {
+  "title": "Review the plugin API before plugins leave beta",
+  "for": "[claude] Review the plugin SDK API before plugins leave beta",
+  "area": "backstage"
+ },
+ "lexbox#2920": {
+  "title": "Plugins can record audio and take photos",
+  "for": "[claude] Let plugins record audio and capture photos",
+  "area": "feature"
+ },
+ "lexbox#2917": {
+  "title": "Plugins stay off on Android until a security gap is closed",
+  "for": "[claude] Plugins are off on Android until the Blazor WebView bootstrap checks message sources",
+  "area": "devices"
+ },
+ "lexbox#2916": {
+  "title": "Activity history shows which plugin made a change",
+  "for": "[claude] Record which plugin authored a commit",
+  "area": "feature"
+ },
+ "lexbox#2914": {
+  "title": "Creating an entry with an existing id is rejected",
+  "for": "[claude] CreateEntry accepts ids that already exist",
+  "area": "data"
+ },
+ "lexbox#2770": {
+  "title": "Shared vernacular and analysis writing systems stay in sync",
+  "for": "Writing systems shared between vernacular and analysis get out of sync",
+  "area": "data"
+ },
+ "lexbox#2230": {
+  "title": "Disabled writing systems are synced",
+  "for": "Sync disabled WS's",
+  "area": "data"
+ },
+ "lexbox#1289": {
+  "title": "Sort words the way FieldWorks does, using ICU",
+  "for": "ICU based sorting",
+  "area": "feature"
+ },
+ "lexbox#2356": {
+  "title": "Consider an Electron build for Mac and Linux",
+  "for": "Consider an Electron build for Mac and Linux support",
+  "area": "devices"
+ },
+ "lexbox#1485": {
+  "title": "Restart app button on the troubleshooting page",
+  "for": "Add restart app button in troubleshooting",
+  "area": "feature"
+ },
+ "lexbox#2699": {
+  "title": "Lexicon selector drops a lexicon deleted elsewhere after an error",
+  "for": "[PB Extension] Lexicon selector keeps a lexicon deleted elsewhere after a failed select or delete",
+  "area": "fix"
+ },
+ "lexbox#2660": {
+  "title": "Delete local lexicons from the Paratext 10 Lexicon extension",
+  "for": "Delete local CRDT projects via the PT10 Lexicon extension",
+  "area": "feature"
+ },
+ "lexbox#2646": {
+  "title": "Lexicon selector refreshes its list after a project is chosen",
+  "for": "[claude] Lexicon selector: restored tab with no project shows an unfiltered list after resolveProject",
+  "area": "fix"
+ },
+ "lexbox#2559": {
+  "title": "Expose morphosyntactic analyses to the interlinearizer",
+  "for": "Expose morphosyntactic analyses (MSA) so interlinearizer GrammarRef can resolve",
+  "area": "feature"
+ },
+ "lexbox#2558": {
+  "title": "Expose allomorphs to the interlinearizer",
+  "for": "Expose allomorphs (IMoForm) so interlinearizer AllomorphRef can resolve",
+  "area": "feature"
+ },
+ "lexbox#2486": {
+  "title": "Language picker for the Create Lexicon form",
+  "for": "platform.bible-extension: use EthnoLib for language-tag entry in Create Lexicon form",
+  "area": "feature"
+ },
+ "harmony#168": {
+  "title": "Deleting a remote resource also removes the server copy",
+  "for": "[claude] Let IRemoteResourceService delete remote resources",
+  "area": "data"
+ },
+ "harmony#167": {
+  "title": "API to restore project to the state at a chosen sync point",
+  "for": "Add a CheckoutSyncState API",
+  "area": "backstage"
+ },
+ "harmony#153": {
+  "title": "Sync through an app-supplied folder, for Android USB drives",
+  "for": "Let JsonSyncable use an app-supplied folder abstraction (Android SAF support)",
+  "area": "backstage"
+ },
+ "harmony#120": {
+  "title": "Local ledger of every entity change for history",
+  "for": "Add an EntityTouches ledger table",
+  "area": "backstage"
+ },
+ "harmony#48": {
+  "title": "Changes can trigger other changes",
+  "for": "Add API for changes to dispatch sub changes",
+  "area": "backstage"
+ },
+ "lexbox#1949": {
+  "title": "Startup tasks that regenerate local data after updates",
+  "for": "Startup tasks",
+  "area": "backstage"
+ },
+ "harmony#46": {
+  "title": "Step-by-step sync debugging tool",
+  "for": "Build ISyncable for interactive debugging ",
+  "area": "backstage"
+ },
+ "harmony#36": {
+  "title": "Refactor how snapshots are selected",
+  "for": "Refactor snapshot selection",
+  "area": "backstage"
+ },
+ "harmony#35": {
+  "title": "Clean up old snapshots to shrink the database",
+  "for": "Implement snapshot cleanup",
+  "area": "data"
+ },
+ "harmony#27": {
+  "title": "Errors while applying changes give more context",
+  "for": "better exception details from snapshot worker",
+  "area": "backstage"
+ },
+ "harmony#22": {
+  "title": "Rename Crdt-prefixed classes to Harmony",
+  "for": "rename Crdt prefix to Harmony where Crdt is referring to the library and no the algorithm",
+  "area": "backstage"
+ },
+ "harmony#19": {
+  "title": "Idea: record when changes are received",
+  "for": "[Idea] Record when commits are received (and sent?)",
+  "area": "backstage"
+ },
+ "harmony#14": {
+  "title": "Investigate catching model changes when saving",
+  "for": "investigate if we can intercept saving changes in EF to catch changes to the model",
+  "area": "backstage"
+ },
+ "harmony#13": {
+  "title": "Consider tools IT support will need",
+  "for": "Consider IT support needs",
+  "area": "backstage"
+ },
+ "lexbox#2424": {
+  "title": "FwLiteWeb keeps its data folders under one base directory",
+  "for": "Consolidate FwLiteWeb data paths behind a single BaseDataDir",
+  "area": "backstage"
+ },
+ "lexbox#664": {
+  "title": "Failed resumable requests stop retrying forever",
+  "for": "Override status codes for resumable requests",
+  "area": "backstage"
+ },
+ "lexbox#457": {
+  "title": "Startup health check for the resumable service",
+  "for": "Create startup probe for resumable",
+  "area": "backstage"
+ },
+ "lexbox#2867": {
+  "title": "Entry updates are saved all at once, not partially",
+  "for": "Updating an entry through the web API isn't atomic",
+  "area": "data"
+ },
+ "lexbox#2842": {
+  "title": "Idea: open a project live on the server without downloading",
+  "for": "Idea: FW Lite apps (FwLiteWeb, MAUI) opening a project live through Lexbox's lexicon API",
+  "area": "feature"
+ },
+ "lexbox#2663": {
+  "title": "One unreachable server no longer hides projects from others",
+  "for": "[claude] One unreachable Lexbox server hides remote projects from all servers",
+  "area": "fix"
+ },
+ "lexbox#2365": {
+  "title": "Server enforces unique commit ids per project",
+  "for": "Move CRDT commits to a composite (ProjectId, Id) PK + add unique index on Id",
+  "area": "backstage"
+ },
+ "lexbox#1938": {
+  "title": "Build the MiniLcm SDK with a sample project automatically",
+  "for": "Automate building MiniLcm sdk",
+  "area": "backstage"
+ },
+ "lexbox#1838": {
+  "title": "MiniLcm SDK returns clearer errors",
+  "for": "MiniLcm SDK improve error handling",
+  "area": "backstage"
+ },
+ "lexbox#1052": {
+  "title": "Better documentation for public Lexbox APIs",
+  "for": "polish documentation for lexbox public apis",
+  "area": "backstage"
+ },
+ "lexbox#1041": {
+  "title": "Upload a locally created project to Lexbox",
+  "for": "Allow uploading CRDT projects",
+  "area": "feature"
+ },
+ "lexbox#2845": {
+  "title": "Signing in again lets you switch Lexbox accounts",
+  "for": "OAuth prompt=login can't switch accounts: /login sends signed-in users to /home",
+  "area": "fix"
+ },
+ "lexbox#843": {
+  "title": "Login tokens survive security certificate rotation",
+  "for": "gracefully handle oauth cert rotation",
+  "area": "backstage"
+ },
+ "lexbox#1313": {
+  "title": "Reuse memory buffers when comparing positions",
+  "for": "use object pool for DiffPositions JsonArrays",
+  "area": "backstage"
+ },
+ "lexbox#2919": {
+  "title": "Managers choose which commits a FieldWorks merge includes",
+  "for": "Let a manager choose which commits a fw-headless merge includes",
+  "area": "feature"
+ },
+ "lexbox#2918": {
+  "title": "Record the sync state after each FieldWorks merge",
+  "for": "Record fw-headless's sync state after each FwData merge",
+  "area": "data"
+ },
+ "lexbox#2195": {
+  "title": "Notify when new Send/Receive data is waiting to be synced",
+  "for": "Nice to have: notify user (with colored dot on Synchronize button, perhaps) if pending changes in Lexbox need to be pulled into CRDT",
+  "area": "feature"
+ },
+ "lexbox#1956": {
+  "title": "Maintenance mode for the FieldWorks merge service",
+  "for": "Create a maintenance mode for fw headless merge ",
+  "area": "backstage"
+ },
+ "lexbox#1766": {
+  "title": "Table comparing FW Lite projects with classic projects",
+  "for": "Show feature table comparing harmony and fwdata in FW Lite",
+  "area": "feature"
+ },
+ "lexbox#1663": {
+  "title": "More storage for the merge service",
+  "for": "Increase fw-headless volume size",
+  "area": "backstage"
+ },
+ "lexbox#2238": {
+  "title": "Maintenance warning banner on Lexbox",
+  "for": "Add maintenance warning banner",
+  "area": "feature"
+ },
+ "lexbox#243": {
+  "title": "Push for the first time button for new projects",
+  "for": "Add Push for the first time button",
+  "area": "feature"
+ },
+ "lexbox#2811": {
+  "title": "\"What's new\" dialog after FW Lite updates",
+  "for": "[claude] FW Lite: \"What's new\" dialog after updates",
+  "area": "feature"
+ },
+ "lexbox#1122": {
+  "title": "Idea: guided tour of the viewer",
+  "for": "Idea: Tour of viewer UI",
+  "area": "feature"
  }
 }
