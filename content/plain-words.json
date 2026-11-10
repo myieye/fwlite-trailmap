@@ -2320,8 +2320,8 @@
   "area": "feature"
  },
  "lexbox#2947": {
-  "title": "Sync dialog tabs are named Cloud, Nearby and Lexbox",
-  "for": "[claude] Name the sync dialog tabs Cloud, Nearby and Lexbox",
+  "title": "Sync dialog tabs renamed Cloud, Nearby and Lexbox, fit on phones",
+  "for": "[claude] Name the sync dialog tabs Cloud, Nearby and Lexbox, stacked on phones",
   "area": "feature"
  },
  "lexbox#2945": {
