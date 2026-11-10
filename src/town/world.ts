@@ -8,6 +8,10 @@ export interface World {
   /** Label point above each node's building. */
   anchors: Map<string, THREE.Vector3>
   districtAnchors: Map<string, THREE.Vector3>
+  /** Centres of the ground cells each district owns. */
+  grounds: Map<string, THREE.Vector3[]>
+  /** The district whose ground is at or near this point. */
+  districtAt: (x: number, z: number) => string | undefined
   /** Ellipse the camera target stays inside. */
   bounds: { cx: number; cz: number; rx: number; rz: number }
   radius: number
@@ -22,7 +26,7 @@ export interface World {
 export type Animated = { pos: THREE.Vector3; tick: (t: number) => void }
 
 export type Projected = { id: string; x: number; y: number; on: boolean }
-export type View = { zoom: number; minZoom: number; points: Projected[] }
+export type View = { zoom: number; minZoom: number; points: Projected[]; district?: string }
 
 export type Cells = Record<string, [string, string]>
 
@@ -139,16 +143,16 @@ export class Batch {
     private lib: Library,
     private paint: THREE.Material,
   ) {}
-  model(name: string, x: number, y: number, z: number, rotY = 0, scale = 1) {
+  model(name: string, x: number, y: number, z: number, rotY = 0, scale = 1, tint?: THREE.Color) {
     const m = new THREE.Matrix4().compose(
       new THREE.Vector3(x, y, z),
       new THREE.Quaternion().setFromAxisAngle(UP, rotY),
       new THREE.Vector3(scale, scale, scale),
     )
-    this.modelM(name, m)
+    this.modelM(name, m, undefined, tint)
   }
-  modelM(name: string, m: THREE.Matrix4, mat?: THREE.Material) {
-    for (const p of this.lib.parts(name)) this.push(mat ?? p.mat, p.geo.clone().applyMatrix4(m), '#ffffff')
+  modelM(name: string, m: THREE.Matrix4, mat?: THREE.Material, tint: THREE.ColorRepresentation = '#ffffff') {
+    for (const p of this.lib.parts(name)) this.push(mat ?? p.mat, p.geo.clone().applyMatrix4(m), tint)
   }
   /** Procedural geometry painted with a flat color through the atlas' white swatch. */
   shape(geo: THREE.BufferGeometry, m: THREE.Matrix4, color: THREE.ColorRepresentation) {

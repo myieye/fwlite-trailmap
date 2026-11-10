@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import layoutJson from './layout.json'
 import packUrl from './models/hex.glb?url'
+import { districtColor } from './districts'
 import type { Town, TownNode } from './types'
 import {
   Batch,
@@ -162,21 +163,19 @@ const top: Cells = {
   '2,1': ['#b57f57', '#7a4b33'],
   '7,1': ['#8c6a52', '#4f3c33'],
 }
-const roofs: Record<string, [string, string]> = {
-  editing: ['#5b7d96', '#2f4a63'],
-  collaboration: ['#5fa39a', '#2c6a62'],
-  'project-setup': ['#a184b8', '#5d4373'],
-  platforms: ['#d9a84a', '#99681f'],
-  sync: ['#4f86c6', '#24507f'],
-  help: ['#8aa86c', '#4d6b3a'],
-  unsorted: ['#a29d92', '#66625a'],
-  old: ['#d9744e', '#9c4029'],
-}
-const spareRoofs = Object.values(roofs).slice(0, 6)
 const earth: Cells = { '0,2': ['#a0805c', '#6c5240'] }
 const rock: Cells = { '0,2': ['#8a8476', '#5a5550'] }
 
 type Kind = 'grass' | 'river' | 'road'
+
+/** How far from its lots a district's ground reaches. A cell two districts reach equally stays plain grass. */
+const REACH = 2
+const GRASS = new THREE.Color('#a9c886')
+/** Vertex colours multiply the grass texture, so the tint is the ratio that lands partway to the district colour. */
+function groundTint(district: string) {
+  const to = GRASS.clone().lerp(new THREE.Color(districtColor(district)[0]), 0.4)
+  return new THREE.Color(to.r / GRASS.r, to.g / GRASS.g, to.b / GRASS.b)
+}
 
 export async function buildHex(town: Town): Promise<World> {
   const scene = await loadPack(packUrl)
@@ -193,7 +192,7 @@ export async function buildHex(town: Town): Promise<World> {
   const roofOf = (district: string) => {
     let m = roofMats.get(district)
     if (!m) {
-      m = mk({ ...top, '0,3': roofs[district] ?? spareRoofs[hash(district) % spareRoofs.length] })
+      m = mk({ ...top, '0,3': districtColor(district) })
       roofMats.set(district, m)
     }
     return m
@@ -237,8 +236,32 @@ export async function buildHex(town: Town): Promise<World> {
     if (c && c.kind === 'grass') c.kind = 'road'
   }
 
+  const live = town.districts.filter((d) => d.nodes.some((id) => town.nodes[id])).map((d) => d.id)
+  const seeds = live.map((id) => {
+    const own = placed.filter((p) => p.node.district === id).map((p) => p.cell)
+    return [id, [...(layout.districts[id]?.lots ?? []), ...own]] as const
+  })
+  const owner = new Map<string, string>()
+  for (const c of cells.values()) {
+    if (c.kind === 'river' || eastOfRiver([c.q, c.r])) continue
+    const by = seeds.map(([id, lots]) => [id, Math.min(...lots.map((l) => hexDist(l, [c.q, c.r])))] as const).sort((a, b) => a[1] - b[1])
+    if (by.length && by[0][1] <= REACH && (by.length < 2 || by[1][1] > by[0][1])) owner.set(key(c.q, c.r), by[0][0])
+  }
+  const territory = new Map<string, Cell[]>()
+  for (const [k, id] of owner) territory.set(id, [...(territory.get(id) ?? []), k.split(',').map(Number) as Cell])
+  if (import.meta.env.DEV)
+    for (const [id, own] of territory) {
+      const seen = new Set([key(...own[0])])
+      const todo = [own[0]]
+      for (let c = todo.pop(); c; c = todo.pop())
+        for (const n of near(c)) if (owner.get(key(...n)) === id && !seen.has(key(...n))) (seen.add(key(...n)), todo.push(n))
+      if (seen.size < own.length) console.warn(`town: the ${id} district's ground is in more than one piece; move a lot in layout.json`)
+    }
+  const tints = new Map(live.filter((id) => id !== UNSORTED).map((id) => [id, groundTint(id)]))
+
   for (const c of cells.values()) {
     const [x, z] = pos(c.q, c.r)
+    const tint = tints.get(owner.get(key(c.q, c.r)) ?? '')
     if (c.kind === 'river') {
       const o = riverOpen.get(key(c.q, c.r))!
       if (c.q === bridge[0] && c.r === bridge[1]) {
@@ -252,12 +275,23 @@ export async function buildHex(town: Town): Promise<World> {
     } else if (c.kind === 'road') {
       const t = match([...roadOpen.get(key(c.q, c.r))!], ROAD)
       batch.model(t.name, x, 0, z, t.rot)
-    } else batch.model('hex_grass', x, 0, z)
+    } else batch.model('hex_grass', x, 0, z, 0, 1, tint)
     const d = dist(c.q, c.r)
     batch.modelM('hex_grass', new THREE.Matrix4().makeTranslation(x, -1, z), mEarth)
     if (d <= R - 1 - ((c.q * 3 + c.r) % 2 === 0 ? 0 : 1)) batch.modelM('hex_grass', new THREE.Matrix4().makeTranslation(x, -2, z), mRock)
     if (d <= R - 3)
       batch.modelM('hex_grass', new THREE.Matrix4().compose(new THREE.Vector3(x, -3, z), new THREE.Quaternion(), new THREE.Vector3(0.9, 1, 0.9)), mRock)
+  }
+
+  for (const [k, id] of owner) {
+    const [q, r] = k.split(',').map(Number)
+    const [x, z] = pos(q, r)
+    for (const [deg, [dq, dr]] of Object.entries(DIRS)) {
+      const nk = key(q + dq, r + dr)
+      if (!cells.has(nk) || owner.get(nk) === id) continue
+      const a = rad(Number(deg))
+      batch.box(x + Math.cos(a) * 0.92, -0.03, z - Math.sin(a) * 0.92, 1.16, 0.08, 0.11, districtColor(id)[1], a + Math.PI / 2)
+    }
   }
 
   const anchors = new Map<string, THREE.Vector3>()
@@ -435,15 +469,31 @@ export async function buildHex(town: Town): Promise<World> {
 
   root.add(batch.build((m) => (m instanceof THREE.MeshLambertMaterial ? m : mTop)))
 
+  // A district's name sits on its own ground, on the free cell nearest the middle of its buildings.
   const districtAnchors = new Map<string, THREE.Vector3>()
-  for (const d of town.districts) {
-    const pts = placed
-      .filter((p) => p.node.district === d.id && !eastOfRiver(p.cell) && cells.get(key(...p.cell))?.kind !== 'river')
-      .map((p) => new THREE.Vector3(pos(...p.cell)[0], 0, pos(...p.cell)[1]))
-    if (!pts.length && d.nodes.some((id) => town.nodes[id]))
-      for (const c of layout.districts[d.id]?.lots ?? []) pts.push(new THREE.Vector3(pos(...c)[0], 0, pos(...c)[1]))
-    if (!pts.length) continue
-    districtAnchors.set(d.id, pts.reduce((a, p) => a.add(p), new THREE.Vector3()).divideScalar(pts.length).setY(2.4))
+  const grounds = new Map<string, THREE.Vector3[]>()
+  for (const [id, own] of territory) {
+    const pts = own.map((c) => new THREE.Vector3(pos(...c)[0], 0, pos(...c)[1]))
+    grounds.set(id, pts)
+    const built = placed.filter((p) => p.node.district === id && owner.get(key(...p.cell)) === id).map((p) => pos(...p.cell))
+    const mid = (built.length ? built.map(([x, z]) => new THREE.Vector3(x, 0, z)) : pts).reduce((a, p) => a.add(p), new THREE.Vector3())
+    mid.divideScalar(built.length || pts.length)
+    const free = pts.filter((p) => !built.some(([x, z]) => x === p.x && z === p.z))
+    const at = (free.length ? free : pts).reduce((a, p) => (p.distanceTo(mid) < a.distanceTo(mid) ? p : a))
+    districtAnchors.set(id, at.clone().setY(0.4))
+  }
+  const districtAt = (x: number, z: number) => {
+    const r0 = Math.round(z / SQ3)
+    const q0 = Math.round((x - r0) / 2)
+    let best: string | undefined
+    let bd = 2 * REACH + 0.5
+    for (let q = q0 - 3; q <= q0 + 3; q++)
+      for (let r = r0 - 3; r <= r0 + 3; r++) {
+        const id = owner.get(key(q, r))
+        const d = Math.hypot(pos(q, r)[0] - x, pos(q, r)[1] - z)
+        if (id && d < bd) [best, bd] = [id, d]
+      }
+    return best
   }
 
   const cx = (minX + maxX) / 2
@@ -452,6 +502,8 @@ export async function buildHex(town: Town): Promise<World> {
     root,
     anchors,
     districtAnchors,
+    grounds,
+    districtAt,
     bounds: { cx, cz, rx: (maxX - minX) / 2, rz: (maxZ - minZ) / 2 },
     radius: Math.max(maxX - minX, maxZ - minZ) / 2 + 2,
     nearZoom: 40,

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { swatch } from './districts'
   import { icons, uiIcons } from './icons'
   import { stateInfo } from './info'
   import type { Town } from './types'
@@ -15,7 +16,7 @@
 <div class="list" role="region" aria-label="Features as a list">
   {#each districts as d (d.id)}
     <section>
-      <h2>{d.name}</h2>
+      <h2 style={swatch(d.id)}><i class="swatch"></i>{d.name}</h2>
       {#if d.blurb}<p class="blurb">{d.blurb}</p>{/if}
       <ul>
         {#each d.nodes as id (id)}

@@ -7,7 +7,8 @@
   import Scene from './Scene.svelte'
   import { town as data } from './model'
   import { icons, uiIcons } from './icons'
-  import { date, stateInfo, states, summary, totals, visible } from './info'
+  import { swatch } from './districts'
+  import { date, plural, stateInfo, states, summary, totals, visible } from './info'
   import type { TownNode } from './types'
   import type { View, World } from './world'
 
@@ -15,7 +16,13 @@
   const REPO = 'https://github.com/sillsdev/languageforge-lexbox'
   const nodes = Object.values(town.nodes)
   const districtName = Object.fromEntries(town.districts.map((d) => [d.id, d.name]))
-  const districtSize = Object.fromEntries(town.districts.map((d) => [d.id, d.nodes.length]))
+  const rollup = Object.fromEntries(
+    town.districts.map((d) => {
+      const own = d.nodes.map((id) => town.nodes[id])
+      return [d.id, { features: own.length, fires: totals(own).fires }]
+    }),
+  )
+  const districtCount = town.districts.filter((d) => d.nodes.length && d.id !== 'unsorted').length
   const total = totals(nodes)
   const focus = nodes.filter((n) => n.counts.fires || n.state !== 'open').map((n) => n.id)
 
@@ -42,85 +49,67 @@
   type Box = [number, number, number, number]
   type Label =
     | { kind: 'district'; id: string; x: number; y: number; small: boolean }
-    | { kind: 'dot'; id: string; x: number; y: number; n: TownNode }
-    | { kind: 'spot'; id: string; x: number; y: number; n: TownNode; head: number; side?: 'l' | 'r'; state: boolean }
+    | { kind: 'mark'; id: string; x: number; y: number; n: TownNode; head: number; side: 'l' | 'r' }
     | { kind: 'tag'; id: string; x: number; y: number; dx: number; n: TownNode }
 
+  /** Far view: districts by name, buildings only as fire and state marks. Near view: every building by name. */
   const labels = $derived.by(() => {
-    const out: Label[] = []
     const boxes: Box[] = chrome()
-    const fits = (r: Box) => {
-      if (boxes.some((o) => r[0] < o[2] && r[2] > o[0] && r[1] < o[3] && r[3] > o[1])) return false
-      boxes.push(r)
-      return true
-    }
+    const clear = (r: Box) => !boxes.some((o) => r[0] < o[2] && r[2] > o[0] && r[1] < o[3] && r[3] > o[1])
+    const fits = (r: Box) => clear(r) && !!boxes.push(r)
     const onNodes = view.points.filter((p) => p.on && town.nodes[p.id])
-    if (!near) {
-      // Buildings that need attention claim space before district names, which nudge aside or drop.
-      const spots: Extract<Label, { kind: 'spot' }>[] = []
-      const fires = onNodes.filter((p) => town.nodes[p.id].counts.fires).sort((a, b) => town.nodes[b.id].counts.fires - town.nodes[a.id].counts.fires)
-      for (const p of fires) {
+    const mark = (p: (typeof onNodes)[number]): Extract<Label, { kind: 'mark' }> => {
+      const n = town.nodes[p.id]
+      const head = n.counts.fires ? 30 + String(n.counts.fires).length * 7 : n.state === 'open' ? 12 : 22
+      return { kind: 'mark', id: n.id, x: p.x, y: p.y, n, head, side: p.x > w - 190 ? 'l' : 'r' }
+    }
+    const marks: Label[] = []
+    const tags: Label[] = []
+    if (near) {
+      const cap = w < 640 ? 9 : 18
+      const score = (p: (typeof onNodes)[number]) => {
         const n = town.nodes[p.id]
-        const head = 30 + String(n.counts.fires).length * 7
-        if (fits([p.x - head / 2, p.y - 12, p.x + head / 2, p.y + 12]) || selectedId === n.id) spots.push({ kind: 'spot', id: n.id, x: p.x, y: p.y, n, head, state: false })
+        if (selectedId === n.id) return -1e9
+        return Math.hypot(p.x - w / 2, p.y - h / 2) - (n.counts.fires ? 150 : 0)
       }
-      const name = (s: (typeof spots)[number], extra: number) => {
-        const nw = s.n.name.length * 6.9 + 12 + extra
-        const from = s.head / 2
-        if (s.x + from + nw < w - 4 && fits([s.x + from, s.y - 12, s.x + from + nw, s.y + 12])) s.side = 'r'
-        else if (s.x - from - nw > 4 && fits([s.x - from - nw, s.y - 12, s.x - from, s.y + 12])) s.side = 'l'
-        return !!s.side
+      for (const p of onNodes.sort((a, b) => score(a) - score(b))) {
+        const n = town.nodes[p.id]
+        const bw = Math.max(n.name.length * 7.3 + (n.state === 'open' ? 17 : 0), badgeWidth(n)) + 18
+        const x = Math.min(Math.max(p.x, bw / 2 + 6), w - bw / 2 - 6)
+        if (tags.length < cap && fits([x - bw / 2, p.y - 58, x + bw / 2, p.y - 6])) tags.push({ kind: 'tag', id: n.id, x: p.x, y: p.y, dx: x - p.x, n })
+        else marks.push(mark(p))
       }
-      for (const s of spots) {
-        const sw = s.n.state === 'open' ? 0 : stateInfo[s.n.state].label.length * 6.2 + 26
-        if (sw && name(s, sw)) s.state = true
-        else name(s, 0)
-      }
+    } else {
       for (const p of onNodes) {
         const n = town.nodes[p.id]
-        if (n.counts.fires || n.state === 'open') continue
-        const head = stateInfo[n.state].label.length * 6.2 + 30
-        const nw = n.name.length * 6.9 + 12
-        const [l, r] = [p.x - head / 2, p.x + head / 2]
-        // A state with no name beside it is a guessing game, so it's both or neither.
-        for (const y of [p.y, p.y - 26, p.y + 26]) {
-          const side = l > 4 && r + nw < w - 4 && fits([l, y - 12, r + nw, y + 12]) ? 'r' : r < w - 4 && l - nw > 4 && fits([l - nw, y - 12, r, y + 12]) ? 'l' : undefined
-          if (!side) continue
-          spots.push({ kind: 'spot', id: n.id, x: p.x, y, n, head, side, state: true })
-          break
-        }
+        if (!n.counts.fires && n.state === 'open' && selectedId !== n.id) continue
+        const m = mark(p)
+        boxes.push([p.x - m.head / 2 - 4, p.y - 14, p.x + m.head / 2 + 4, p.y + 14])
+        marks.push(m)
       }
-      const ds = view.points
-        .filter((p) => p.on && p.id.startsWith('d:'))
-        .sort((a, b) => (districtSize[b.id.slice(2)] ?? 0) - (districtSize[a.id.slice(2)] ?? 0))
-      for (const p of ds) {
-        const id = p.id.slice(2)
-        const len = (districtName[id] ?? id).length
-        for (const [bw, bh] of [[len * (w < 700 ? 7.7 : 8.6) + 30, 17], [len * 6.7 + 22, 12]]) {
-          const offsets = [[0, 0], [0, -30], [0, 30], [bw / 3, -24], [-bw / 3, -24], [bw / 3, 24], [-bw / 3, 24], [bw / 2, 0], [-bw / 2, 0], [0, -52], [0, 52], [bw / 2, -24], [-bw / 2, -24], [bw / 2, 24], [-bw / 2, 24]]
-          const at = offsets.find(([dx, dy]) => p.x + dx - bw / 2 > 4 && p.x + dx + bw / 2 < w - 4 && fits([p.x + dx - bw / 2, p.y + dy - bh, p.x + dx + bw / 2, p.y + dy + bh]))
-          if (!at) continue
-          out.push({ kind: 'district', id, x: p.x + at[0], y: p.y + at[1], small: bh < 17 })
-          break
-        }
+    }
+    const districts: Label[] = []
+    for (const p of view.points.filter((p) => p.on && p.id.startsWith('d:'))) {
+      const id = p.id.slice(2)
+      const len = (districtName[id] ?? id).length
+      const full: [number, number] = [Math.max(len * (w < 700 ? 8.6 : 9.6), 100) / 2 + 6, 24]
+      const small: [number, number] = [(len * 7.4) / 2 + 4, 11]
+      const place = ([bw, bh]: [number, number], reach: number) => {
+        const steps = [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5]
+        const offsets = steps
+          .flatMap((i) => steps.map((j) => [(i * bw) / 2, j * bh]))
+          .filter(([dx, dy]) => Math.hypot(dx, dy) < reach)
+          .sort((a, b) => Math.hypot(...a) - Math.hypot(...b))
+        return offsets.find(([dx, dy]) => p.x + dx - bw > 4 && p.x + dx + bw < w - 4 && fits([p.x + dx - bw, p.y + dy - bh, p.x + dx + bw, p.y + dy + bh]))
       }
-      for (const p of onNodes) if (selectedId === p.id && !spots.some((s) => s.id === p.id)) out.push({ kind: 'dot', id: p.id, x: p.x, y: p.y, n: town.nodes[p.id] })
-      return [...out, ...spots]
+      // Near view names the district in the crumb, so a name that doesn't fit there is dropped. Far view always shows all of them.
+      const at = near ? undefined : place(full, 130)
+      const fallback = at ? undefined : place(small, near ? 60 : 220)
+      if (at) districts.push({ kind: 'district', id, x: p.x + at[0], y: p.y + at[1], small: false })
+      else if (fallback) districts.push({ kind: 'district', id, x: p.x + fallback[0], y: p.y + fallback[1], small: true })
+      else if (!near) districts.push({ kind: 'district', id, x: Math.min(Math.max(p.x, small[0] + 4), w - small[0] - 4), y: p.y, small: true })
     }
-    const cap = w < 640 ? 9 : 18
-    const score = (p: (typeof onNodes)[number]) => {
-      const n = town.nodes[p.id]
-      if (selectedId === n.id) return -1e9
-      return Math.hypot(p.x - w / 2, p.y - h / 2) - (n.counts.fires ? 150 : 0)
-    }
-    for (const p of onNodes.sort((a, b) => score(a) - score(b))) {
-      if (out.length >= cap) break
-      const n = town.nodes[p.id]
-      const bw = Math.max(n.name.length * 7.3 + (n.state === 'open' ? 17 : 0), badgeWidth(n)) + 18
-      const x = Math.min(Math.max(p.x, bw / 2 + 6), w - bw / 2 - 6)
-      if (fits([x - bw / 2, p.y - 58, x + bw / 2, p.y - 6])) out.push({ kind: 'tag', id: n.id, x: p.x, y: p.y, dx: x - p.x, n })
-    }
-    return out
+    return [...districts, ...marks, ...tags]
   })
 
   function badgeWidth(n: TownNode) {
@@ -131,16 +120,24 @@
   function chrome(): Box[] {
     void selectedId
     void legendOpen
-    return [...document.querySelectorAll('.title, .legend, .controls, .panel')].map((el) => {
+    void near
+    return [...document.querySelectorAll('.title, .crumb, .legend, .controls, .panel')].map((el) => {
       const r = el.getBoundingClientRect()
       return [r.left - 4, r.top - 4, r.right + 4, r.bottom + 4]
     })
   }
 
   function insets() {
-    const top = document.querySelector('.title')?.getBoundingClientRect().bottom ?? 0
+    const top = document.querySelector('.top')?.getBoundingClientRect().bottom ?? 0
     const key = document.querySelector('.legend')?.getBoundingClientRect().top
     return { top, bottom: key ? innerHeight - key : 0 }
+  }
+
+  /** Middle of the map that the panel or sheet leaves uncovered. */
+  function centre() {
+    const panel = document.querySelector('.panel')?.getBoundingClientRect()
+    if (!panel) return { x: w / 2, y: h / 2 }
+    return w <= 700 ? { x: w / 2, y: panel.top / 2 } : { x: panel.left / 2, y: h / 2 }
   }
 
   function readHash() {
@@ -200,7 +197,7 @@
   <div class="stage" role="img" aria-label="Map of {town.districts.filter((d) => d.nodes.length).length} districts and {summary(nodes)} Use the list view to read it as text.">
     {#if world}
       <Canvas renderMode="on-demand" dpr={[1, 2]} toneMapping={NeutralToneMapping} shadows={PCFShadowMap}>
-        <Scene bind:this={scene} {world} onview={(v) => (view = v)} onpick={pick} {focus} {insets} />
+        <Scene bind:this={scene} {world} onview={(v) => (view = v)} onpick={pick} {focus} {insets} {centre} />
       </Canvas>
     {:else}
       <p class="loading">{error || 'Building the town…'}</p>
@@ -211,17 +208,25 @@
     <div class="labels">
       {#each labels as l (l.kind + l.id)}
         {#if l.kind === 'district'}
-          <button class="district" class:small={l.small} style="transform: translate({l.x}px, {l.y}px)" onclick={() => zoomDistrict(l.id)}>
-            {districtName[l.id] ?? l.id}
+          {@const r = rollup[l.id]}
+          <button
+            class="district"
+            class:small={l.small}
+            style="transform: translate({l.x}px, {l.y}px); {swatch(l.id)}"
+            onclick={() => zoomDistrict(l.id)}
+            aria-label="{districtName[l.id]} district, {plural(r.features, 'feature')}{r.fires ? `, ${r.fires} data-loss or urgent bugs` : ''}. Zoom in."
+          >
+            <span class="dname">{districtName[l.id] ?? l.id}</span>
+            {#if !l.small}
+              <span class="dsub"><i class="swatch"></i>{plural(r.features, 'feature')}{#if r.fires}<span class="badge o-fire">{@html icons.fire}{r.fires}</span>{/if}</span>
+            {/if}
           </button>
-        {:else if l.kind === 'dot'}
-          {@const n = l.n}
-          <button class="dot active" style="transform: translate({l.x}px, {l.y}px)" onclick={() => pick(n.id)} aria-label={n.name}></button>
-        {:else if l.kind === 'spot'}
+        {:else if l.kind === 'mark'}
           {@const n = l.n}
           <button
-            class="spot {l.side ?? ''}"
+            class="spot {l.side}"
             class:active={selectedId === n.id}
+            class:plain={!n.counts.fires && n.state === 'open'}
             style="transform: translate({l.x}px, {l.y}px); --head: {l.head}px"
             onclick={() => pick(n.id)}
             aria-label="{n.name}: {stateInfo[n.state].label}{n.counts.fires ? `, ${n.counts.fires} data-loss or urgent bugs` : ''}"
@@ -229,14 +234,11 @@
             <span class="head">
               {#if n.counts.fires}
                 <span class="badge o-fire">{@html icons.fire}{n.counts.fires}</span>
-              {:else}
-                <span class="badge s-{n.state}">{@html icons[n.state]}{stateInfo[n.state].label}</span>
+              {:else if n.state !== 'open'}
+                <span class="badge round s-{n.state}">{@html icons[n.state]}</span>
               {/if}
             </span>
-            {#if l.side}
-              <span class="name">{n.name}</span>
-              {#if n.counts.fires && l.state}<span class="badge s-{n.state}">{@html icons[n.state]}{stateInfo[n.state].label}</span>{/if}
-            {/if}
+            <span class="name">{n.name}</span>
           </button>
         {:else}
           {@const n = l.n}
@@ -267,17 +269,39 @@
     <List {town} selected={selectedId} onpick={pick} />
   {/if}
 
-  <header class="title">
-    <div>
-      <h1>FieldWorks Lite</h1>
-      <p class="sub">
-        Updated {date(town.generatedAt)} · <a href={REPO} target="_blank" rel="noopener">GitHub{@html uiIcons.external}</a>
-      </p>
-    </div>
-    <button class="toggle" onclick={() => (listOpen = !listOpen)} aria-label={listOpen ? 'Show the map' : 'Show as a list'}>
-      {@html listOpen ? uiIcons.map : uiIcons.list}{listOpen ? 'Map' : 'List'}
-    </button>
-  </header>
+  <div class="top">
+    <header class="title">
+      <div>
+        <h1>FieldWorks Lite</h1>
+        <p class="sub">
+          Updated {date(town.generatedAt)} · <a href={REPO} target="_blank" rel="noopener">GitHub{@html uiIcons.external}</a>
+        </p>
+      </div>
+      <button class="toggle" onclick={() => (listOpen = !listOpen)} aria-label={listOpen ? 'Show the map' : 'Show as a list'}>
+        {@html listOpen ? uiIcons.map : uiIcons.list}{listOpen ? 'Map' : 'List'}
+      </button>
+    </header>
+
+    {#if !listOpen && world}
+      {@const here = near ? view.district : undefined}
+      <nav class="crumb" aria-label="Map location">
+        <ol>
+          {#if near}
+            <li><button onclick={() => (setHash(''), scene?.fitAll())}>‹ Whole town</button></li>
+            {#if here}
+              <li aria-current="location" style={swatch(here)}>
+                <i class="swatch"></i>{districtName[here]}
+                {#if rollup[here].fires}<span class="badge o-fire" title="Data-loss / urgent bugs">{@html icons.fire}{rollup[here].fires}</span>{/if}
+              </li>
+            {/if}
+          {:else}
+            <li aria-current="location">Whole town</li>
+            <li class="hint">{districtCount} districts · pick one to zoom in</li>
+          {/if}
+        </ol>
+      </nav>
+    {/if}
+  </div>
 
   {#if !listOpen}
     <div class="controls" role="group" aria-label="Zoom">
@@ -303,6 +327,6 @@
   {/if}
 
   {#if selected}
-    <Detail node={selected} district={districtName[selected.district] ?? selected.district} doneSince={town.doneSince} onclose={close} bind:full={sheetFull} />
+    <Detail node={selected} district={districtName[selected.district] ?? selected.district} districtId={selected.district} doneSince={town.doneSince} onclose={close} bind:full={sheetFull} />
   {/if}
 </main>

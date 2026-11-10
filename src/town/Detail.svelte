@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { swatch } from './districts'
   import { icons, uiIcons } from './icons'
   import { date, groups, plural, stateInfo } from './info'
   import type { TownNode } from './types'
@@ -6,10 +7,11 @@
   let {
     node,
     district,
+    districtId,
     doneSince,
     onclose,
     full = $bindable(false),
-  }: { node: TownNode; district: string; doneSince: string; onclose: () => void; full?: boolean } = $props()
+  }: { node: TownNode; district: string; districtId: string; doneSince: string; onclose: () => void; full?: boolean } = $props()
 
   const SHOW = 8
   let expanded = $state<Record<string, boolean>>({})
@@ -67,7 +69,7 @@
   bind:this={el}
 >
   <div class="grab" role="presentation" onpointerdown={down} onpointermove={move} onpointerup={up} onpointercancel={up}>
-    <p class="eyebrow">{district}</p>
+    <p class="eyebrow" style={swatch(districtId)}><i class="swatch"></i>{district}</p>
     <h2>{node.name}</h2>
     <button class="close" onpointerdown={(e) => e.stopPropagation()} onclick={onclose} aria-label="Close">×</button>
   </div>

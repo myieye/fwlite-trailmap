@@ -10,12 +10,15 @@
     onpick,
     focus,
     insets,
+    centre,
   }: {
     world: World
     onview: (v: View) => void
     onpick: (id: string | null) => void
     focus: string[]
     insets: () => { top: number; bottom: number }
+    /** Middle of the map the chrome leaves uncovered, in pixels. */
+    centre: () => { x: number; y: number }
   } = $props()
 
   const world = untrack(() => worldProp)
@@ -87,7 +90,9 @@
           return Math.abs(v.x) < 1.2 && Math.abs(v.y) < 1.3
         })
     fireOn = visible.length > 0
-    onview({ zoom, minZoom, points })
+    const mid = centre()
+    const here = groundAt(mid.x, mid.y)
+    onview({ zoom, minZoom, points, district: world.districtAt(here.x, here.z) })
     invalidate()
   }
 
@@ -199,11 +204,23 @@
     apply()
   }
 
+  /** Frames a district's ground, close enough that every building gets its label. */
   export function zoomToDistrict(id: string) {
-    const p = world.districtAnchors.get(id)
-    if (!p) return
-    target.set(p.x, 0, p.z)
-    zoom = Math.max(minZoom * 1.6, world.focusZoom * 0.85)
+    const pts = world.grounds.get(id)
+    if (!pts) return
+    const inv = camera.matrixWorldInverse
+    const b = new THREE.Box3()
+    for (const p of pts) b.expandByPoint(v.copy(p).applyMatrix4(inv))
+    const { width, height } = size.current
+    const { top, bottom } = insets()
+    const room = Math.max(height * 0.5, height - top - bottom)
+    const pad = 2.6
+    const fitZoom = Math.min(width / (b.max.x - b.min.x + pad), room / (b.max.y - b.min.y + pad))
+    zoom = Math.min(Math.max(fitZoom, world.nearZoom * 1.05), Math.max(world.focusZoom, minZoom * 1.6))
+    const c = b.getCenter(new THREE.Vector3())
+    c.y -= (height / 2 - (top + room / 2)) / zoom
+    c.applyMatrix4(camera.matrixWorld)
+    target.copy(c).addScaledVector(dir, -c.y / dir.y)
     apply()
   }
 

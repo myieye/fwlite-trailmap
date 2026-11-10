@@ -20,6 +20,8 @@ Edit `trailmap.config.yaml`. Camps, Harmony goals and forum links are all there 
 
 The town page (`/town/`) is built from `town.config.yaml`: districts, buildings with their state, and rules for which issues land on each (pins, repos, epics, labels, title patterns; the file explains the order). A state's `since` and `evidence` need a release, store listing, doc page or merged PR behind them; leave them out otherwise. After editing, run `npm run town:report -- --items`: it prints each building's counts, every open fire and bug, and what landed in "Still to sort". Fix wrong ones with pins. `src/town/build.ts` holds the rules and is shared by the page, `npm run sync` and the scripts.
 
+Each district owns the ground within two cells of its lots in `src/town/layout.json`, tinted and outlined in its colour from `src/town/districts.ts`. A new district needs lots and a colour that stands apart from its neighbours and from grass; the dev console warns if a district's ground ends up in two pieces.
+
 `npm run town:history` writes `history/<date>.json` (each item's state, labels and buildings; each building's state and counts) unless nothing changed since the newest file. CI writes it on every sync and commits it with the plain words, after `scripts/town/history-check.mjs` checks it.
 
 ## Checking your work
