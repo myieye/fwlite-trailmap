@@ -2818,5 +2818,10 @@
   "title": "Record a content hash for media files to detect damaged copies",
   "for": "Record a content hash on resources",
   "area": "data"
+ },
+ "lexbox#2386": {
+  "title": "Idea to simplify how the extension passes language settings",
+  "for": "[PB extension] Consider adding languages context",
+  "area": "backstage"
  }
 }
