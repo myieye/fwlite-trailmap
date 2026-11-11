@@ -2823,5 +2823,10 @@
   "title": "Idea to simplify how the extension passes language settings",
   "for": "[PB extension] Consider adding languages context",
   "area": "backstage"
+ },
+ "lexbox#2966": {
+  "title": "Delete-during-sync tests accept a sync that is already running",
+  "for": "Accept 429 when re-triggering a running sync in delete-during-sync tests",
+  "area": "backstage"
  }
 }
