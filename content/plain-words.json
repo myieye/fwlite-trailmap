@@ -1020,8 +1020,8 @@
   "area": "feature"
  },
  "lexbox#2549": {
-  "title": "Upgrade the app to .NET 11 release candidate",
-  "for": "Upgrade to .NET 11 RC3",
+  "title": "App moves to the .NET 11 release candidate for testing",
+  "for": "Upgrade to .NET 11",
   "area": "backstage"
  },
  "lexbox#2633": {
@@ -2240,8 +2240,8 @@
   "area": "data"
  },
  "lexbox#2912": {
-  "title": "Media files with names Windows can't store are rejected clearly",
-  "for": "[claude] Validate media upload filenames",
+  "title": "Media file names Windows can't store are rejected with a clear error",
+  "for": "Reject media file names Windows can't store",
   "area": "data"
  },
  "lexbox#2939": {
@@ -2833,5 +2833,25 @@
   "title": "Plugins page explains what plugins can do; flag names work as channel",
   "for": "Explain what plugins can do and accept a flag name as release channel",
   "area": "feature"
+ },
+ "lexbox#2968": {
+  "title": "Saving the same media file again reuses its renamed copy",
+  "for": "[claude] Reuse a renamed copy when the same media file is saved again",
+  "area": "data"
+ },
+ "harmony#173": {
+  "title": "Sync no longer fails on a change an older app can't read",
+  "for": "[claude] Sync fails on a known change type the client can't read",
+  "area": "data"
+ },
+ "harmony#171": {
+  "title": "Remove the unused option to throw on unknown change types",
+  "for": "Drop `UnknownChangeHandling.Throw`",
+  "area": "backstage"
+ },
+ "harmony#170": {
+  "title": "Older app versions no longer lose new change details when syncing",
+  "for": "Keep change properties an older client doesn't know",
+  "area": "data"
  }
 }
