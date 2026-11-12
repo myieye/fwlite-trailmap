@@ -2828,5 +2828,10 @@
   "title": "Delete-during-sync tests accept a sync that is already running",
   "for": "Accept 429 when re-triggering a running sync in delete-during-sync tests",
   "area": "backstage"
+ },
+ "lexbox#2967": {
+  "title": "Plugins page explains what plugins can do; flag names work as channel",
+  "for": "Explain what plugins can do and accept a flag name as release channel",
+  "area": "feature"
  }
 }
