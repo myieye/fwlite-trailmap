@@ -2853,5 +2853,10 @@
   "title": "Older app versions no longer lose new change details when syncing",
   "for": "Keep change properties an older client doesn't know",
   "area": "data"
+ },
+ "lexbox#2970": {
+  "title": "Plugins can no longer send data out by navigating their frame",
+  "for": "[claude] Block plugins from navigating their frame to other sites",
+  "area": "backstage"
  }
 }
