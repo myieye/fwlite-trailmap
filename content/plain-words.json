@@ -2858,5 +2858,10 @@
   "title": "Plugins can no longer send data out by navigating their frame",
   "for": "[claude] Block plugins from navigating their frame to other sites",
   "area": "backstage"
+ },
+ "lexbox#2971": {
+  "title": "Each Mercurial version is tested with its matching Chorus tools",
+  "for": "[claude] Test each hg client with the Chorus FLEx Bridge shipped with it",
+  "area": "backstage"
  }
 }
