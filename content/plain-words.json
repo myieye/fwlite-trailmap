@@ -2800,8 +2800,8 @@
   "area": "feature"
  },
  "lexbox#2964": {
-  "title": "Sync Changes dialog opens on a list of sync methods",
-  "for": "[claude] Open the sync dialog on a list of sync methods instead of tabs",
+  "title": "Sync dialog opens on a list of sync methods, each explained",
+  "for": "Open the sync dialog on a list of sync methods instead of tabs",
   "area": "feature"
  },
  "lexbox#2962": {
@@ -2862,6 +2862,46 @@
  "lexbox#2971": {
   "title": "Each Mercurial version is tested with its matching Chorus tools",
   "for": "[claude] Test each hg client with the Chorus FLEx Bridge shipped with it",
+  "area": "backstage"
+ },
+ "lexbox#2986": {
+  "title": "Audio and pictures with accented file names are found, like FieldWorks",
+  "for": "[claude] Name media files NFC and find them the way FLEx does",
+  "area": "data"
+ },
+ "lexbox#2988": {
+  "title": "Moving the data folder keeps Lexbox projects and fixes delete",
+  "for": "[claude] Fix review findings in the FW Lite data folder migration",
+  "area": "fix"
+ },
+ "lexbox#2987": {
+  "title": "Test that server sync merges divergent FieldWorks changes",
+  "for": "[claude] Test that FwHeadless merges divergent hg heads with chorusmerge",
+  "area": "backstage"
+ },
+ "lexbox#2985": {
+  "title": "Test guidelines ask for values to be passed into helpers openly",
+  "for": "Ask that test values not cross into helpers unseen",
+  "area": "backstage"
+ },
+ "lexbox#2984": {
+  "title": "Plugins page has a button to hide or show the sidebar",
+  "for": "Add a sidebar toggle to the FW Lite plugins page",
+  "area": "feature"
+ },
+ "lexbox#2983": {
+  "title": "Shorter sign-in log lines and a simple log viewer page",
+  "for": "Trim MSAL prefix from FW Lite auth logs and add a log browser",
+  "area": "backstage"
+ },
+ "lexbox#2982": {
+  "title": "Design sketches for a new FW Lite look (not for release)",
+  "for": "Explore a new design language for FW Lite (sketches, not for merge)",
+  "area": "backstage"
+ },
+ "lexbox#2972": {
+  "title": "Linux launch check runs on PRs and shows Chrome output on failure",
+  "for": "Run the FwLiteWeb Linux launch smoke test on PRs and print Chrome's output when it fails",
   "area": "backstage"
  }
 }
