@@ -2903,5 +2903,15 @@
   "title": "Linux launch check runs on PRs and shows Chrome output on failure",
   "for": "Run the FwLiteWeb Linux launch smoke test on PRs and print Chrome's output when it fails",
   "area": "backstage"
+ },
+ "lexbox#2991": {
+  "title": "Android shows a 'Downloading update' message during Play updates",
+  "for": "Show a downloading toast while an Android Play update downloads",
+  "area": "devices"
+ },
+ "lexbox#2990": {
+  "title": "App no longer reinstalls the version it already has",
+  "for": "Stop FW Lite asking lexbox about version \"Unknown\"",
+  "area": "fix"
  }
 }
