@@ -2866,7 +2866,7 @@
  },
  "lexbox#2986": {
   "title": "Audio and pictures with accented file names are found, like FieldWorks",
-  "for": "[claude] Name media files NFC and find them the way FLEx does",
+  "for": "Name media files NFC and find them the way FLEx does",
   "area": "data"
  },
  "lexbox#2988": {
@@ -2913,5 +2913,15 @@
   "title": "App no longer reinstalls the version it already has",
   "for": "Stop FW Lite asking lexbox about version \"Unknown\"",
   "area": "fix"
+ },
+ "lexbox#2994": {
+  "title": "Viewer no longer misses updates when it falls behind",
+  "for": "Stop dropping FwLite events when the viewer falls behind",
+  "area": "fix"
+ },
+ "lexbox#2992": {
+  "title": "Android update shows a closable message instead of a spinner",
+  "for": "Replace the Play update spinner with a closable toast",
+  "area": "devices"
  }
 }
