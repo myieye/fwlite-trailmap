@@ -2885,8 +2885,8 @@
   "area": "backstage"
  },
  "lexbox#2984": {
-  "title": "Plugins page has a button to hide or show the sidebar",
-  "for": "Add a sidebar toggle to the FW Lite plugins page",
+  "title": "Plugin pages have a button to hide or show the sidebar",
+  "for": "Add a sidebar toggle to the FW Lite plugin pages",
   "area": "feature"
  },
  "lexbox#2983": {
@@ -2923,5 +2923,60 @@
   "title": "Android update shows a closable message instead of a spinner",
   "for": "Replace the Play update spinner with a closable toast",
   "area": "devices"
+ },
+ "lexbox#3002": {
+  "title": "Pictures moved to another sense in FLEx now sync",
+  "for": "[claude] Sync pictures that FLEx moved to another sense",
+  "area": "data"
+ },
+ "lexbox#3004": {
+  "title": "Projects with old blank-value edits open and rebuild correctly",
+  "for": "[claude] Ignore blank values in JSON patch adds to rich multi-strings",
+  "area": "data"
+ },
+ "lexbox#3000": {
+  "title": "Large syncs from the headless server now finish instead of timing out",
+  "for": "[claude] Let large Harmony pushes from FwHeadless finish",
+  "area": "data"
+ },
+ "lexbox#3001": {
+  "title": "Sync no longer crashes on old projects with no morph types",
+  "for": "[claude] Fix sync crash on legacy snapshots when the CRDT has no morph types",
+  "area": "data"
+ },
+ "lexbox#2999": {
+  "title": "Project data folder setting is read correctly at startup",
+  "for": "[claude] Resolve FW Lite ProjectDataDir in a method, not a computed property",
+  "area": "backstage"
+ },
+ "lexbox#2997": {
+  "title": "Tests for older Mercurial clients use matching Chorus version",
+  "for": "[claude] Test hg 3 clients with FLEx Bridge 4.3's Chorus",
+  "area": "backstage"
+ },
+ "lexbox#2996": {
+  "title": "Syncs stop re-triggering each other when nothing new was added",
+  "for": "[claude] Stop /add from triggering syncs when it inserted nothing",
+  "area": "data"
+ },
+ "harmony#175": {
+  "title": "Sync results list only commits that were actually new",
+  "for": "[claude] Report only newly added commits in SyncResults",
+  "area": "backstage"
+ },
+ "lexbox#3003": {
+  "title": "Duplicate morph-type commits cause repeated full resyncs",
+  "for": "Duplicate morph-type seed commits leave stores permanently out of sync",
+  "area": "data"
+ },
+ "lexbox#2998": {
+  "title": "Plan to delete old Windows data after the folder migration",
+  "for": "[claude] Delete legacy FW Lite Windows data a few months after the data-folder migration",
+  "area": "devices"
+ },
+ "harmony#174": {
+  "title": "Sync results no longer list commits already present",
+  "for": "[claude] SyncResults lists commits the receiver already had",
+  "area": "data"
  }
 }
