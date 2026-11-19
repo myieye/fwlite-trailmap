@@ -2978,5 +2978,10 @@
   "title": "Sync results no longer list commits already present",
   "for": "[claude] SyncResults lists commits the receiver already had",
   "area": "data"
+ },
+ "lexbox#3005": {
+  "title": "Editor shows the new title after a semantic domain is renamed",
+  "for": "Changing semantic domain titles shows stale info in the editor",
+  "area": "fix"
  }
 }
