@@ -2936,7 +2936,7 @@
  },
  "lexbox#3000": {
   "title": "Large syncs from the headless server now finish instead of timing out",
-  "for": "[claude] Let large Harmony pushes from FwHeadless finish",
+  "for": "Let large Harmony pushes from FwHeadless finish",
   "area": "data"
  },
  "lexbox#3001": {
@@ -2961,8 +2961,8 @@
  },
  "harmony#175": {
   "title": "Sync results list only commits that were actually new",
-  "for": "[claude] Report only newly added commits in SyncResults",
-  "area": "backstage"
+  "for": "Report only newly added commits in SyncResults",
+  "area": "data"
  },
  "lexbox#3003": {
   "title": "Duplicate morph-type commits cause repeated full resyncs",
@@ -2983,5 +2983,40 @@
   "title": "Editor shows the new title after a semantic domain is renamed",
   "for": "Changing semantic domain titles shows stale info in the editor",
   "area": "fix"
+ },
+ "lexbox#3010": {
+  "title": "Custom fields with the same name in different projects sync correctly",
+  "for": "[claude] Reset FLEx Bridge's custom field cache before each Send/Receive",
+  "area": "data"
+ },
+ "lexbox#3006": {
+  "title": "Only site admins can regenerate a sync snapshot",
+  "for": "[claude] Make regenerate-snapshot admin-only",
+  "area": "backstage"
+ },
+ "lexbox#3007": {
+  "title": "Headless project download no longer reports false failure on Windows",
+  "for": "Skip hg's wcache when downloading an fw-headless project",
+  "area": "backstage"
+ },
+ "lexbox#3009": {
+  "title": "Only site admins can block or unblock syncing",
+  "for": "[claude] Make sync block and unblock admin-only",
+  "area": "backstage"
+ },
+ "lexbox#3008": {
+  "title": "Final FieldWorks Lite logo files added to the repository",
+  "for": "[claude] Add FieldWorks Lite logo set",
+  "area": "backstage"
+ },
+ "lexbox#3011": {
+  "title": "Writing system settings no longer leak between projects on the server",
+  "for": "[claude] Stop writing system settings leaking between projects in FwHeadless",
+  "area": "data"
+ },
+ "lexbox#3013": {
+  "title": "Pushing edits that belong to another project now fails clearly",
+  "for": "[claude] Fail pushes of commit Ids that belong to another project",
+  "area": "data"
  }
 }
