@@ -3006,7 +3006,7 @@
  },
  "lexbox#3008": {
   "title": "Final FieldWorks Lite logo files added to the repository",
-  "for": "[claude] Add FieldWorks Lite logo set",
+  "for": "Add FieldWorks Lite logo set",
   "area": "backstage"
  },
  "lexbox#3011": {
@@ -3018,5 +3018,40 @@
   "title": "Pushing edits that belong to another project now fails clearly",
   "for": "[claude] Fail pushes of commit Ids that belong to another project",
   "area": "data"
+ },
+ "lexbox#3017": {
+  "title": "Dictionary App Builder can sign in to read and write lexicons",
+  "for": "Add Dictionary App Builder OAuth client",
+  "area": "feature"
+ },
+ "lexbox#3014": {
+  "title": "Mac users are told when a new FW Lite version is out",
+  "for": "Tell Mac FW Lite users when an update is out",
+  "area": "devices"
+ },
+ "lexbox#3016": {
+  "title": "Logos are excluded from the MIT licence",
+  "for": "[claude] Exclude the logos from the MIT licence",
+  "area": "backstage"
+ },
+ "lexbox#3019": {
+  "title": "Third-party lexicon apps can download pictures and audio",
+  "for": "[claude] Let lexicon API clients download media files",
+  "area": "feature"
+ },
+ "lexbox#3018": {
+  "title": "FW Lite on Mac stays logged in after a restart",
+  "for": "[claude] Keep FW Lite Mac logged in across restarts",
+  "area": "fix"
+ },
+ "lexbox#2589": {
+  "title": "Admins can mark projects migrated from Language Forge",
+  "for": "New ProjectMigrationStatus enum value for Language Forge migration",
+  "area": "backstage"
+ },
+ "lexbox#3015": {
+  "title": "Lexbox logo files added to the repository",
+  "for": "[claude] Add Lexbox logo set",
+  "area": "backstage"
  }
 }
