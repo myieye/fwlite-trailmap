@@ -3060,8 +3060,8 @@
   "area": "feature"
  },
  "lexbox#3031": {
-  "title": "Simpler Tasks list: pick a field, then a language",
-  "for": "[claude] Simplify the Tasks list and its done screen",
+  "title": "Tasks page: pick a field, then a language",
+  "for": "Redesign the Tasks page: pick a field, then a language",
   "area": "feature"
  },
  "lexbox#3033": {
@@ -3096,7 +3096,7 @@
  },
  "lexbox#3030": {
   "title": "Dropdown lists show one plain scrollbar",
-  "for": "[claude] Give the select dropdown one plain scrollbar",
+  "for": "Give the select dropdown one plain scrollbar",
   "area": "fix"
  },
  "lexbox#3026": {
@@ -3123,5 +3123,60 @@
   "title": "Sync a project with nearby devices over Wi-Fi, no internet needed",
   "for": "Sync FW Lite projects with nearby devices over Wi-Fi",
   "area": "feature"
+ },
+ "lexbox#3047": {
+  "title": "Activity filter is grouped and comment changes read plainly",
+  "for": "[claude] Group the activity-type filter and show comment changes without JSON",
+  "area": "feature"
+ },
+ "lexbox#3051": {
+  "title": "Fix a failing Safari test for quick-create morph type",
+  "for": "[claude] Fix the WebKit failure in the quick-create morph type test",
+  "area": "backstage"
+ },
+ "lexbox#3050": {
+  "title": "Windows keeps each project's media inside its own folder",
+  "for": "[claude] Keep FW Lite media inside each project folder on Windows",
+  "area": "data"
+ },
+ "lexbox#3049": {
+  "title": "Dashboard stats stay current after leaving and returning",
+  "for": "[claude] Keep dashboard stats current after leaving and returning",
+  "area": "fix"
+ },
+ "lexbox#3048": {
+  "title": "Saving an entry no longer recounts every task",
+  "for": "[claude] Recount only the task counts on screen when entries change",
+  "area": "fix"
+ },
+ "lexbox#3046": {
+  "title": "Update sync library for faster writes",
+  "for": "[claude] Update Harmony to 0.2.1-rc.491",
+  "area": "backstage"
+ },
+ "lexbox#3045": {
+  "title": "Task drawer tidied with a clearer progress label",
+  "for": "Tidy the task drawer: drop dev strings, label progress, bring back 🎊",
+  "area": "feature"
+ },
+ "lexbox#3044": {
+  "title": "Test for Back button behavior on the Tasks page",
+  "for": "[claude] Test Tasks page Back behavior and trim TaskList comments",
+  "area": "backstage"
+ },
+ "lexbox#3042": {
+  "title": "FW Lite switches to the new logo",
+  "for": "Switch FW Lite to the new logo",
+  "area": "feature"
+ },
+ "lexbox#3043": {
+  "title": "Read-only dropdowns look like read-only fields, not faded",
+  "for": "[claude] Show read-only selects as read-only fields, not disabled",
+  "area": "fix"
+ },
+ "harmony#176": {
+  "title": "Saving a change in large projects is much faster",
+  "for": "[claude] Stop scanning every commit when writing a change",
+  "area": "fix"
  }
 }
