@@ -3113,5 +3113,15 @@
   "title": "Lexicon extension to expose headwords with morph-type markers",
   "for": "Expose entry headwords with morph-type markers through the Lexicon extension's entry service",
   "area": "backstage"
+ },
+ "lexbox#3039": {
+  "title": "Server stops retrying a broken project sync after 10 failures",
+  "for": "Stop retrying a failing fw-headless harmony sync after a set number of failures",
+  "area": "backstage"
+ },
+ "lexbox#3041": {
+  "title": "Sync a project with nearby devices over Wi-Fi, no internet needed",
+  "for": "Sync FW Lite projects with nearby devices over Wi-Fi",
+  "area": "feature"
  }
 }
