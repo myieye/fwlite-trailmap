@@ -3053,5 +3053,65 @@
   "title": "Lexbox logo files added to the repository",
   "for": "[claude] Add Lexbox logo set",
   "area": "backstage"
+ },
+ "lexbox#3037": {
+  "title": "Filter popover is tidier, with one Comments choice",
+  "for": "[claude] Tidy the filter popover: specific field last, one comments select",
+  "area": "feature"
+ },
+ "lexbox#3031": {
+  "title": "Simpler Tasks list: pick a field, then a language",
+  "for": "[claude] Simplify the Tasks list and its done screen",
+  "area": "feature"
+ },
+ "lexbox#3033": {
+  "title": "New task for adding missing example sentence translations",
+  "for": "[claude] Add an example translation task",
+  "area": "feature"
+ },
+ "lexbox#3032": {
+  "title": "Dashboard language rows link to their tasks",
+  "for": "[claude] Link Dashboard rows to their tasks",
+  "area": "feature"
+ },
+ "lexbox#3027": {
+  "title": "Morph type filter is visible in the filter popover",
+  "for": "[claude] Show the Lite morph type filter in the filter popover",
+  "area": "feature"
+ },
+ "lexbox#3035": {
+  "title": "Active filters show as chips you can tap to remove",
+  "for": "[claude] Show active filters as removable chips",
+  "area": "feature"
+ },
+ "lexbox#3036": {
+  "title": "New entries from search use the writing system being shown",
+  "for": "[claude] Prefill new entries from search in the shown writing system",
+  "area": "fix"
+ },
+ "lexbox#3028": {
+  "title": "Morph type is picked from affix markers when creating an entry",
+  "for": "[claude] Pick the morph type from affix markers when creating an entry",
+  "area": "feature"
+ },
+ "lexbox#3030": {
+  "title": "Dropdown lists show one plain scrollbar",
+  "for": "[claude] Give the select dropdown one plain scrollbar",
+  "area": "fix"
+ },
+ "lexbox#3026": {
+  "title": "Clearer wording and icon for the FieldWorks Classic sync option",
+  "for": "Reword the FieldWorks Classic sync option and update its icon",
+  "area": "feature"
+ },
+ "lexbox#3025": {
+  "title": "Header size test adjusted to the server's 8 KB limit",
+  "for": "[claude] Fit the header size test to the ingress's 8 KB limit",
+  "area": "backstage"
+ },
+ "lexbox#3038": {
+  "title": "Lexicon extension to expose headwords with morph-type markers",
+  "for": "Expose entry headwords with morph-type markers through the Lexicon extension's entry service",
+  "area": "backstage"
  }
 }
