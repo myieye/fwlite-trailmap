@@ -3178,5 +3178,95 @@
   "title": "Saving a change in large projects is much faster",
   "for": "[claude] Stop scanning every commit when writing a change",
   "area": "fix"
+ },
+ "lexbox#3068": {
+  "title": "The name prompt explains why FW Lite asks for your name",
+  "for": "[claude] Say why FW Lite asks for your name",
+  "area": "feature"
+ },
+ "lexbox#3065": {
+  "title": "Select and multi-select lists look and behave the same everywhere",
+  "for": "[claude] Standardize select and multi-select lists in the viewer",
+  "area": "feature"
+ },
+ "lexbox#3067": {
+  "title": "FW Lite no longer crashes if minimized while starting on Windows",
+  "for": "[claude] Fix FW Lite crash when minimized during Windows startup",
+  "area": "fix"
+ },
+ "lexbox#3066": {
+  "title": "Dev builds can upload a local project to Lexbox",
+  "for": "[claude] Add a dev-only Upload to Lexbox for local FW Lite projects",
+  "area": "backstage"
+ },
+ "lexbox#3056": {
+  "title": "Read-only fields look read-only and hide edit actions",
+  "for": "[claude] Make read-only fields look read-only and hide edit actions",
+  "area": "feature"
+ },
+ "lexbox#3063": {
+  "title": "Clicking a button closes an open popover even if a tooltip shows",
+  "for": "Close popovers when clicking a button whose tooltip is open",
+  "area": "fix"
+ },
+ "lexbox#3064": {
+  "title": "Pressing wide list rows and selects shrinks them less",
+  "for": "[claude] Flatten the press scale on wide rows and selects",
+  "area": "feature"
+ },
+ "lexbox#3053": {
+  "title": "FW Lite projects show the FW Lite logo in project lists",
+  "for": "[claude] Mark FW Lite projects with the FW Lite logo",
+  "area": "feature"
+ },
+ "lexbox#3060": {
+  "title": "Home page project lists no longer jump around on refresh",
+  "for": "[claude] Stop the home page project lists from rebuilding on refresh",
+  "area": "fix"
+ },
+ "lexbox#3058": {
+  "title": "The open project is marked with a check in the project picker",
+  "for": "Mark the open project in the project picker with a check",
+  "area": "fix"
+ },
+ "lexbox#3059": {
+  "title": "FW Lite starts faster on Windows",
+  "for": "[claude] Start FW Lite faster by warming up the startup project",
+  "area": "feature"
+ },
+ "lexbox#3052": {
+  "title": "A splash screen shows while FW Lite starts on Windows",
+  "for": "Show a splash screen while FW Lite starts on Windows",
+  "area": "feature"
+ },
+ "lexbox#3057": {
+  "title": "Docs are published after an FW Lite release",
+  "for": "Publish the docs after an FW Lite release, not on every develop push",
+  "area": "backstage"
+ },
+ "lexbox#3054": {
+  "title": "Pressing Next twice in the task drawer no longer saves twice",
+  "for": "Keep the task drawer's Next guard until the next entry shows",
+  "area": "fix"
+ },
+ "harmony#178": {
+  "title": "Changes from newer versions keep their unknown details when stored",
+  "for": "[claude] Keep change properties an older client doesn't know",
+  "area": "data"
+ },
+ "harmony#180": {
+  "title": "Synced changes are stored without loss, even if unknown to the app",
+  "for": "[claude] Store synced commits on clients without deserializing their changes",
+  "area": "data"
+ },
+ "harmony#179": {
+  "title": "Plan to drop commit hashes from synced history",
+  "for": "[claude] Drop commit hashes",
+  "area": "backstage"
+ },
+ "harmony#177": {
+  "title": "Design idea: app-defined change types for sync",
+  "for": "[claude] Deserialize changes to an app-defined change type instead of IChange",
+  "area": "backstage"
  }
 }
