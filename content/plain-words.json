@@ -3196,7 +3196,7 @@
  },
  "lexbox#3066": {
   "title": "Dev builds can upload a local project to Lexbox",
-  "for": "[claude] Add a dev-only Upload to Lexbox for local FW Lite projects",
+  "for": "[claude] Add dev-only Lexbox upload and credit new local projects to the Lexbox account",
   "area": "backstage"
  },
  "lexbox#3056": {
@@ -3230,8 +3230,8 @@
   "area": "fix"
  },
  "lexbox#3059": {
-  "title": "FW Lite starts faster on Windows",
-  "for": "[claude] Start FW Lite faster by warming up the startup project",
+  "title": "FW Lite opens your project faster at startup",
+  "for": "Start FW Lite faster by warming up the startup project",
   "area": "feature"
  },
  "lexbox#3052": {
@@ -3270,13 +3270,43 @@
   "area": "backstage"
  },
  "lexbox#3069": {
-  "title": "Morph type hint's 'Show all' link flows with the hint text",
-  "for": "[claude] Let Show all flow with the morph type hint text",
+  "title": "Morph type hint's 'Show all' link wraps with the hint text",
+  "for": "Let Show all flow with the morph type hint text",
   "area": "fix"
  },
  "lexbox#3070": {
   "title": "Test project builds again after the sync library update",
-  "for": "[claude] Fix LcmCrdt.Tests build after the Harmony update",
+  "for": "Fix LcmCrdt.Tests build after the Harmony update",
+  "area": "backstage"
+ },
+ "lexbox#3074": {
+  "title": "Send/Receive client time-outs no longer count as server errors",
+  "for": "[claude] Don't mark client hang-ups in the sync proxy as errors",
+  "area": "backstage"
+ },
+ "lexbox#3075": {
+  "title": "Sync failure alerts now say which project failed",
+  "for": "[claude] Tag the FwHeadless sync job span with the project id",
+  "area": "backstage"
+ },
+ "lexbox#3076": {
+  "title": "Test that live stats count only while their view is open",
+  "for": "[claude] Test that stats views count live only while open",
+  "area": "backstage"
+ },
+ "lexbox#3073": {
+  "title": "An entry's complex forms are sorted the same in both project types",
+  "for": "[claude] Sort an entry's complex forms the same way in CRDT and FwData",
+  "area": "fix"
+ },
+ "lexbox#3072": {
+  "title": "Entry lists and searches load faster the first time",
+  "for": "Load entry children by id so new entry queries build fast",
+  "area": "feature"
+ },
+ "lexbox#3071": {
+  "title": "Plan to store the Mac login in the keychain",
+  "for": "[claude] Store the FW Lite Mac login in the keychain",
   "area": "backstage"
  }
 }
