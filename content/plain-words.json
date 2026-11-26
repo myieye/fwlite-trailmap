@@ -3268,5 +3268,15 @@
   "title": "Design idea: app-defined change types for sync",
   "for": "[claude] Deserialize changes to an app-defined change type instead of IChange",
   "area": "backstage"
+ },
+ "lexbox#3069": {
+  "title": "Morph type hint's 'Show all' link flows with the hint text",
+  "for": "[claude] Let Show all flow with the morph type hint text",
+  "area": "fix"
+ },
+ "lexbox#3070": {
+  "title": "Test project builds again after the sync library update",
+  "for": "[claude] Fix LcmCrdt.Tests build after the Harmony update",
+  "area": "backstage"
  }
 }
