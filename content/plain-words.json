@@ -3308,5 +3308,10 @@
   "title": "Plan to store the Mac login in the keychain",
   "for": "[claude] Store the FW Lite Mac login in the keychain",
   "area": "backstage"
+ },
+ "lexbox#3077": {
+  "title": "Mac app updates are chosen by Lexbox, not read from GitHub",
+  "for": "Serve the FW Lite Mac Velopack update feed from Lexbox",
+  "area": "devices"
  }
 }
