@@ -2925,8 +2925,8 @@
   "area": "devices"
  },
  "lexbox#3002": {
-  "title": "Pictures moved to another sense in FLEx now sync",
-  "for": "[claude] Sync pictures that FLEx moved to another sense",
+  "title": "Pictures moved to another sense in FieldWorks now sync",
+  "for": "Sync pictures that FLEx moved to another sense",
   "area": "data"
  },
  "lexbox#3004": {
@@ -3291,7 +3291,7 @@
  },
  "lexbox#3076": {
   "title": "Test that live stats count only while their view is open",
-  "for": "[claude] Test that stats views count live only while open",
+  "for": "[claude] Test stats subscriptions and count dashboard fields with task filters",
   "area": "backstage"
  },
  "lexbox#3073": {
@@ -3313,5 +3313,70 @@
   "title": "Mac app updates are chosen by Lexbox, not read from GitHub",
   "for": "Serve the FW Lite Mac Velopack update feed from Lexbox",
   "area": "devices"
+ },
+ "lexbox#3090": {
+  "title": "Option to match diacritics exactly when searching",
+  "for": "[claude] Add a \"Match diacritics exactly\" search setting",
+  "area": "feature"
+ },
+ "lexbox#3088": {
+  "title": "Tidier Troubleshoot dialog with a logs and settings folder button",
+  "for": "[claude] Clean up the Troubleshoot dialog and add an app folder button",
+  "area": "feature"
+ },
+ "lexbox#3089": {
+  "title": "Multi-select choices save as you tick them",
+  "for": "[claude] Save each multi-select toggle as it happens",
+  "area": "fix"
+ },
+ "lexbox#3086": {
+  "title": "Dashboard shows part of speech, domain and translation progress",
+  "for": "[claude] Show part of speech, semantic domain and translation stats on the dashboard",
+  "area": "feature"
+ },
+ "lexbox#3087": {
+  "title": "Code comment explaining a doubled task count after saving",
+  "for": "[claude] Note why the open task is counted twice per save",
+  "area": "backstage"
+ },
+ "lexbox#3084": {
+  "title": "Entry reads stay consistent when a sync happens at the same time",
+  "for": "[claude] Read a single entry and its children in one snapshot",
+  "area": "data"
+ },
+ "lexbox#3085": {
+  "title": "Dashboard shows a dash instead of loading forever when a count fails",
+  "for": "[claude] Report a failed entry count instead of showing placeholders forever",
+  "area": "fix"
+ },
+ "lexbox#3083": {
+  "title": "A failed media download no longer leaves a cut-off file",
+  "for": "[claude] Download media to a temp file before giving it its final name",
+  "area": "data"
+ },
+ "lexbox#3082": {
+  "title": "Routine notifications close on their own",
+  "for": "[claude] Auto-dismiss Media Manager and other non-actionable toasts",
+  "area": "fix"
+ },
+ "lexbox#3079": {
+  "title": "Fix two flaky integration tests in CI",
+  "for": "Fix two flaky GHA integration test failures",
+  "area": "backstage"
+ },
+ "lexbox#3078": {
+  "title": "FW Lite on Mac installs its own updates",
+  "for": "Auto-update FW Lite on Mac with Velopack",
+  "area": "devices"
+ },
+ "harmony#181": {
+  "title": "Deletes and syncs run much faster on large projects",
+  "for": "[claude] Filter candidates before grouping snapshots by entity",
+  "area": "data"
+ },
+ "lexbox#3080": {
+  "title": "Plugins may not work offline until opened once online",
+  "for": "[claude] Plugins aren't available offline until opened once online",
+  "area": "feature"
  }
 }
